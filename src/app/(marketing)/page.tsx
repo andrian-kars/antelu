@@ -10,8 +10,8 @@ export default function HomePage() {
         <p className="text-lg lg:text-3xl max-w-screen-xl">
           Ofrecemos una selección diversa de vehículos para que los niños
           disfruten. Ya sea para una fiesta de cumpleaños, un evento especial o
-          simplemente por diversión, Kids Car Rental es la elección definitiva
-          para el alquiler de vehículos amigables para niños.
+          simplemente por diversión, Antelu es la elección definitiva para el
+          alquiler de vehículos amigables para niños.
         </p>
         <ReserveNowButton />
       </section>
