@@ -1,4 +1,6 @@
+import { VehicleCard } from "@/components/VehicleCard";
 import { ReserveNowButton } from "@/components/ReserveNowButton";
+import { vehicles } from "@/data/vehicles";
 
 export default function HomePage() {
   return (
@@ -15,11 +17,15 @@ export default function HomePage() {
         </p>
         <ReserveNowButton />
       </section>
-      <section id="pricing" className="px-8 py-18 bg-acccent/5">
+      <section id="pricing" className="px-8 py-16 bg-acccent/5">
         <h2 className="text-4xl text-center text-balance font-semibold mb-8">
-          Pricing sdsafsaf fasdsadsa afdasfas sa a sfsd sdsa sdsa sa
+          Elige La Aventura De Tu Hijo
         </h2>
-        <div></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen-xl mx-auto">
+          {vehicles.map((vehicle) => (
+            <VehicleCard key={vehicle.id} {...vehicle} />
+          ))}
+        </div>
       </section>
     </>
   );
