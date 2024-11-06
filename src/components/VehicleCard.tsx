@@ -16,6 +16,8 @@ export function VehicleCard({
   images,
   characteristics,
 }: (typeof vehicles)[number]) {
+  console.log(characteristics);
+
   return (
     <Card>
       <CardHeader>
@@ -23,7 +25,10 @@ export function VehicleCard({
       </CardHeader>
       <CardContent>
         <CardTitle>{name}</CardTitle>
-        <CardDescription></CardDescription>
+        <CardDescription>
+          <div>Type: {type}</div>
+          <div>Price: {discount || price}</div>
+        </CardDescription>
       </CardContent>
     </Card>
   );
