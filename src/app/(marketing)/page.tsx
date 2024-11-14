@@ -19,7 +19,7 @@ export default function HomePage() {
       </section>
       <section id="pricing" className="px-8 py-16 bg-acccent/5">
         <h2 className="text-4xl text-center text-balance font-semibold mb-8">
-          Elige La Aventura De Tu Hijo
+          Elige La Aventura De Tu Hijo/Hija
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen-xl mx-auto">
           {vehicles.map((vehicle) => (
