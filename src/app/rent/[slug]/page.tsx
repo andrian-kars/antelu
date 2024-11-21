@@ -19,7 +19,7 @@ export default async function RentPage({
   return (
     <section className="px-8 py-16 bg-acccent/5 container">
       <Card className="flex flex-col lg:flex-row gap-5">
-        <CardHeader className="relative flex justify-center items-center flex-1">
+        <CardHeader className="relative flex justify-center items-center">
           <CardTitle className="text-2xl sm:text-3xl">{name}</CardTitle>
           <Carousel slides={images} name={name} />
           <div className="flex flex-col items-center justify-center absolute bottom-2 sm:bottom-4 right-2 sm:right-4 lg:bottom-8 lg:right-8 bg-red-600 rounded-full w-24 h-24 text-white">

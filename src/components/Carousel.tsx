@@ -27,7 +27,7 @@ export default function Carousel({
   useEffect(() => {
     const timer = setTimeout(() => {
       nextSlide();
-    }, 2500);
+    }, 3800);
 
     return () => {
       clearTimeout(timer);
@@ -35,16 +35,9 @@ export default function Carousel({
   }, [current]);
 
   return (
-    <div className={"overflow-hidden relative"}>
-      <div
-        className={`flex transition ease-out duration-40`}
-        style={{
-          transform: `translateX(-${current * 100}%)`,
-        }}
-      >
-        {slides.map((s, index) => {
-          return <Image key={index} src={s} alt={name} />;
-        })}
+    <div className="overflow-hidden relative">
+      <div className="flex justify-center items-center size-300 sm:size-400 md:size-500 lg:size-600 xl:size-700">
+        <Image src={slides[current]} alt={name} />
       </div>
 
       {!isSingleItem && (
@@ -53,7 +46,7 @@ export default function Carousel({
             <Button
               size="icon"
               onClick={previousSlide}
-              className="rounded-full"
+              className="rounded-full ml-2"
               variant="secondary"
             >
               <CircleChevronLeft />
@@ -61,7 +54,7 @@ export default function Carousel({
             <Button
               onClick={nextSlide}
               size="icon"
-              className="rounded-full"
+              className="rounded-full mr-2"
               variant="secondary"
             >
               <CircleChevronLeft className="rotate-180 shadow-xl" />

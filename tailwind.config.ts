@@ -10,6 +10,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      size: {
+        700: "700px",
+        600: "600px",
+        500: "500px",
+        400: "400px",
+        300: "300px",
+      },
       container: {
         center: true,
         padding: "1.5rem",
