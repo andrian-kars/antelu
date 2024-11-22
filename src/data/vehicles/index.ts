@@ -45,6 +45,19 @@ import quad_red_1 from "./images/quad_red_1.jpg";
 import quad_red_2 from "./images/quad_red_2.jpg";
 import quad_red_3 from "./images/quad_red_3.jpg";
 import quad_red_4 from "./images/quad_red_4.jpg";
+import tractor_blue from "./images/tractor_blue.webp";
+import tractor_blue_1 from "./images/tractor_blue_1.webp";
+import tractor_blue_2 from "./images/tractor_blue_2.webp";
+import tractor_blue_3 from "./images/tractor_blue_3.webp";
+import tractor_blue_4 from "./images/tractor_blue_4.webp";
+import tractor_blue_5 from "./images/tractor_blue_5.jpg";
+import tractor_blue_6 from "./images/tractor_blue_6.jpg";
+import tractor_blue_7 from "./images/tractor_blue_7.jpg";
+import tractor_yellow from "./images/tractor_yellow.jpg";
+import tractor_yellow_1 from "./images/tractor_yellow_1.jpg";
+import tractor_yellow_2 from "./images/tractor_yellow_2.jpg";
+import tractor_yellow_3 from "./images/tractor_yellow_3.jpg";
+import tractor_yellow_4 from "./images/tractor_yellow_4.jpg";
 
 export const vehicles = [
   {
@@ -395,6 +408,71 @@ export const vehicles = [
       },
       { name: "maxSpeed", value: "3-5" },
       { name: "maxWeight", value: 30 },
+    ],
+  },
+  {
+    name: "Tractor (Azul)",
+    id: "tractor_blue",
+    type: "electric_car",
+    price: 29.99,
+    discount: null,
+    images: [
+      tractor_blue,
+      tractor_blue_1,
+      tractor_blue_2,
+      tractor_blue_3,
+      tractor_blue_4,
+      tractor_blue_5,
+      tractor_blue_6,
+      tractor_blue_7,
+    ],
+    characteristics: [
+      { name: "recommendedAge", value: "1-8" },
+      { name: "battery", value: "12V" },
+      { name: "isOpeningDoors", value: true },
+      { name: "motor", value: "2*25V" },
+      {
+        name: "seats",
+        value: {
+          number: 1,
+          material: null,
+        },
+      },
+      { name: "maxSpeed", value: "4-5" },
+      { name: "maxWeight", value: 30 },
+      { name: "isBelts", value: true },
+      { name: "isRemoteControl", value: true },
+    ],
+  },
+  {
+    name: "Tractor (Amarillo)",
+    id: "tractor_yellow",
+    type: "electric_car",
+    price: 29.99,
+    discount: null,
+    images: [
+      tractor_yellow,
+      tractor_yellow_1,
+      tractor_yellow_2,
+      tractor_yellow_3,
+      tractor_yellow_4,
+    ],
+    characteristics: [
+      { name: "recommendedAge", value: "1-8" },
+      { name: "battery", value: "12V" },
+      { name: "isOpeningDoors", value: true },
+      { name: "motor", value: "2*25V" },
+      {
+        name: "seats",
+        value: {
+          number: 1,
+          material: null,
+        },
+      },
+      { name: "maxSpeed", value: "4-5" },
+      { name: "maxWeight", value: 30 },
+      { name: "isBelts", value: true },
+      { name: "isRemoteControl", value: true },
     ],
   },
 ];
