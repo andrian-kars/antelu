@@ -20,6 +20,7 @@ export function VehicleCard({
   discount,
   images,
   characteristics,
+  itemProp,
 }: (typeof vehicles)[number]) {
   return (
     <Card>
@@ -41,7 +42,9 @@ export function VehicleCard({
       </Link>
       <CardContent>
         <Link href={`/rent/${id}`}>
-          <CardTitle className="text-xl">{name}</CardTitle>
+          <CardTitle className="text-xl" itemProp={itemProp}>
+            {name}
+          </CardTitle>
         </Link>
         <CharacteristicsList characteristics={characteristics} />
       </CardContent>

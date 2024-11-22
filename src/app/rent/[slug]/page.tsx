@@ -16,7 +16,7 @@ export async function generateMetadata({
   const title = vehicle?.name;
 
   return {
-    title: title ? `${title} | Antelu` : "Antelu",
+    title: title ? `${title} - Antelu` : "Antelu",
   };
 }
 

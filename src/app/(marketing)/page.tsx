@@ -1,37 +1,60 @@
 import { VehicleCard } from "@/components/VehicleCard";
 import { ReserveNowButton } from "@/components/ReserveNowButton";
 import { vehicles } from "@/data/vehicles";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Antelu | Alquiler de Coches para Niños",
-  description:
-    "Ya sea para una fiesta de cumpleaños, un evento especial o simplemente por diversión, Antelu es la elección definitiva para el alquiler de vehículos amigables para niños.",
-};
 
 export default function HomePage() {
   return (
     <>
-      <section className="min-h-screen bg-[radial-gradient(hsl(0,72%,65%,40%),hsl(24,62%,73%,40%),hsl(var(--background))_60%)] flex items-center justify-center text-center text-balance flex-col gap-8 px-4">
-        <h1 className="text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight m-4">
+      <section
+        itemScope
+        itemType="http://schema.org/Product"
+        className="min-h-screen bg-[radial-gradient(hsl(0,72%,65%,40%),hsl(24,62%,73%,40%),hsl(var(--background))_60%)] flex items-center justify-center text-center text-balance flex-col gap-8 px-4"
+      >
+        <h1
+          itemProp="name"
+          className="text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight m-4"
+        >
           ALQUILER DE VEHÍCULOS INFANTILES: COCHES, MOTOS, CABALLITOS.
         </h1>
-        <p className="text-lg lg:text-3xl max-w-screen-xl">
+        <h2
+          itemProp="description"
+          className="text-lg lg:text-3xl max-w-screen-xl"
+        >
           Ofrecemos una selección diversa de vehículos para que los más pequeños
           disfruten en cualquier evento: fiestas de cumpleaños, bodas, cualquier
           otra fiesta o eventos, o simplemente por diversión. ANTELU te ofrece
           la elección definitiva a precios muy asequibles para el alquiler de
           vehículos divertidos y seguros para los más pequeños.
-        </p>
-        <ReserveNowButton />
-      </section>
-      <section id="pricing" className="px-8 py-16 bg-acccent/5">
-        <h2 className="text-4xl text-center text-balance font-semibold mb-8">
-          Elige La Aventura De Tu Hijo/Hija
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen-xl mx-auto">
-          {vehicles.map((vehicle) => (
-            <VehicleCard key={vehicle.id} {...vehicle} />
+        <div itemProp="offers" itemScope itemType="http://schema.org/Offer">
+          <meta itemProp="priceCurrency" content="EUR" />
+          <link itemProp="availability" href="http://schema.org/InStock" />
+          <span itemProp="price" className="hidden">
+            Consultar en la página
+          </span>
+          <ReserveNowButton />
+        </div>
+      </section>
+      <section id="vehicles" className="px-8 py-16 bg-acccent/5">
+        <h3 className="text-4xl text-center text-balance font-semibold mb-8">
+          Elige La Aventura De Tu Hijo/Hija
+        </h3>
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen-xl mx-auto"
+          itemScope
+          itemType="http://schema.org/ItemList"
+        >
+          {vehicles.map((vehicle, index) => (
+            <div
+              itemProp="itemListElement"
+              itemScope
+              itemType="http://schema.org/Product"
+              key={vehicle.id}
+              className="vehicle-card"
+            >
+              <VehicleCard {...vehicle} />
+              <meta itemProp="position" content={`${index + 1}`} />
+            </div>
           ))}
         </div>
       </section>
