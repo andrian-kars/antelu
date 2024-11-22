@@ -1,6 +1,13 @@
 import { VehicleCard } from "@/components/VehicleCard";
 import { ReserveNowButton } from "@/components/ReserveNowButton";
 import { vehicles } from "@/data/vehicles";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Antelu | Alquiler de Coches para Niños",
+  description:
+    "Ya sea para una fiesta de cumpleaños, un evento especial o simplemente por diversión, Antelu es la elección definitiva para el alquiler de vehículos amigables para niños.",
+};
 
 export default function HomePage() {
   return (

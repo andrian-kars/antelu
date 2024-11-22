@@ -3,6 +3,22 @@ import { CharacteristicsList } from "@/components/CharacteristicsList";
 import { ReserveNowButton } from "@/components/ReserveNowButton";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { vehicles } from "@/data/vehicles";
+import type { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const slug = (await params).slug;
+  const vehicle = vehicles.find((vehicle) => vehicle.id === slug);
+
+  const title = vehicle?.name;
+
+  return {
+    title: title ? `${title} | Antelu` : "Antelu",
+  };
+}
 
 export default async function RentPage({
   params,
