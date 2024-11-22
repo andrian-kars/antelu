@@ -8,8 +8,8 @@ export default function NavBar() {
         <Link href="/" className="mr-auto">
           <BrandLogo />
         </Link>
-        <Link className="text-lg" href="/#pricing">
-          Pricing
+        <Link className="text-lg" href="/#vehicles">
+          Vehículos
         </Link>
       </nav>
     </header>

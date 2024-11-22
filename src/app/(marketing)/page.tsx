@@ -8,7 +8,7 @@ export default function HomePage() {
       <section
         itemScope
         itemType="http://schema.org/Product"
-        className="mt-20 mb-20 bg-[radial-gradient(hsl(0,72%,65%,40%),hsl(24,62%,73%,40%),hsl(var(--background))_60%)] flex items-center justify-center text-center text-balance flex-col gap-8 px-4"
+        className="mt-20 bg-[radial-gradient(hsl(0,72%,65%,40%),hsl(24,62%,73%,40%),hsl(var(--background))_60%)] flex items-center justify-center text-center text-balance flex-col gap-8 px-4"
       >
         <h1
           itemProp="name"
@@ -35,10 +35,13 @@ export default function HomePage() {
           <ReserveNowButton />
         </div>
       </section>
-      <section id="vehicles" className="px-8 py-16 bg-acccent/5">
-        <h3 className="text-4xl text-center text-balance font-semibold mb-8">
+      <section id="vehicles" className="px-8 pt-28 pb-16 bg-acccent/5">
+        <h3 className="text-4xl lg:text-6xl text-center text-balance font-semibold mb-2">
           Elige La Aventura De Tu Hijo/Hija
         </h3>
+        <p className="text-center mb-8 lg:text-xl italic">
+          *Con estos precios, puedes disfrutar del vehículo durante todo el día.
+        </p>
         <div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen-xl mx-auto"
           itemScope
