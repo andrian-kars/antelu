@@ -220,7 +220,7 @@ export const vehicles = [
     discount: null,
     images: [lamborghini_sian, lamborghini_sian_1],
     characteristics: [
-      { name: "recommendedAge", value: "3-8" },
+      { name: "recommendedAge", value: "0-6" },
       { name: "battery", value: "12V 4.5AH" },
       { name: "isOpeningDoors", value: true },
       { name: "motor", value: "2*12V" },
