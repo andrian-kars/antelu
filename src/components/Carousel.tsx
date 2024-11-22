@@ -37,7 +37,15 @@ export default function Carousel({
   return (
     <div className="overflow-hidden relative">
       <div className="flex justify-center items-center size-300 sm:size-400 md:size-500 lg:size-600 xl:size-700">
-        <Image src={slides[current]} alt={name} />
+        {slides.map((slide, index) => (
+          <Image
+            key={slide.src}
+            src={slide}
+            alt={name}
+            priority={index === 0}
+            className={current === index ? "visible" : "invisible size-0"}
+          />
+        ))}
       </div>
 
       {!isSingleItem && (
