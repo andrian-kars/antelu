@@ -97,7 +97,7 @@ export const vehicles = [
       {
         name: "seats",
         value: {
-          number: 2,
+          number: 1,
           material: null,
         },
       },
@@ -260,7 +260,7 @@ export const vehicles = [
       mercedes_ml_350_4,
     ],
     characteristics: [
-      { name: "recommendedAge", value: "3-6" },
+      { name: "recommendedAge", value: "0-6" },
       { name: "battery", value: "12V 7AH" },
       { name: "isOpeningDoors", value: true },
       { name: "motor", value: "2*35V" },
