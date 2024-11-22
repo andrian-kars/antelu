@@ -7,6 +7,7 @@ import lamborghini_aventador_svj_1 from "./images/lamborghini_aventador_svj_1.jp
 import lamborghini_aventador_svj_2 from "./images/lamborghini_aventador_svj_2.jpg";
 import lamborghini_aventador_svj_3 from "./images/lamborghini_aventador_svj_3.jpg";
 import lamborghini_aventador_svj_4 from "./images/lamborghini_aventador_svj_4.jpg";
+import lamborghini_aventador_svj_5 from "./images/lamborghini_aventador_svj_5.jpg";
 import jeep_wragler from "./images/jeep_wragler.jpg";
 import jeep_wragler_1 from "./images/jeep_wragler_1.jpg";
 import jeep_wragler_2 from "./images/jeep_wragler_2.jpg";
@@ -35,6 +36,15 @@ import jeep_red_3 from "./images/jeep_red_3.jpg";
 import jeep_red_4 from "./images/jeep_red_4.jpg";
 import lamborghini_sian from "./images/lamborghini_sian.jpg";
 import lamborghini_sian_1 from "./images/lamborghini_sian_1.jpg";
+import quad_yellow from "./images/quad_yellow.jpg";
+import quad_yellow_1 from "./images/quad_yellow_1.jpg";
+import quad_yellow_2 from "./images/quad_yellow_2.jpg";
+import quad_yellow_3 from "./images/quad_yellow_3.jpg";
+import quad_red from "./images/quad_red.jpg";
+import quad_red_1 from "./images/quad_red_1.jpg";
+import quad_red_2 from "./images/quad_red_2.jpg";
+import quad_red_3 from "./images/quad_red_3.jpg";
+import quad_red_4 from "./images/quad_red_4.jpg";
 
 export const vehicles = [
   {
@@ -88,9 +98,10 @@ export const vehicles = [
       lamborghini_aventador_svj_2,
       lamborghini_aventador_svj_3,
       lamborghini_aventador_svj_4,
+      lamborghini_aventador_svj_5,
     ],
     characteristics: [
-      { name: "recommendedAge", value: "3-8" },
+      { name: "recommendedAge", value: "1-8" },
       { name: "battery", value: "12V 7AH" },
       { name: "isOpeningDoors", value: true },
       { name: "motor", value: "2*35V" },
@@ -102,7 +113,7 @@ export const vehicles = [
         },
       },
       { name: "maxSpeed", value: "3-5" },
-      { name: "maxWeight", value: 25 },
+      { name: "maxWeight", value: 30 },
       { name: "isBelts", value: true },
       { name: "isRemoteControl", value: true },
       {
@@ -187,7 +198,7 @@ export const vehicles = [
     discount: 69.99,
     images: [fire_truck, fire_truck_1],
     characteristics: [
-      { name: "recommendedAge", value: "1-6" },
+      { name: "recommendedAge", value: "1-8" },
       { name: "battery", value: "12V 10AH" },
       { name: "isOpeningDoors", value: true },
       { name: "motor", value: "2*12V" },
@@ -220,7 +231,7 @@ export const vehicles = [
     discount: null,
     images: [lamborghini_sian, lamborghini_sian_1],
     characteristics: [
-      { name: "recommendedAge", value: "0-6" },
+      { name: "recommendedAge", value: "1-3" },
       { name: "battery", value: "12V 4.5AH" },
       { name: "isOpeningDoors", value: true },
       { name: "motor", value: "2*12V" },
@@ -260,7 +271,7 @@ export const vehicles = [
       mercedes_ml_350_4,
     ],
     characteristics: [
-      { name: "recommendedAge", value: "0-6" },
+      { name: "recommendedAge", value: "1-3" },
       { name: "battery", value: "12V 7AH" },
       { name: "isOpeningDoors", value: true },
       { name: "motor", value: "2*35V" },
@@ -300,7 +311,7 @@ export const vehicles = [
       jeep_yellow_4,
     ],
     characteristics: [
-      { name: "recommendedAge", value: "1-6" },
+      { name: "recommendedAge", value: "1-8" },
       { name: "battery", value: "12V 7AH" },
       { name: "isOpeningDoors", value: true },
       { name: "motor", value: "4*12V" },
@@ -325,7 +336,7 @@ export const vehicles = [
     discount: null,
     images: [jeep_red, jeep_red_1, jeep_red_2, jeep_red_3, jeep_red_4],
     characteristics: [
-      { name: "recommendedAge", value: "1-6" },
+      { name: "recommendedAge", value: "1-8" },
       { name: "battery", value: "12V 7AH" },
       { name: "isOpeningDoors", value: true },
       { name: "motor", value: "4*12V" },
@@ -340,6 +351,50 @@ export const vehicles = [
       { name: "maxWeight", value: 30 },
       { name: "isBelts", value: true },
       { name: "isRemoteControl", value: true },
+    ],
+  },
+  {
+    name: "Quad (Amarillo)",
+    id: "quad_yellow",
+    type: "electric_car",
+    price: 29.99,
+    discount: null,
+    images: [quad_yellow, quad_yellow_1, quad_yellow_2, quad_yellow_3],
+    characteristics: [
+      { name: "recommendedAge", value: "3-8" },
+      { name: "battery", value: "12V 10AH" },
+      { name: "motor", value: "2*12V" },
+      {
+        name: "seats",
+        value: {
+          number: 1,
+          material: null,
+        },
+      },
+      { name: "maxSpeed", value: "3-5" },
+      { name: "maxWeight", value: 30 },
+    ],
+  },
+  {
+    name: "Quad (Rojo)",
+    id: "quad_red",
+    type: "electric_car",
+    price: 29.99,
+    discount: null,
+    images: [quad_red, quad_red_1, quad_red_2, quad_red_3, quad_red_4],
+    characteristics: [
+      { name: "recommendedAge", value: "3-8" },
+      { name: "battery", value: "12V 10AH" },
+      { name: "motor", value: "2*12V" },
+      {
+        name: "seats",
+        value: {
+          number: 1,
+          material: null,
+        },
+      },
+      { name: "maxSpeed", value: "3-5" },
+      { name: "maxWeight", value: 30 },
     ],
   },
 ];
