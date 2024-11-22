@@ -58,6 +58,14 @@ import tractor_yellow_1 from "./images/tractor_yellow_1.jpg";
 import tractor_yellow_2 from "./images/tractor_yellow_2.jpg";
 import tractor_yellow_3 from "./images/tractor_yellow_3.jpg";
 import tractor_yellow_4 from "./images/tractor_yellow_4.jpg";
+import moto_red from "./images/moto_red.webp";
+import moto_red_1 from "./images/moto_red_1.jpg";
+import moto_red_2 from "./images/moto_red_2.jpg";
+import moto_red_3 from "./images/moto_red_3.jpg";
+import moto_red_4 from "./images/moto_red_4.jpg";
+import moto_black from "./images/moto_black.webp";
+import moto_black_1 from "./images/moto_black_1.jpg";
+import moto_black_2 from "./images/moto_black_2.jpg";
 
 export const vehicles = [
   {
@@ -473,6 +481,48 @@ export const vehicles = [
       { name: "maxWeight", value: 30 },
       { name: "isBelts", value: true },
       { name: "isRemoteControl", value: true },
+    ],
+  },
+  {
+    name: "Moto (Rojo)",
+    id: "moto_red",
+    type: "electric_car",
+    price: 29.99,
+    discount: null,
+    images: [moto_red, moto_red_1, moto_red_2, moto_red_3, moto_red_4],
+    characteristics: [
+      { name: "recommendedAge", value: "1-6" },
+      { name: "battery", value: "5V 4AH" },
+      {
+        name: "seats",
+        value: {
+          number: 1,
+          material: null,
+        },
+      },
+      { name: "maxSpeed", value: "3-4" },
+      { name: "maxWeight", value: 25 },
+    ],
+  },
+  {
+    name: "Moto (Negro)",
+    id: "moto_black",
+    type: "electric_car",
+    price: 29.99,
+    discount: null,
+    images: [moto_black, moto_black_1, moto_black_2],
+    characteristics: [
+      { name: "recommendedAge", value: "1-6" },
+      { name: "battery", value: "5V 4AH" },
+      {
+        name: "seats",
+        value: {
+          number: 1,
+          material: null,
+        },
+      },
+      { name: "maxSpeed", value: "3-4" },
+      { name: "maxWeight", value: 25 },
     ],
   },
 ];
