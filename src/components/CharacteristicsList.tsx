@@ -83,13 +83,15 @@ function characteristicsMapper(characteristics: Array<Characteristic>) {
   return characteristics.map(({ name, value }) => {
     switch (name) {
       case "recommendedAge":
-        return `Edades ${value} años`;
+        return `Edad ${value} años`;
       case "battery":
         return `Batería ${value}`;
       case "isOpeningDoors":
-        return "Puertas que se Abren";
+        return "Puertas que se abren";
       case "motor":
-        return `Motores de ${value}`;
+        const val = value as string;
+        const [count, volt] = val.split("*");
+        return `${count} Motores ${volt}`;
       case "seats":
         const { number, material } = value as SeatsDetail;
         return `${number} ${material === "leather" ? "Eco-Cuero" : ""} asiento${
@@ -111,6 +113,8 @@ function characteristicsMapper(characteristics: Array<Characteristic>) {
 
       case "isOriginal":
         return "Con diseño y licencia oficiales";
+      case "isTrailerDetachable":
+        return "Con remolque desenganchable";
     }
   });
 }

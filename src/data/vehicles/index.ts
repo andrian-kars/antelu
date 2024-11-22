@@ -450,6 +450,7 @@ export const vehicles = [
       { name: "maxWeight", value: 30 },
       { name: "isBelts", value: true },
       { name: "isRemoteControl", value: true },
+      { name: "isTrailerDetachable", value: true },
     ],
   },
   {
@@ -481,14 +482,15 @@ export const vehicles = [
       { name: "maxWeight", value: 30 },
       { name: "isBelts", value: true },
       { name: "isRemoteControl", value: true },
+      { name: "isTrailerDetachable", value: true },
     ],
   },
   {
     name: "Moto (Rojo)",
     id: "moto_red",
     type: "electric_car",
-    price: 29.99,
-    discount: null,
+    price: 9.99,
+    discount: 29.99,
     images: [moto_red, moto_red_1, moto_red_2, moto_red_3, moto_red_4],
     characteristics: [
       { name: "recommendedAge", value: "1-3" },
@@ -508,8 +510,8 @@ export const vehicles = [
     name: "Moto (Negro)",
     id: "moto_black",
     type: "electric_car",
-    price: 29.99,
-    discount: null,
+    price: 9.99,
+    discount: 29.99,
     images: [moto_black, moto_black_1, moto_black_2],
     characteristics: [
       { name: "recommendedAge", value: "1-3" },
