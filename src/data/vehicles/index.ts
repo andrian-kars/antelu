@@ -491,7 +491,7 @@ export const vehicles = [
     discount: null,
     images: [moto_red, moto_red_1, moto_red_2, moto_red_3, moto_red_4],
     characteristics: [
-      { name: "recommendedAge", value: "1-6" },
+      { name: "recommendedAge", value: "1-3" },
       { name: "battery", value: "5V 4AH" },
       {
         name: "seats",
@@ -512,7 +512,7 @@ export const vehicles = [
     discount: null,
     images: [moto_black, moto_black_1, moto_black_2],
     characteristics: [
-      { name: "recommendedAge", value: "1-6" },
+      { name: "recommendedAge", value: "1-3" },
       { name: "battery", value: "5V 4AH" },
       {
         name: "seats",
