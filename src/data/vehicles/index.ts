@@ -117,7 +117,7 @@ export const vehicles = [
     ],
   },
   {
-    name: "HOMCOM Jeep Wragler",
+    name: "Jeep Wragler",
     id: "jeep_wragler",
     type: "electric_car",
     price: 29.99,
@@ -287,7 +287,7 @@ export const vehicles = [
     ],
   },
   {
-    name: "INDALCHESS Jeep (Amarillo)",
+    name: "Jeep (Amarillo)",
     id: "jeep_yellow",
     type: "electric_car",
     price: 29.99,
@@ -318,7 +318,7 @@ export const vehicles = [
     ],
   },
   {
-    name: "INDALCHESS Jeep (Rojo)",
+    name: "Jeep (Rojo)",
     id: "jeep_red",
     type: "electric_car",
     price: 29.99,
