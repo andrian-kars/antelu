@@ -8,7 +8,7 @@ export default function HomePage() {
       <section
         itemScope
         itemType="http://schema.org/Product"
-        className="min-h-screen bg-[radial-gradient(hsl(0,72%,65%,40%),hsl(24,62%,73%,40%),hsl(var(--background))_60%)] flex items-center justify-center text-center text-balance flex-col gap-8 px-4"
+        className="mt-20 mb-20 bg-[radial-gradient(hsl(0,72%,65%,40%),hsl(24,62%,73%,40%),hsl(var(--background))_60%)] flex items-center justify-center text-center text-balance flex-col gap-8 px-4"
       >
         <h1
           itemProp="name"
