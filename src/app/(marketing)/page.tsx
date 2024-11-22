@@ -14,13 +14,14 @@ export default function HomePage() {
     <>
       <section className="min-h-screen bg-[radial-gradient(hsl(0,72%,65%,40%),hsl(24,62%,73%,40%),hsl(var(--background))_60%)] flex items-center justify-center text-center text-balance flex-col gap-8 px-4">
         <h1 className="text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight m-4">
-          Alquiler de Coches para Niños
+          ALQUILER DE VEHÍCULOS INFANTILES: COCHES, MOTOS, CABALLITOS.
         </h1>
         <p className="text-lg lg:text-3xl max-w-screen-xl">
-          Ofrecemos una selección diversa de vehículos para que los niños
-          disfruten. Ya sea para una fiesta de cumpleaños, un evento especial o
-          simplemente por diversión, Antelu es la elección definitiva para el
-          alquiler de vehículos amigables para niños.
+          Ofrecemos una selección diversa de vehículos para que los más pequeños
+          disfruten en cualquier evento: fiestas de cumpleaños, bodas, cualquier
+          otra fiesta o eventos, o simplemente por diversión. ANTELU te ofrece
+          la elección definitiva a precios muy asequibles para el alquiler de
+          vehículos divertidos y seguros para los más pequeños.
         </p>
         <ReserveNowButton />
       </section>

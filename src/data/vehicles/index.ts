@@ -73,7 +73,7 @@ export const vehicles = [
     id: "mercedes_csl_350_amg",
     type: "electric_car",
     price: 29.99,
-    discount: 69.99,
+    discount: null,
     images: [
       mercedes_csl_350_amg,
       mercedes_csl_350_amg_1,
@@ -216,7 +216,7 @@ export const vehicles = [
     id: "fire_truck",
     type: "electric_car",
     price: 29.99,
-    discount: 69.99,
+    discount: null,
     images: [fire_truck, fire_truck_1],
     characteristics: [
       { name: "recommendedAge", value: "1-8" },
@@ -283,7 +283,7 @@ export const vehicles = [
     id: "mercedes_ml_350",
     type: "electric_car",
     price: 29.99,
-    discount: 69.99,
+    discount: null,
     images: [
       mercedes_ml_350,
       mercedes_ml_350_1,

@@ -94,9 +94,9 @@ function characteristicsMapper(characteristics: Array<Characteristic>) {
         return `${count} Motores ${volt}`;
       case "seats":
         const { number, material } = value as SeatsDetail;
-        return `${number} ${material === "leather" ? "Eco-Cuero" : ""} asiento${
+        return `${number > 1 ? number : ""} ${number > 1 ? "a" : "A"}siento${
           number > 1 ? "s" : ""
-        }`;
+        } ${material === "leather" ? "de eco-cuero" : ""}`;
       case "maxSpeed":
         return `Velocidad máxima ${value} Km/h`;
       case "maxWeight":
