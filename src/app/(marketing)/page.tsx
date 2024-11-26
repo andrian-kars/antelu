@@ -1,6 +1,6 @@
 import { VehicleCard } from "@/components/VehicleCard";
-import { ReserveNowButton } from "@/components/ReserveNowButton";
 import { vehicles } from "@/data/vehicles";
+import initial_background from "@/data/general/images/initial_background.jpg";
 
 export default function HomePage() {
   return (
@@ -8,7 +8,17 @@ export default function HomePage() {
       <section
         itemScope
         itemType="http://schema.org/Product"
-        className="mt-20 bg-[radial-gradient(hsl(0,72%,65%,40%),hsl(24,62%,73%,40%),hsl(var(--background))_60%)] flex items-center justify-center text-center text-balance flex-col gap-8 px-4"
+        style={{
+          backgroundImage: `linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url(${initial_background.src})`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+        }}
+        className="py-16 sm:py-56 bg-[radial-gradient(hsl(0,72%,65%,40%),hsl(24,62%,73%,40%),hsl(var(--background))_60%)] flex items-center justify-center text-center text-balance flex-col gap-8 px-4 text-white"
       >
         <h1
           itemProp="name"
@@ -32,7 +42,6 @@ export default function HomePage() {
           <span itemProp="price" className="hidden">
             Consultar en la página
           </span>
-          <ReserveNowButton />
         </div>
       </section>
       <section id="vehicles" className="px-8 pt-28 pb-16 bg-acccent/5">
