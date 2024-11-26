@@ -638,7 +638,7 @@ export const vehicles = [
       pony_unicorn_white_4,
     ],
     characteristics: [
-      { name: "recommendedAge", value: "3-7" },
+      { name: "recommendedAge", value: "3-8" },
       {
         name: "seats",
         value: {
@@ -664,7 +664,7 @@ export const vehicles = [
       pony_unicorn_pink_4,
     ],
     characteristics: [
-      { name: "recommendedAge", value: "3-7" },
+      { name: "recommendedAge", value: "3-8" },
       {
         name: "seats",
         value: {
@@ -684,7 +684,7 @@ export const vehicles = [
     discount: null,
     images: [pony, pony_1, pony_2, pony_3, pony_4],
     characteristics: [
-      { name: "recommendedAge", value: "3-7" },
+      { name: "recommendedAge", value: "5-15" },
       {
         name: "seats",
         value: {
@@ -692,7 +692,7 @@ export const vehicles = [
           material: null,
         },
       },
-      { name: "maxWeight", value: 40 },
+      { name: "maxWeight", value: 60 },
     ],
   },
 ];
