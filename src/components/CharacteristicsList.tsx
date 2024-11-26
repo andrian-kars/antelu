@@ -11,34 +11,33 @@ export function CharacteristicsList({
   isFull?: boolean;
 }) {
   const [isFullDescription, setIsFullDescription] = useState(false);
+  const chars = characteristicsMapper(characteristics);
 
   const handleDescriptionChange = () => setIsFullDescription((prev) => !prev);
 
-  if (isFull)
+  if (isFull || chars.length <= 4)
     return (
       <ul className="mt-4 gap-3 flex flex-col text-gray-500">
-        {characteristicsMapper(characteristics).map(
-          (char, index, currentArray) => (
-            <li
-              key={index}
-              className={`flex gap-3 ${
-                index !== currentArray.length - 1
-                  ? "border-b-2 border-dashed pb-2"
-                  : ""
-              }`}
-            >
-              <Check color="white" className="bg-red-600 rounded-full p-1" />
-              <p>{char}</p>
-            </li>
-          )
-        )}
+        {chars.map((char, index, currentArray) => (
+          <li
+            key={index}
+            className={`flex gap-3 ${
+              index !== currentArray.length - 1
+                ? "border-b-2 border-dashed pb-2"
+                : ""
+            }`}
+          >
+            <Check color="white" className="bg-red-600 rounded-full p-1" />
+            <p>{char}</p>
+          </li>
+        ))}
       </ul>
     );
 
   return (
     <>
       <ul className="mt-4 gap-3 flex flex-col text-gray-500">
-        {characteristicsMapper(characteristics)
+        {chars
           .filter((char, index) => char && index < 4)
           .map((char, index) => (
             <li
@@ -58,7 +57,7 @@ export function CharacteristicsList({
       </p>
       {isFullDescription && (
         <ul className="mt-4 gap-3 flex flex-col text-gray-500">
-          {characteristicsMapper(characteristics)
+          {chars
             .filter((char, index) => char && index > 3)
             .map((char, index, currentArray) => (
               <li
