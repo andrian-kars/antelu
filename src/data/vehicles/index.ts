@@ -29,6 +29,10 @@ import jeep_yellow_1 from "./images/jeep_yellow_1.jpg";
 import jeep_yellow_2 from "./images/jeep_yellow_2.jpg";
 import jeep_yellow_3 from "./images/jeep_yellow_3.jpg";
 import jeep_yellow_4 from "./images/jeep_yellow_4.jpg";
+import jeep_plus_red from "./images/jeep_plus_red.jpg";
+import jeep_plus_red_1 from "./images/jeep_plus_red_1.jpg";
+import jeep_plus_red_2 from "./images/jeep_plus_red_2.jpg";
+import jeep_plus_red_3 from "./images/jeep_plus_red_3.jpg";
 import jeep_red from "./images/jeep_red.jpg";
 import jeep_red_1 from "./images/jeep_red_1.jpg";
 import jeep_red_2 from "./images/jeep_red_2.jpg";
@@ -406,6 +410,39 @@ export const vehicles = [
       { name: "maxWeight", value: 30 },
       { name: "isBelts", value: true },
       { name: "isRemoteControl", value: true },
+    ],
+  },
+  {
+    itemProp: "name",
+    name: "Jeep Todoterreno (Rojo)",
+    id: "jeep-plus-red",
+    type: "electric_car",
+    price: 29.99,
+    discount: null,
+    images: [jeep_plus_red, jeep_plus_red_1, jeep_plus_red_2, jeep_plus_red_3],
+    characteristics: [
+      { name: "recommendedAge", value: "3-8" },
+      { name: "battery", value: "12V 7AH" },
+      { name: "isOpeningDoors", value: true },
+      {
+        name: "seats",
+        value: {
+          number: 1,
+          material: null,
+        },
+      },
+      { name: "maxSpeed", value: "5-6" },
+      { name: "maxWeight", value: 30 },
+      { name: "isBelts", value: true },
+      { name: "isRemoteControl", value: true },
+      {
+        name: "sound",
+        value: {
+          isUsb: true,
+          isBluetooth: true,
+          isMp3: true,
+        },
+      },
     ],
   },
   {
