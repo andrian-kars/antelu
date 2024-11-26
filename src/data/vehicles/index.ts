@@ -66,6 +66,16 @@ import moto_red_4 from "./images/moto_red_4.jpg";
 import moto_black from "./images/moto_black.webp";
 import moto_black_1 from "./images/moto_black_1.jpg";
 import moto_black_2 from "./images/moto_black_2.jpg";
+import moto_cross_yellow from "./images/moto_cross_yellow.jpg";
+import moto_cross_yellow_1 from "./images/moto_cross_yellow_1.jpg";
+import moto_cross_yellow_2 from "./images/moto_cross_yellow_2.jpg";
+import moto_cross_yellow_3 from "./images/moto_cross_yellow_3.jpg";
+import moto_cross_yellow_4 from "./images/moto_cross_yellow_4.jpg";
+import moto_cross_red from "./images/moto_cross_red.jpg";
+import moto_cross_red_1 from "./images/moto_cross_red_1.jpg";
+import moto_cross_red_2 from "./images/moto_cross_red_2.jpg";
+import moto_cross_red_3 from "./images/moto_cross_red_3.jpg";
+import moto_cross_red_4 from "./images/moto_cross_red_4.jpg";
 
 export const vehicles = [
   {
@@ -540,6 +550,62 @@ export const vehicles = [
       },
       { name: "maxSpeed", value: "3-4" },
       { name: "maxWeight", value: 25 },
+    ],
+  },
+  {
+    itemProp: "name",
+    name: "Moto Cross (Amarillo)",
+    id: "moto-cross-yellow",
+    type: "electric_car",
+    price: 9.99,
+    discount: 29.99,
+    images: [
+      moto_cross_yellow,
+      moto_cross_yellow_1,
+      moto_cross_yellow_2,
+      moto_cross_yellow_3,
+      moto_cross_yellow_4,
+    ],
+    characteristics: [
+      { name: "recommendedAge", value: "3-6" },
+      { name: "motor", value: "1*12V" },
+      {
+        name: "seats",
+        value: {
+          number: 1,
+          material: null,
+        },
+      },
+      { name: "maxSpeed", value: "5-6" },
+      { name: "maxWeight", value: 30 },
+    ],
+  },
+  {
+    itemProp: "name",
+    name: "Moto Cross (Rojo)",
+    id: "moto-cross-red",
+    type: "electric_car",
+    price: 9.99,
+    discount: 29.99,
+    images: [
+      moto_cross_red,
+      moto_cross_red_1,
+      moto_cross_red_2,
+      moto_cross_red_3,
+      moto_cross_red_4,
+    ],
+    characteristics: [
+      { name: "recommendedAge", value: "3-6" },
+      { name: "motor", value: "1*12V" },
+      {
+        name: "seats",
+        value: {
+          number: 1,
+          material: null,
+        },
+      },
+      { name: "maxSpeed", value: "5-6" },
+      { name: "maxWeight", value: 30 },
     ],
   },
 ];

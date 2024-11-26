@@ -12,7 +12,7 @@ export default function HomePage() {
       >
         <h1
           itemProp="name"
-          className="text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight m-4"
+          className="text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight m-4"
         >
           ALQUILER DE VEHÍCULOS INFANTILES: COCHES, MOTOS, CABALLITOS.
         </h1>

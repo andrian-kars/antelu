@@ -91,7 +91,9 @@ function characteristicsMapper(characteristics: Array<Characteristic>) {
       case "motor":
         const val = value as string;
         const [count, volt] = val.split("*");
-        return `${count} Motores ${volt}`;
+        return `${+count > 1 ? count : ""} Motor${
+          +count > 1 ? "es" : ""
+        } ${volt}`;
       case "seats":
         const { number, material } = value as SeatsDetail;
         return `${number > 1 ? number : ""} ${number > 1 ? "a" : "A"}siento${
