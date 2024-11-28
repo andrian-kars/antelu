@@ -85,16 +85,19 @@ import pony_unicorn_white_1 from "./images/pony_unicorn_white_1.jpg";
 import pony_unicorn_white_2 from "./images/pony_unicorn_white_2.jpg";
 import pony_unicorn_white_3 from "./images/pony_unicorn_white_3.jpg";
 import pony_unicorn_white_4 from "./images/pony_unicorn_white_4.jpg";
-import pony_unicorn_pink from "./images/pony_unicorn_pink.jpg";
-import pony_unicorn_pink_1 from "./images/pony_unicorn_pink_1.jpg";
-import pony_unicorn_pink_2 from "./images/pony_unicorn_pink_2.jpg";
-import pony_unicorn_pink_3 from "./images/pony_unicorn_pink_3.jpg";
-import pony_unicorn_pink_4 from "./images/pony_unicorn_pink_4.jpg";
-import pony from "./images/pony.jpg";
-import pony_1 from "./images/pony_1.jpg";
-import pony_2 from "./images/pony_2.jpg";
-import pony_3 from "./images/pony_3.jpg";
-import pony_4 from "./images/pony_4.jpg";
+import pony_brown from "./images/pony_brown.jpg";
+import pony_brown_1 from "./images/pony_brown_1.jpg";
+import pony_brown_2 from "./images/pony_brown_2.jpg";
+import pony_brown_3 from "./images/pony_brown_3.jpg";
+import pony_black from "./images/pony_black.jpg";
+import pony_black_1 from "./images/pony_black_1.jpg";
+import pony_black_2 from "./images/pony_black_2.jpg";
+import pony_black_3 from "./images/pony_black_3.jpg";
+import pony_black_4 from "./images/pony_black_4.jpg";
+import pony_small from "./images/pony_small.jpg";
+import pony_small_1 from "./images/pony_small_1.jpg";
+import pony_small_2 from "./images/pony_small_2.jpg";
+import pony_small_3 from "./images/pony_small_3.jpg";
 
 export const vehicles = [
   {
@@ -609,8 +612,8 @@ export const vehicles = [
     name: "Moto Cross (Amarillo)",
     id: "moto-cross-yellow",
     type: "electric_car",
-    price: 9.99,
-    discount: 29.99,
+    price: 29.99,
+    discount: null,
     images: [
       moto_cross_yellow,
       moto_cross_yellow_1,
@@ -619,7 +622,7 @@ export const vehicles = [
       moto_cross_yellow_4,
     ],
     characteristics: [
-      { name: "recommendedAge", value: "3-6" },
+      { name: "recommendedAge", value: "3-8" },
       { name: "motor", value: "1*12V" },
       {
         name: "seats",
@@ -637,8 +640,8 @@ export const vehicles = [
     name: "Moto Cross (Rojo)",
     id: "moto-cross-red",
     type: "electric_car",
-    price: 9.99,
-    discount: 29.99,
+    price: 29.99,
+    discount: null,
     images: [
       moto_cross_red,
       moto_cross_red_1,
@@ -647,7 +650,7 @@ export const vehicles = [
       moto_cross_red_4,
     ],
     characteristics: [
-      { name: "recommendedAge", value: "3-6" },
+      { name: "recommendedAge", value: "3-8" },
       { name: "motor", value: "1*12V" },
       {
         name: "seats",
@@ -664,7 +667,7 @@ export const vehicles = [
     itemProp: "name",
     name: "Pony Unicornio (Blanco)",
     id: "pony-unicorn-white",
-    type: "electric_car",
+    type: "pony",
     price: 29.99,
     discount: null,
     images: [
@@ -675,7 +678,7 @@ export const vehicles = [
       pony_unicorn_white_4,
     ],
     characteristics: [
-      { name: "recommendedAge", value: "3-8" },
+      { name: "recommendedAge", value: "1-8" },
       {
         name: "seats",
         value: {
@@ -683,45 +686,19 @@ export const vehicles = [
           material: null,
         },
       },
-      { name: "maxWeight", value: 40 },
+      { name: "maxWeight", value: 30 },
     ],
   },
   {
     itemProp: "name",
-    name: "Pony Unicornio (Rosa)",
-    id: "pony-unicorn-pink",
-    type: "electric_car",
+    name: "Pony (Marrón)",
+    id: "pony-brown",
+    type: "pony",
     price: 29.99,
     discount: null,
-    images: [
-      pony_unicorn_pink,
-      pony_unicorn_pink_1,
-      pony_unicorn_pink_2,
-      pony_unicorn_pink_3,
-      pony_unicorn_pink_4,
-    ],
+    images: [pony_brown, pony_brown_1, pony_brown_2, pony_brown_3],
     characteristics: [
-      { name: "recommendedAge", value: "3-8" },
-      {
-        name: "seats",
-        value: {
-          number: 1,
-          material: null,
-        },
-      },
-      { name: "maxWeight", value: 40 },
-    ],
-  },
-  {
-    itemProp: "name",
-    name: "Pony",
-    id: "pony",
-    type: "electric_car",
-    price: 29.99,
-    discount: null,
-    images: [pony, pony_1, pony_2, pony_3, pony_4],
-    characteristics: [
-      { name: "recommendedAge", value: "5-15" },
+      { name: "recommendedAge", value: "3-15" },
       {
         name: "seats",
         value: {
@@ -730,6 +707,52 @@ export const vehicles = [
         },
       },
       { name: "maxWeight", value: 60 },
+    ],
+  },
+  {
+    itemProp: "name",
+    name: "Pony (Negro)",
+    id: "pony-black",
+    type: "pony",
+    price: 29.99,
+    discount: null,
+    images: [
+      pony_black,
+      pony_black_1,
+      pony_black_2,
+      pony_black_3,
+      pony_black_4,
+    ],
+    characteristics: [
+      { name: "recommendedAge", value: "3-15" },
+      {
+        name: "seats",
+        value: {
+          number: 1,
+          material: null,
+        },
+      },
+      { name: "maxWeight", value: 60 },
+    ],
+  },
+  {
+    itemProp: "name",
+    name: "Pequeño Pony",
+    id: "pony-small",
+    type: "pony",
+    price: 29.99,
+    discount: null,
+    images: [pony_small, pony_small_1, pony_small_2, pony_small_3],
+    characteristics: [
+      { name: "recommendedAge", value: "1-3" },
+      {
+        name: "seats",
+        value: {
+          number: 1,
+          material: null,
+        },
+      },
+      { name: "maxWeight", value: 20 },
     ],
   },
 ];
