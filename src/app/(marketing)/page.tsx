@@ -1,6 +1,9 @@
 import { VehicleCard } from "@/components/VehicleCard";
 import { vehicles } from "@/data/vehicles";
 import initial_background from "@/data/general/images/initial_background.jpg";
+import Image from "next/image";
+import infoLeft from "@/data/general/images/info_left.jpg";
+import infoRight from "@/data/general/images/info_right.jpg";
 
 export default function HomePage() {
   return (
@@ -44,7 +47,7 @@ export default function HomePage() {
           </span>
         </div>
       </section>
-      <section id="vehicles" className="px-8 pt-28 pb-16 bg-acccent/5">
+      <section id="vehicles" className="px-8 pt-28 bg-acccent/5">
         <h3 className="text-4xl lg:text-6xl text-center text-balance font-semibold mb-2">
           Elige La Aventura De Tu Hijo/Hija
         </h3>
@@ -68,6 +71,76 @@ export default function HomePage() {
               <meta itemProp="position" content={`${index + 1}`} />
             </div>
           ))}
+        </div>
+      </section>
+      <section id="info" className="pt-6 md:pt-12 bg-acccent/5">
+        <div className="flex flex-1">
+          <Image
+            src={infoLeft}
+            alt="Info cars"
+            className="w-1/2 hidden md:block"
+          />
+          <div className="flex flex-col justify-center md:w-1/2 px-6 lg:px-12 xl:px-24 py-3 lg:py-6">
+            <h4 className="text-xl lg:text-4xl text-balance font-semibold mb-2 lg:mb-4">
+              Alquilar un coche para niños es una opción excelente por varias
+              razones:
+            </h4>
+            <p className="text-base lg:text-lg">
+              Desde fomentar la conveniencia y ofrecer diversas opciones, hasta
+              facilitar la planificación de eventos y permitir pruebas de
+              manejo, los alquileres de coches para niños son una opción
+              versátil para diferentes necesidades y ocasiones. Son ideales para
+              vacaciones, eventos especiales o simplemente un fin de semana de
+              diversión, ya que los beneficios de alquilar estos coches van más
+              allá de la diversión, creando experiencias memorables en la
+              infancia. 🚗
+            </p>
+          </div>
+        </div>
+        <div className="flex">
+          <div className="flex flex-col justify-center md:w-1/2 px-6 lg:px-12 xl:px-24 py-3 lg:py-6">
+            <h4 className="text-xl lg:text-4xl text-balance font-semibold mb-2 lg:mb-4">
+              Cómo Alquilar:
+            </h4>
+            <ol>
+              <li>
+                <p className="text-base lg:text-lg font-semibold">
+                  1. Investigación
+                </p>
+                <p className="text-base lg:text-lg">
+                  ¡Descubre nuestra impresionante selección de vehículos,
+                  precios competitivos y políticas de alquiler amigables con el
+                  cliente! 🚗💨
+                </p>
+              </li>
+              <li>
+                <p className="text-base lg:text-lg font-semibold">
+                  2. Hacer una Reserva
+                </p>
+                <p className="text-base lg:text-lg">
+                  Si todo parece correcto, puedes proceder a reservar el coche.
+                  Haz la llamada telefónica.
+                </p>
+              </li>
+              <li>
+                <p className="text-base lg:text-lg font-semibold">
+                  3. Recoger y Devolver el Vehículo
+                </p>
+                <p className="text-base lg:text-lg">
+                  El día del alquiler, recoge el coche en nuestras instalaciones
+                  o utiliza nuestro servicio de entrega por un cargo extra. Al
+                  concluir el alquiler, devuelve el coche en la misma ubicación
+                  o coordina la recogida con un representante. Recuerda
+                  devolverlo en el mismo estado para evitar cargos adicionales.
+                </p>
+              </li>
+            </ol>
+          </div>
+          <Image
+            src={infoRight}
+            alt="Info hourses"
+            className="w-1/2 hidden md:block"
+          />
         </div>
       </section>
     </>
