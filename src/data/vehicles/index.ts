@@ -57,6 +57,7 @@ import tractor_blue_4 from "./images/tractor_blue_4.webp";
 import tractor_blue_5 from "./images/tractor_blue_5.jpg";
 import tractor_blue_6 from "./images/tractor_blue_6.jpg";
 import tractor_blue_7 from "./images/tractor_blue_7.jpg";
+import tractor_blue_8 from "./images/tractor_blue_8.jpg";
 import tractor_yellow from "./images/tractor_yellow.jpg";
 import tractor_yellow_1 from "./images/tractor_yellow_1.jpg";
 import tractor_yellow_2 from "./images/tractor_yellow_2.jpg";
@@ -503,6 +504,7 @@ export const vehicles = [
     discount: null,
     images: [
       tractor_blue,
+      tractor_blue_8,
       tractor_blue_1,
       tractor_blue_2,
       tractor_blue_3,
@@ -698,7 +700,7 @@ export const vehicles = [
     discount: null,
     images: [pony_brown, pony_brown_1, pony_brown_2, pony_brown_3],
     characteristics: [
-      { name: "recommendedAge", value: "3-15" },
+      { name: "recommendedAge", value: "5-15" },
       {
         name: "seats",
         value: {
