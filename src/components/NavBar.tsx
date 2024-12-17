@@ -25,7 +25,7 @@ export default function NavBar() {
   };
 
   return (
-    <header className="flex py-6 shadow-xl sticky top-0 w-full z-50 bg-background/95">
+    <header className="flex py-4 md:py-6 shadow-xl sticky top-0 w-full z-50 bg-background/95">
       <nav className="flex items-center container font-semibold">
         <Link href="/" className="mr-auto">
           <BrandLogo onClick={handleCloseNav} />
@@ -41,10 +41,10 @@ export default function NavBar() {
         </ul>
         <div className="flex md:hidden">
           {isNavOpen ? (
-            <X size={32} className="cursor-pointer" onClick={handleCloseNav} />
+            <X size={28} className="cursor-pointer" onClick={handleCloseNav} />
           ) : (
             <Menu
-              size={32}
+              size={28}
               className="cursor-pointer"
               onClick={handleOpenNav}
             />
@@ -55,10 +55,10 @@ export default function NavBar() {
                 <div
                   className={cn(
                     isNavOpen ? "flex" : "hidden",
-                    "fixed top-0 right-0 bottom-0 left-0 min-h-screen z-40 bg-white"
+                    "fixed top-14 right-0 bottom-0 left-0 z-40 bg-background/95"
                   )}
                 >
-                  <ul className="w-full flex flex-col items-center justify-center gap-10">
+                  <ul className="w-full flex flex-col items-center justify-center gap-4">
                     {LINKS.map(({ name, path }) => (
                       <li
                         key={name}

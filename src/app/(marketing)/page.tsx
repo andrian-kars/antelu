@@ -21,17 +21,17 @@ export default function HomePage() {
           backgroundSize: "cover",
           textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
         }}
-        className="py-16 sm:py-56 bg-[radial-gradient(hsl(0,72%,65%,40%),hsl(24,62%,73%,40%),hsl(var(--background))_60%)] flex items-center justify-center text-center text-balance flex-col gap-8 px-4 text-white"
+        className="py-16 sm:py-56 bg-[radial-gradient(hsl(0,72%,65%,40%),hsl(24,62%,73%,40%),hsl(var(--background))_60%)] flex items-center justify-center text-center text-balance flex-col gap-4 md:gap-8 px-4 text-white"
       >
         <h1
           itemProp="name"
-          className="text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight m-4"
+          className="text-3xl md:text-5xl xl:text-6xl font-bold tracking-tight m-2 md:m-4"
         >
           ALQUILER DE VEHÍCULOS INFANTILES: COCHES, MOTOS, CABALLITOS.
         </h1>
         <h2
           itemProp="description"
-          className="text-lg lg:text-3xl max-w-screen-xl"
+          className="text-lg md:text-2xl xl:text-3xl max-w-screen-xl"
         >
           Ofrecemos una selección diversa de vehículos para que los más pequeños
           disfruten en cualquier evento: fiestas de cumpleaños, bodas, cualquier
@@ -47,7 +47,7 @@ export default function HomePage() {
           </span>
         </div>
       </section>
-      <section id="vehicles" className="px-8 pt-28 bg-acccent/5">
+      <section id="vehicles" className="px-8 pt-20 md:pt-28 bg-acccent/5">
         <h3 className="text-4xl lg:text-6xl text-center text-balance font-semibold mb-2">
           Elige La Aventura De Tu Hijo/Hija
         </h3>
@@ -73,7 +73,7 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-      <section id="info" className="pt-6 md:pt-12 bg-acccent/5">
+      <section id="info" className="pt-14 md:pt-20 bg-acccent/5">
         <div className="flex flex-1">
           <Image
             src={infoLeft}
