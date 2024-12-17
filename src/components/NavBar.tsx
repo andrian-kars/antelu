@@ -16,15 +16,19 @@ const LINKS = [
 export default function NavBar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
-  const handleToggleNav = () => {
-    setIsNavOpen((prev) => !prev);
+  const handleOpenNav = () => {
+    setIsNavOpen(true);
+  };
+
+  const handleCloseNav = () => {
+    setIsNavOpen(false);
   };
 
   return (
     <header className="flex py-6 shadow-xl sticky top-0 w-full z-50 bg-background/95">
       <nav className="flex items-center container font-semibold">
         <Link href="/" className="mr-auto">
-          <BrandLogo />
+          <BrandLogo onClick={handleCloseNav} />
         </Link>
         <ul className="gap-10 hidden md:flex">
           {LINKS.map(({ name, path }) => (
@@ -37,12 +41,12 @@ export default function NavBar() {
         </ul>
         <div className="flex md:hidden">
           {isNavOpen ? (
-            <X size={32} className="cursor-pointer" onClick={handleToggleNav} />
+            <X size={32} className="cursor-pointer" onClick={handleCloseNav} />
           ) : (
             <Menu
               size={32}
               className="cursor-pointer"
-              onClick={handleToggleNav}
+              onClick={handleOpenNav}
             />
           )}
 
@@ -59,7 +63,7 @@ export default function NavBar() {
                     <Link
                       className="text-lg font-semibold"
                       href={path}
-                      onClick={handleToggleNav}
+                      onClick={handleCloseNav}
                     >
                       {name}
                     </Link>
