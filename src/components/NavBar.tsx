@@ -50,7 +50,7 @@ export default function NavBar() {
             />
           )}
 
-          {document
+          {typeof document !== "undefined"
             ? createPortal(
                 <div
                   className={cn(
