@@ -50,29 +50,34 @@ export default function NavBar() {
             />
           )}
 
-          {createPortal(
-            <div
-              className={cn(
-                isNavOpen ? "flex" : "hidden",
-                "fixed top-0 right-0 bottom-0 left-0 min-h-screen z-40 bg-white"
-              )}
-            >
-              <ul className="w-full flex flex-col items-center justify-center gap-10">
-                {LINKS.map(({ name, path }) => (
-                  <li key={name} className="border-b border-gray-400 uppercase">
-                    <Link
-                      className="text-lg font-semibold"
-                      href={path}
-                      onClick={handleCloseNav}
-                    >
-                      {name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>,
-            document.body
-          )}
+          {document
+            ? createPortal(
+                <div
+                  className={cn(
+                    isNavOpen ? "flex" : "hidden",
+                    "fixed top-0 right-0 bottom-0 left-0 min-h-screen z-40 bg-white"
+                  )}
+                >
+                  <ul className="w-full flex flex-col items-center justify-center gap-10">
+                    {LINKS.map(({ name, path }) => (
+                      <li
+                        key={name}
+                        className="border-b border-gray-400 uppercase"
+                      >
+                        <Link
+                          className="text-lg font-semibold"
+                          href={path}
+                          onClick={handleCloseNav}
+                        >
+                          {name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>,
+                document.body
+              )
+            : null}
         </div>
       </nav>
     </header>
