@@ -35,7 +35,10 @@ const questions = [
 
 export default function QuestionsSection() {
   return (
-    <section id="questions" className="container pt-14 md:pt-20 bg-acccent/5">
+    <section
+      id="questions"
+      className="container pt-14 md:pt-20 bg-acccent/5 pb-16"
+    >
       <Accordion type="single" collapsible defaultValue="item-0">
         {questions.map(({ header, content }, i) => (
           <AccordionItem key={i} value={`item-${i}`}>

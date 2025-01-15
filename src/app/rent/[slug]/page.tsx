@@ -33,8 +33,8 @@ export default async function RentPage({
   const { images, name, discount, price, characteristics } = vehicle;
 
   return (
-    <section className="px-8 py-16 bg-acccent/5 container">
-      <Card className="flex flex-col lg:flex-row gap-5">
+    <section className="relative px-8 py-16 bg-acccent/5 z-40 bg-white">
+      <Card className="flex flex-col lg:flex-row gap-5 container">
         <CardHeader className="relative flex justify-center items-center lg:w-2/3">
           <CardTitle className="text-2xl sm:text-3xl">{name}</CardTitle>
           <Carousel slides={images} name={name} />

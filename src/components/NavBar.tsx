@@ -1,17 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
-
-const LINKS = [
-  { name: "Vehículos", path: "/#vehicles" },
-  { name: "Información", path: "/#info" },
-  { name: "Galería", path: "/gallery" },
-  { name: "Preguntas", path: "/#questions" },
-];
+import { navLinks } from "@/data/constants";
 
 export default function NavBar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -28,13 +22,19 @@ export default function NavBar() {
     <>
       <header className="flex py-4 md:py-6 shadow-xl sticky top-0 w-full z-50 bg-background/95">
         <nav className="flex items-center container font-semibold">
-          <Link href="/" className="mr-auto">
+          <Link
+            href="/"
+            className="mr-auto hover:text-gray-600 active:text-gray-600 focus:text-gray-600 transition focus:outline-none"
+          >
             <BrandLogo onClick={handleCloseNav} />
           </Link>
           <ul className="gap-10 hidden md:flex">
-            {LINKS.map(({ name, path }) => (
+            {navLinks.map(({ name, path }) => (
               <li key={name}>
-                <Link className="text-lg" href={path}>
+                <Link
+                  className="text-lg hover:text-gray-600 active:text-gray-600 focus:text-gray-600 transition focus:outline-none"
+                  href={path}
+                >
                   {name}
                 </Link>
               </li>
@@ -64,7 +64,7 @@ export default function NavBar() {
         )}
       >
         <ul className="w-full flex flex-col items-center justify-center gap-4">
-          {LINKS.map(({ name, path }) => (
+          {navLinks.map(({ name, path }) => (
             <li key={name} className="border-b border-gray-400 uppercase">
               <Link
                 className="text-lg font-semibold"

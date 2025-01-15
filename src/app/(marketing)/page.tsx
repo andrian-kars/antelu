@@ -8,7 +8,7 @@ import QuestionsSection from "./_sections/QuestionsSection";
 
 export default function HomePage() {
   return (
-    <>
+    <main className="z-40 relative bg-white">
       <section
         itemScope
         itemType="http://schema.org/Product"
@@ -145,6 +145,6 @@ export default function HomePage() {
         </div>
       </section>
       <QuestionsSection />
-    </>
+    </main>
   );
 }
