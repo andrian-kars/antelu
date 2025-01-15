@@ -27,7 +27,7 @@ export default function Footer() {
           </h5>
           <ul className="flex flex-col gap-3">
             <li>
-              <p>Lunes-Sunday:</p>
+              <p>Lunes-Domingo:</p>
             </li>
             <li>
               <p>
@@ -36,7 +36,7 @@ export default function Footer() {
               </p>
             </li>
             <li>
-              <p>Horario: 10:00 a 18:00</p>
+              <p>Horario: 11:00 a 21:00</p>
             </li>
             <li>
               <ContactDialog>

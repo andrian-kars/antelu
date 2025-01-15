@@ -26,11 +26,6 @@ const questions = [
     content:
       "Los clientes pueden reservar con antelación en la compañía de alquiler, lo cual es especialmente útil durante períodos de alta demanda como vacaciones o fines de semana.",
   },
-  {
-    header: "¿Qué tipos de coches para niños están disponibles para alquilar?",
-    content:
-      "La gama puede variar, pero a menudo incluye coches eléctricos, coches a pedales e incluso coches temáticos como todoterrenos y marcas de lujo.",
-  },
 ];
 
 export default function QuestionsSection() {
