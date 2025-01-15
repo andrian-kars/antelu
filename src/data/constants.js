@@ -4,3 +4,5 @@ export const navLinks = [
   { name: "Galería", path: "/gallery" },
   { name: "Preguntas", path: "/#questions" },
 ];
+
+export const phoneNumber = "+34 604 952 317";

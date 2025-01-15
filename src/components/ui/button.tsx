@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
@@ -53,4 +53,33 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = "Button";
 
-export { Button, buttonVariants };
+const ButtonLink = ({
+  href,
+  className,
+  variant,
+  ...props
+}: {
+  href: string;
+  className: string;
+  children: React.ReactNode;
+  variant:
+    | "link"
+    | "secondary"
+    | "default"
+    | "destructive"
+    | "outline"
+    | "ghost"
+    | null
+    | undefined;
+}) => {
+  return (
+    <Link
+      href={href}
+      className={cn(buttonVariants({ variant, className }))}
+      {...props}
+    />
+  );
+};
+ButtonLink.displayName = "ButtonLink";
+
+export { ButtonLink, Button, buttonVariants };

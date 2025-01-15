@@ -1,4 +1,4 @@
-import { navLinks } from "@/data/constants";
+import { navLinks, phoneNumber } from "@/data/constants";
 import Link from "next/link";
 
 const currentYear = new Date().getFullYear(); // Gets the current year
@@ -38,7 +38,12 @@ export default function Footer() {
               <p>Hours: 10am-6pm</p>
             </li>
             <li>
-              <Link href="tel:+34 604 952 317">+34 604 952 317</Link>
+              <Link
+                className="text-neutral-500 hover:text-white active:text-white focus:text-white transition focus:outline-none"
+                href={`tel:${phoneNumber}`}
+              >
+                {phoneNumber}
+              </Link>
             </li>
           </ul>
         </div>
