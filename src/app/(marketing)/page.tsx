@@ -4,6 +4,7 @@ import initial_background from "@/data/general/images/initial_background.jpg";
 import Image from "next/image";
 import infoLeft from "@/data/general/images/info_left.jpg";
 import infoRight from "@/data/general/images/info_right.jpg";
+import QuestionsSection from "./_sections/QuestionsSection";
 
 export default function HomePage() {
   return (
@@ -143,6 +144,7 @@ export default function HomePage() {
           />
         </div>
       </section>
+      <QuestionsSection />
     </>
   );
 }
