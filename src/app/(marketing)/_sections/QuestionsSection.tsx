@@ -19,7 +19,7 @@ const questions = [
   {
     header: "¿Qué sucede si el coche se daña?",
     content:
-      "Nuestro seguro cubre fallos eléctricos y daños en las piezas durante el uso habitual. Sin embargo, es importante señalar que nuestra cobertura no se extiende a robos o daños relacionados con el agua. Por favor, tómese un momento para familiarizarse con estos términos para que pueda tener una experiencia de alquiler sin inconvenientes. Si tiene alguna pregunta, no dude en preguntar, ¡estamos aquí para ayudarle!",
+      "Nuestro seguro cubre fallas eléctricas y daños a piezas durante el uso normal. Sin embargo, es importante tener en cuenta que nuestra cobertura no cubre robo ni daños relacionados con el agua o mal uso. Si tienes alguna pregunta, no dudes en preguntar. ¡Estamos aquí para ayudarte!",
   },
   {
     header: "¿Puedo reservar un coche con antelación?",

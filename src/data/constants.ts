@@ -6,3 +6,4 @@ export const navLinks = [
 ];
 
 export const phoneNumber = "+34 604 952 317";
+export const telegramId = "+34 604 952 317";

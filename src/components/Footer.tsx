@@ -1,5 +1,6 @@
 import { navLinks, phoneNumber } from "@/data/constants";
 import Link from "next/link";
+import { ContactDialog } from "./ContactDialog";
 
 const currentYear = new Date().getFullYear(); // Gets the current year
 
@@ -26,24 +27,23 @@ export default function Footer() {
           </h5>
           <ul className="flex flex-col gap-3">
             <li>
-              <p>Monday-Friday:</p>
+              <p>Lunes-Sunday:</p>
             </li>
             <li>
               <p>
-                Address: 250 Trowers Rd, Unit 1, Woodbridge, ON L4L 5Z6, Canada.
-                (Back door)
+                Polígono de La Gándara, Estrada Castelao, s/n, 15570 Narón, A
+                Coruña, España (Odeón)
               </p>
             </li>
             <li>
-              <p>Hours: 10am-6pm</p>
+              <p>Horario: 10:00 a 18:00</p>
             </li>
             <li>
-              <Link
-                className="text-neutral-500 hover:text-white active:text-white focus:text-white transition focus:outline-none"
-                href={`tel:${phoneNumber}`}
-              >
-                {phoneNumber}
-              </Link>
+              <ContactDialog>
+                <p className="text-neutral-500 hover:text-white active:text-white focus:text-white transition focus:outline-none cursor-pointer">
+                  {phoneNumber}
+                </p>
+              </ContactDialog>
             </li>
           </ul>
         </div>

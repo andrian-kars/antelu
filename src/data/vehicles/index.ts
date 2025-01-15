@@ -332,7 +332,7 @@ export const vehicles = [
       mercedes_ml_350_4,
     ],
     characteristics: [
-      { name: "recommendedAge", value: "1-3" },
+      { name: "recommendedAge", value: "1-6" },
       { name: "battery", value: "12V 7AH" },
       { name: "isOpeningDoors", value: true },
       { name: "motor", value: "2*35V" },
@@ -680,7 +680,7 @@ export const vehicles = [
       pony_unicorn_white_4,
     ],
     characteristics: [
-      { name: "recommendedAge", value: "1-8" },
+      { name: "recommendedAge", value: "3-8" },
       {
         name: "seats",
         value: {
@@ -693,7 +693,7 @@ export const vehicles = [
   },
   {
     itemProp: "name",
-    name: "Pony (Marrón)",
+    name: "Caballo (Marrón)",
     id: "pony-brown",
     type: "pony",
     price: 29.99,
@@ -713,7 +713,7 @@ export const vehicles = [
   },
   {
     itemProp: "name",
-    name: "Pony (Negro)",
+    name: "Caballo (Negro)",
     id: "pony-black",
     type: "pony",
     price: 29.99,
@@ -726,7 +726,7 @@ export const vehicles = [
       pony_black_4,
     ],
     characteristics: [
-      { name: "recommendedAge", value: "3-15" },
+      { name: "recommendedAge", value: "3-8" },
       {
         name: "seats",
         value: {
