@@ -38,7 +38,7 @@ export default function Footer() {
               <p>Hours: 10am-6pm</p>
             </li>
             <li>
-              <p>437-848-4684</p>
+              <Link href="tel:+34 604 952 317">+34 604 952 317</Link>
             </li>
           </ul>
         </div>
