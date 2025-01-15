@@ -33,15 +33,21 @@ export default function Carousel({
   } = usePrevNextButtons(emblaApi);
 
   return (
-    <div className={cn("embla", className)} ref={emblaRef}>
+    <div className={cn("embla max-h-screen", className)} ref={emblaRef}>
       <div className="embla__container">
         {slides.map((slide, index) => (
-          <div key={slide.src} className="embla__slide">
+          <div
+            key={slide.src}
+            className="embla__slide overflow-hidden"
+            style={{
+              height: "calc(100vh - 200px)",
+            }}
+          >
             <Image
               src={slide}
               alt={name}
               priority={index === 0}
-              className="md:w-2/3 lg:w-full"
+              className="object-contain  overflow-hidden"
             />
           </div>
         ))}
