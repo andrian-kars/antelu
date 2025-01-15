@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="pt-12 md:pt-20 shadow-xl sticky bottom-0 w-full bg-black/90 overflow-hidden text-white/85">
       <section className="flex flex-col md:flex-row gap-6 md:gap-10 container border-t border-neutral-500 py-6 md:py-10">
-        <div className="flex-1">
+        <div className="flex-1 hidden md:block">
           <h5 className="text-base lg:text-xl font-semibold mb-3">
             Acerca de Antelu
           </h5>
