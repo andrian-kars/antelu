@@ -36,13 +36,7 @@ export default function Carousel({
     <div className={cn("embla max-h-screen", className)} ref={emblaRef}>
       <div className="embla__container">
         {slides.map((slide, index) => (
-          <div
-            key={slide.src}
-            className="embla__slide overflow-hidden"
-            style={{
-              height: "calc(100vh - 200px)",
-            }}
-          >
+          <div key={slide.src} className="embla__slide overflow-hidden">
             <Image
               src={slide}
               alt={name}
