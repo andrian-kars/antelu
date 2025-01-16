@@ -14,7 +14,7 @@ export default function GalleryPage() {
   const [index, setIndex] = useState(-1);
 
   return (
-    <section className="relative py-8 bg-acccent/5 z-40 bg-white">
+    <section className="relative py-8 bg-acccent/5 z-30 bg-white">
       <div className="container">
         <h3 className="text-4xl lg:text-6xl text-center text-balance font-semibold mb-2">
           Galería
