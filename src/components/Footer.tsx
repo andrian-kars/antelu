@@ -31,8 +31,8 @@ export default function Footer() {
             </li>
             <li>
               <p>
-                Polígono de La Gándara, Estrada Castelao, s/n, 15570 Narón, A
-                Coruña, España (Odeón)
+                Centro comercial Odeón, Polígono de La Gándara, Estrada
+                Castelao, s/n, 15570 Narón, A Coruña, España
               </p>
             </li>
             <li>

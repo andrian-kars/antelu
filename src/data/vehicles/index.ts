@@ -90,15 +90,19 @@ import pony_brown from "./images/pony_brown.jpg";
 import pony_brown_1 from "./images/pony_brown_1.jpg";
 import pony_brown_2 from "./images/pony_brown_2.jpg";
 import pony_brown_3 from "./images/pony_brown_3.jpg";
-import pony_black from "./images/pony_black.jpg";
-import pony_black_1 from "./images/pony_black_1.jpg";
-import pony_black_2 from "./images/pony_black_2.jpg";
-import pony_black_3 from "./images/pony_black_3.jpg";
-import pony_black_4 from "./images/pony_black_4.jpg";
+import horse_black from "./images/horse_black.jpg";
+import horse_black_1 from "./images/horse_black_1.jpg";
+import horse_black_2 from "./images/horse_black_2.jpg";
+import horse_black_3 from "./images/horse_black_3.jpg";
+import horse_black_4 from "./images/horse_black_4.jpg";
 import pony_small from "./images/pony_small.jpg";
 import pony_small_1 from "./images/pony_small_1.jpg";
 import pony_small_2 from "./images/pony_small_2.jpg";
 import pony_small_3 from "./images/pony_small_3.jpg";
+import pony_black from "./images/pony_black.jpg";
+import pony_black_1 from "./images/pony_black_1.jpg";
+import pony_black_2 from "./images/pony_black_2.jpg";
+import pony_black_3 from "./images/pony_black_3.jpg";
 
 export const vehicles = [
   {
@@ -693,8 +697,28 @@ export const vehicles = [
   },
   {
     itemProp: "name",
+    name: "Pony (Negro)",
+    id: "pony-black",
+    type: "pony",
+    price: 29.99,
+    discount: null,
+    images: [pony_black, pony_black_1, pony_black_2, pony_black_3],
+    characteristics: [
+      { name: "recommendedAge", value: "3-8" },
+      {
+        name: "seats",
+        value: {
+          number: 1,
+          material: null,
+        },
+      },
+      { name: "maxWeight", value: 30 },
+    ],
+  },
+  {
+    itemProp: "name",
     name: "Caballo (Marrón)",
-    id: "pony-brown",
+    id: "horse-brown",
     type: "pony",
     price: 29.99,
     discount: null,
@@ -714,19 +738,19 @@ export const vehicles = [
   {
     itemProp: "name",
     name: "Caballo (Negro)",
-    id: "pony-black",
+    id: "horse-black",
     type: "pony",
     price: 29.99,
     discount: null,
     images: [
-      pony_black,
-      pony_black_1,
-      pony_black_2,
-      pony_black_3,
-      pony_black_4,
+      horse_black,
+      horse_black_1,
+      horse_black_2,
+      horse_black_3,
+      horse_black_4,
     ],
     characteristics: [
-      { name: "recommendedAge", value: "3-8" },
+      { name: "recommendedAge", value: "5-15" },
       {
         name: "seats",
         value: {

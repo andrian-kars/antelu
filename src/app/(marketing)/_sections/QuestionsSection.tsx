@@ -26,6 +26,11 @@ const questions = [
     content:
       "Los clientes pueden reservar con antelación en la compañía de alquiler, lo cual es especialmente útil durante períodos de alta demanda como vacaciones o fines de semana.",
   },
+  {
+    header: "¿Qué tipos de coches para niños están disponibles para alquilar?",
+    content:
+      "La gama puede variar, pero a menudo incluye coches eléctricos de 12 V, motos  de 12V y de 6 V, caballos  a pedales.",
+  },
 ];
 
 export default function QuestionsSection() {
