@@ -29,7 +29,7 @@ const questions = [
   {
     header: "¿Qué tipos de coches para niños están disponibles para alquilar?",
     content:
-      "La gama puede variar, pero a menudo incluye coches eléctricos de 12 V, motos  de 12V y de 6 V, caballos  a pedales.",
+      "La gama puede variar, pero a menudo incluye coches eléctricos de 12V, motos de 12V y de 6V, caballos a pedales.",
   },
 ];
 
