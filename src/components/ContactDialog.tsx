@@ -16,7 +16,7 @@ export function ContactDialog({ children }: { children: ReactNode }) {
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-[235px]">
+      <DialogContent className="w-[235px]">
         <DialogHeader>
           <DialogTitle className="text-base lg:text-xl font-semibold">
             Contáctenos
