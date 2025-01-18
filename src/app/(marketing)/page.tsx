@@ -106,10 +106,10 @@ export default function HomePage() {
             <ol>
               <li>
                 <p className="text-base lg:text-lg font-semibold">
-                  1. Investigación
+                  1. Selección
                 </p>
                 <p className="text-base lg:text-lg">
-                  ¡Descubre nuestra impresionante selección de vehículos,
+                  ¡Descubre nuestro impresionante escaparate de vehículos,
                   precios competitivos y políticas de alquiler amigables con el
                   cliente! 🚗💨
                 </p>
@@ -119,20 +119,22 @@ export default function HomePage() {
                   2. Hacer una Reserva
                 </p>
                 <p className="text-base lg:text-lg">
-                  Si todo parece correcto, puedes proceder a reservar el coche.
-                  Haz la llamada telefónica.
+                  Si te gusta alguno puedes proceder a reservar el coche. Haz
+                  una sencilla llamada telefónica e iniciaremos el trámite.
                 </p>
               </li>
               <li>
                 <p className="text-base lg:text-lg font-semibold">
-                  3. Recoger y Devolver el Vehículo
+                  3. Recoger y Devolver el vehículo
                 </p>
                 <p className="text-base lg:text-lg">
-                  El día del alquiler, recoge el coche en nuestras instalaciones
-                  o utiliza nuestro servicio de entrega por un cargo extra. Al
-                  concluir el alquiler, devuelve el coche en la misma ubicación
-                  o coordina la recogida con un representante. Recuerda
-                  devolverlo en el mismo estado para evitar cargos adicionales.
+                  En el día y hora acordado para el alquiler recoge el coche en
+                  nuestras instalaciones o utiliza nuestro servicio de entrega
+                  por un cargo extra. Al concluir el alquiler, devuelve el coche
+                  en el lugar y hora convenido, y en mismo estado para evitar
+                  cargos adicionales. El titular del contrato de alquiler deberá
+                  tener más de 18 años y dar sus datos personales y presentar su
+                  DNI, junto con el depósito de 50€ de fianza por vehículo.
                 </p>
               </li>
             </ol>
