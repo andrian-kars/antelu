@@ -520,7 +520,6 @@ export const vehicles = [
     characteristics: [
       { name: "recommendedAge", value: "1-8" },
       { name: "battery", value: "12V" },
-      { name: "isOpeningDoors", value: true },
       { name: "motor", value: "2*25V" },
       {
         name: "seats",
@@ -553,7 +552,6 @@ export const vehicles = [
     characteristics: [
       { name: "recommendedAge", value: "1-8" },
       { name: "battery", value: "12V" },
-      { name: "isOpeningDoors", value: true },
       { name: "motor", value: "2*25V" },
       {
         name: "seats",
