@@ -1,82 +1,68 @@
 "use client";
 
-import { useState } from "react";
-import { BrandLogo } from "@/components/BrandLogo";
-import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { useRef, useState } from "react";
+import { Menu, Phone, X } from "lucide-react";
 import Link from "next/link";
-import { navLinks } from "@/data/constants";
+import { BrandLogo } from "./BrandLogo";
+import { business, navLinks } from "@/data/constants";
 
 export default function NavBar() {
-  const [isNavOpen, setIsNavOpen] = useState(false);
-
-  const handleOpenNav = () => {
-    setIsNavOpen(true);
-  };
-
-  const handleCloseNav = () => {
-    setIsNavOpen(false);
-  };
+  const [open, setOpen] = useState(false);
+  const toggle = useRef<HTMLButtonElement>(null);
 
   return (
-    <>
-      <header className="flex py-4 md:py-6 shadow-xl sticky top-0 w-full z-50 bg-background/95">
-        <nav className="flex items-center container font-semibold">
-          <Link
-            href="/"
-            className="mr-auto hover:text-gray-600 active:text-gray-600 focus:text-gray-600 transition focus:outline-none"
-          >
-            <BrandLogo onClick={handleCloseNav} />
-          </Link>
-          <ul className="gap-10 hidden md:flex">
-            {navLinks.map(({ name, path }) => (
-              <li key={name}>
-                <Link
-                  className="text-lg hover:text-gray-600 active:text-gray-600 focus:text-gray-600 transition focus:outline-none"
-                  href={path}
-                >
-                  {name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div className="flex md:hidden">
-            {isNavOpen ? (
-              <X
-                size={28}
-                className="cursor-pointer"
-                onClick={handleCloseNav}
-              />
-            ) : (
-              <Menu
-                size={28}
-                className="cursor-pointer"
-                onClick={handleOpenNav}
-              />
-            )}
-          </div>
-        </nav>
-      </header>
-      <div
-        className={cn(
-          isNavOpen ? "flex" : "hidden",
-          "fixed top-14 right-0 bottom-0 left-0 z-40 bg-background/95"
-        )}
-      >
-        <ul className="w-full flex flex-col items-center justify-center gap-4">
+    <header
+      className="site-header"
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && open) {
+          setOpen(false);
+          toggle.current?.focus();
+        }
+      }}
+    >
+      <nav className="page-width nav-row" aria-label="Navegación principal">
+        <Link
+          className="brand-link"
+          href="/"
+          aria-label="Antelu, inicio"
+          onClick={() => setOpen(false)}
+        >
+          <BrandLogo />
+        </Link>
+        <div className="desktop-links">
           {navLinks.map(({ name, path }) => (
-            <li key={name} className="border-b border-gray-400 uppercase">
-              <Link
-                className="text-lg font-semibold"
-                href={path}
-                onClick={handleCloseNav}
-              >
-                {name}
-              </Link>
-            </li>
+            <Link key={path} href={path}>
+              {name}
+            </Link>
           ))}
-        </ul>
-      </div>
-    </>
+        </div>
+        <a className="header-phone" href={business.phoneHref}>
+          <Phone size={17} aria-hidden="true" />
+          <span>{business.phone}</span>
+        </a>
+        <button
+          className="icon-button menu-toggle"
+          ref={toggle}
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+        </button>
+      </nav>
+      <nav
+        className="mobile-links page-width"
+        id="mobile-navigation"
+        aria-label="Navegación móvil"
+        hidden={!open}
+      >
+        {navLinks.map(({ name, path }) => (
+          <Link key={path} href={path} onClick={() => setOpen(false)}>
+            {name}
+          </Link>
+        ))}
+      </nav>
+    </header>
   );
 }

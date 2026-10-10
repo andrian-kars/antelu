@@ -1,137 +1,81 @@
-"use client";
-
-import { useState } from "react";
 import { Check } from "lucide-react";
 
-export function CharacteristicsList({
-  characteristics,
-  isFull = false,
-}: {
-  characteristics: Array<Characteristic>;
-  isFull?: boolean;
-}) {
-  const [isFullDescription, setIsFullDescription] = useState(false);
-  const chars = characteristicsMapper(characteristics);
-
-  const handleDescriptionChange = () => setIsFullDescription((prev) => !prev);
-
-  if (isFull || chars.length <= 4)
-    return (
-      <ul className="mt-4 gap-3 flex flex-col text-gray-500">
-        {chars.map((char, index, currentArray) => (
-          <li
-            key={index}
-            className={`flex gap-3 ${
-              index !== currentArray.length - 1
-                ? "border-b-2 border-dashed pb-2"
-                : ""
-            }`}
-          >
-            <Check color="white" className="bg-red-600 rounded-full p-1" />
-            <p>{char}</p>
-          </li>
-        ))}
-      </ul>
-    );
-
-  return (
-    <>
-      <ul className="mt-4 gap-3 flex flex-col text-gray-500">
-        {chars
-          .filter((char, index) => char && index < 4)
-          .map((char, index) => (
-            <li
-              key={index}
-              className="flex gap-3 border-b-2 border-dashed pb-2"
-            >
-              <Check color="white" className="bg-red-600 rounded-full p-1" />
-              <p>{char}</p>
-            </li>
-          ))}
-      </ul>
-      <p
-        className="mt-2 border-b-2 border-dashed pb-2 cursor-pointer font-medium"
-        onClick={handleDescriptionChange}
-      >
-        Ver {isFullDescription ? "menos" : "más"} características
-      </p>
-      {isFullDescription && (
-        <ul className="mt-4 gap-3 flex flex-col text-gray-500">
-          {chars
-            .filter((char, index) => char && index > 3)
-            .map((char, index, currentArray) => (
-              <li
-                key={index}
-                className={`flex gap-3 ${
-                  index !== currentArray.length - 1
-                    ? "border-b-2 border-dashed pb-2"
-                    : ""
-                }`}
-              >
-                <Check color="white" className="bg-red-600 rounded-full p-1" />
-                <p>{char}</p>
-              </li>
-            ))}
-        </ul>
-      )}
-    </>
-  );
-}
-
-function characteristicsMapper(characteristics: Array<Characteristic>) {
-  return characteristics.map(({ name, value }) => {
-    switch (name) {
-      case "recommendedAge":
-        return `Edad ${value} años`;
-      case "battery":
-        return `Batería ${value}`;
-      case "isOpeningDoors":
-        return "Puertas que se abren";
-      case "motor":
-        const val = value as string;
-        const [count, volt] = val.split("*");
-        return `${+count > 1 ? count : ""} Motor${
-          +count > 1 ? "es" : ""
-        } ${volt}`;
-      case "seats":
-        const { number, material } = value as SeatsDetail;
-        return `${number > 1 ? number : ""} ${number > 1 ? "a" : "A"}siento${
-          number > 1 ? "s" : ""
-        } ${material === "leather" ? "de eco-cuero" : ""}`;
-      case "maxSpeed":
-        return `Velocidad máxima ${value} Km/h`;
-      case "maxWeight":
-        return `Capacidad de carga de ${value} kg`;
-      case "isBelts":
-        return "Cinturones de seguridad";
-      case "isRemoteControl":
-        return "Control remoto para padres";
-      case "sound":
-        const { isMp3, isBluetooth, isUsb } = value as SoundSystem;
-        return [isMp3 && "Mp3", isBluetooth && "Bluetooth", isUsb && "USB"]
-          .filter((el) => el)
-          .join(" & ");
-
-      case "isOriginal":
-        return "Con diseño y licencia oficiales";
-      case "isTrailerDetachable":
-        return "Con remolque desenganchable";
-    }
-  });
-}
-
+type SeatsDetail = { number: number; material: string | null };
+type SoundSystem = { isUsb: boolean; isBluetooth: boolean; isMp3: boolean };
 type Characteristic = {
   name: string;
   value: string | number | boolean | SeatsDetail | SoundSystem;
 };
 
-type SeatsDetail = {
-  number: number;
-  material: string | null;
-};
+export function CharacteristicsList({
+  characteristics,
+  isFull = false,
+}: {
+  characteristics: Characteristic[];
+  isFull?: boolean;
+}) {
+  const descriptions = characteristics
+    .map(({ name, value }) => {
+      if (value === false) return null;
+      switch (name) {
+        case "recommendedAge":
+          return `Edad recomendada: ${value} años`;
+        case "battery":
+          return `Batería: ${formatUnits(String(value))}`;
+        case "isOpeningDoors":
+          return "Puertas que se abren";
+        case "motor": {
+          const [count, power] = String(value).split("*");
+          if (!power) return `Motor: ${formatUnits(count)}`;
+          return Number(count) > 1
+            ? `${count} motores de ${formatUnits(power)}`
+            : `Motor: ${formatUnits(power)}`;
+        }
+        case "seats": {
+          const { number, material } = value as SeatsDetail;
+          return `${number} ${number === 1 ? "asiento" : "asientos"}${material === "leather" ? " de ecocuero" : ""}`;
+        }
+        case "maxSpeed":
+          return `Velocidad máxima: ${value} km/h`;
+        case "maxWeight":
+          return `Carga máxima: ${value} kg`;
+        case "isBelts":
+          return "Cinturones de seguridad";
+        case "isRemoteControl":
+          return "Control remoto para adultos";
+        case "sound": {
+          const sound = value as SoundSystem;
+          const options = [
+            sound.isMp3 && "MP3",
+            sound.isBluetooth && "Bluetooth",
+            sound.isUsb && "USB",
+          ].filter(Boolean);
+          return options.length ? `Sonido: ${options.join(", ")}` : null;
+        }
+        case "isTrailerDetachable":
+          return "Remolque desmontable";
+        default:
+          return null;
+      }
+    })
+    .filter((description): description is string => Boolean(description));
 
-type SoundSystem = {
-  isUsb: boolean;
-  isBluetooth: boolean;
-  isMp3: boolean;
-};
+  return (
+    <ul className="specification-list">
+      {(isFull ? descriptions : descriptions.slice(0, 4)).map((description) => (
+        <li key={description}>
+          <Check size={17} aria-hidden="true" />
+          <span>{description}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// Source data uses "12V 4.5AH"; Spanish style is "12 V 4,5 Ah".
+function formatUnits(value: string) {
+  return value
+    .replace(/(\d)\.(\d)/g, "$1,$2")
+    .replace(/(\d)\s?V\b/g, "$1 V")
+    .replace(/(\d)\s?AH\b/gi, "$1 Ah");
+}

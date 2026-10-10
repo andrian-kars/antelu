@@ -1,0 +1,9 @@
+.next
+node_modules
+yarn.lock
+next-env.d.ts
+playwright-report
+test-results
+src/data/vehicles/images
+src/data/general/images
+src/data/gallery/images

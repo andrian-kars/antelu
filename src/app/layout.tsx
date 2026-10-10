@@ -1,26 +1,29 @@
-import localFont from "next/font/local";
+import "@fontsource-variable/bricolage-grotesque";
+import "@fontsource-variable/source-sans-3";
 import "./globals.css";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
+import { business } from "@/data/constants";
 
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title:
-    "Antelu: Alquiler de Vehículos Infantiles - Coches, Motos y Caballitos",
+  metadataBase: new URL(business.url),
+  title: "Antelu | Vehículos infantiles de alquiler",
   description:
-    "ANTELU ofrece una selección diversa de vehículos para que los más pequeños disfruten en cualquier evento: cumpleaños, bodas o por diversión.",
-  keywords:
-    "alquiler de coches infantiles, alquiler de motos para niños, alquiler de caballitos, entretenimiento para fiestas infantiles, juegos para eventos infantiles, atracciones para cumpleaños, juguetes para alquilar en eventos, vehículos divertidos para niños, servicios de alquiler para fiestas, alquiler seguro para niños",
+    "Coches, motos y caballitos infantiles de alquiler en Narón. Encuentra su favorito y consulta la disponibilidad con Antelu.",
+  openGraph: {
+    type: "website",
+    locale: "es_ES",
+    siteName: "Antelu",
+    title: "Antelu | Vehículos infantiles de alquiler",
+    description: "Pequeños vehículos. Grandes recuerdos.",
+  },
+  twitter: { card: "summary_large_image" },
+  robots:
+    process.env.VERCEL_ENV === "preview"
+      ? { index: false, follow: false }
+      : { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -29,11 +32,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans bg-background`}
-      >
+    <html lang="es" data-scroll-behavior="smooth">
+      <body className="antialiased">
+        <a className="skip-link" href="#main">
+          Saltar al contenido
+        </a>
+        <NavBar />
         {children}
+        <Footer />
       </body>
     </html>
   );

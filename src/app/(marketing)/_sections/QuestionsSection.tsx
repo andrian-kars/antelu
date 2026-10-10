@@ -1,56 +1,57 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Plus } from "lucide-react";
+import { business, formatPrice } from "@/data/constants";
 
 const questions = [
   {
-    header: "¿Qué edad es apropiada para alquilar un coche para niños?",
-    content:
-      "La edad apropiada para alquilar un coche para niños depende en gran medida del tipo de coche. Algunos coches son adecuados para niños pequeños, mientras que otros están diseñados para niños mayores. Siempre verifica la recomendación de edad para cada coche.",
+    title: "¿Qué vehículo es adecuado para su edad?",
+    answer:
+      "Cada modelo tiene su propia edad recomendada y capacidad de carga. Revisa su ficha y consúltanos si necesitas ayuda para elegir.",
   },
   {
-    header: "¿Qué medidas de seguridad están establecidas?",
-    content:
-      "Como compañía de alquiler de confianza, garantizamos que todos nuestros coches para niños cumplen con los estándares de seguridad. Esto puede incluir cinturones de seguridad, control remoto parental y límites de velocidad adecuados.",
+    title: "¿Cómo se confirma el alquiler?",
+    answer:
+      "Escríbenos por WhatsApp o llámanos con el modelo y la fecha que te interesan. Confirmaremos contigo la disponibilidad y las condiciones antes de la recogida.",
   },
   {
-    header: "¿Qué sucede si el coche se daña?",
-    content:
-      "Nuestro seguro cubre fallas eléctricas y daños a piezas durante el uso normal. Sin embargo, es importante tener en cuenta que nuestra cobertura no cubre robo ni daños relacionados con el agua o mal uso. Si tienes alguna pregunta, no dudes en preguntar. ¡Estamos aquí para ayudarte!",
+    title: "¿Qué necesito para recoger el vehículo?",
+    answer: `La persona titular del alquiler debe ser mayor de 18 años, presentar su DNI y dejar una fianza de ${formatPrice(business.deposit)} por vehículo.`,
   },
   {
-    header: "¿Puedo reservar un coche con antelación?",
-    content:
-      "Los clientes pueden reservar con antelación en la compañía de alquiler, lo cual es especialmente útil durante períodos de alta demanda como vacaciones o fines de semana.",
+    title: "¿Se puede entregar el vehículo a domicilio?",
+    answer:
+      "Puedes consultar nuestro servicio de entrega con cargo adicional. Acordaremos contigo la zona, el horario y el importe antes de confirmar el alquiler.",
   },
   {
-    header: "¿Qué tipos de coches para niños están disponibles para alquilar?",
-    content:
-      "La gama puede variar, pero a menudo incluye coches eléctricos de 12V, motos de 12V y de 6V, caballos a pedales.",
+    title: "¿Qué hago si hay algún problema con el vehículo?",
+    answer:
+      "Contacta con Antelu para que podamos ayudarte. Consulta las condiciones de uso, devolución y posibles daños antes de confirmar tu alquiler.",
   },
 ];
 
 export default function QuestionsSection() {
   return (
-    <section
-      id="questions"
-      className="container pt-14 md:pt-20 bg-acccent/5 pb-16"
-    >
-      <Accordion type="single" collapsible defaultValue="item-0">
-        {questions.map(({ header, content }, i) => (
-          <AccordionItem key={i} value={`item-${i}`}>
-            <AccordionTrigger className="text-base lg:text-xl font-semibold">
-              {header}
-            </AccordionTrigger>
-            <AccordionContent className="text-base lg:text-lg">
-              {content}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+    <section id="questions" className="faq-section section-space">
+      <div className="page-width faq-layout">
+        <div>
+          <p className="eyebrow">Antes de arrancar</p>
+          <h2>
+            Preguntas
+            <br />
+            frecuentes.
+          </h2>
+        </div>
+        <div className="faq-list">
+          {questions.map(({ title, answer }) => (
+            <details key={title}>
+              <summary>
+                {title}
+                <Plus size={20} aria-hidden="true" />
+              </summary>
+              <p>{answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

@@ -1,4 +1,9 @@
-import { phoneNumber, telegramId } from "@/data/constants";
+import {
+  business,
+  getWhatsAppUrl,
+  telegramId,
+  type ContactVehicle,
+} from "@/data/constants";
 import {
   Dialog,
   DialogContent,
@@ -10,31 +15,46 @@ import {
 import Link from "next/link";
 import { ReactNode } from "react";
 
-export function ContactDialog({ children }: { children: ReactNode }) {
-  const phone = phoneNumber.split(" ").join("");
-
+export function ContactDialog({
+  children,
+  vehicle,
+}: {
+  children: ReactNode;
+  vehicle?: ContactVehicle;
+}) {
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="w-[235px]">
+      <DialogContent className="contact-dialog w-[calc(100%-2rem)]">
         <DialogHeader>
           <DialogTitle className="text-base lg:text-xl font-semibold">
-            Contáctenos
+            Hablemos de tu alquiler
           </DialogTitle>
         </DialogHeader>
-        <DialogHeader>
-          <DialogDescription className="flex">
-            <Link target="_blank" href={`https://wa.me/${phone}`}>
-              <WhatsappIcon />
-            </Link>
-            <Link target="_blank" href={`https://t.me/${telegramId}`}>
-              <TelegramIcon />
-            </Link>
-            <Link target="_blank" href={`tel:${phone}`}>
-              <PhoneIcon />
-            </Link>
-          </DialogDescription>
-        </DialogHeader>
+        <DialogDescription>
+          {vehicle ? vehicle.name : "Coches, motos y caballitos para un día especial."}
+        </DialogDescription>
+        <div className="contact-options">
+          <Link
+            className="contact-option"
+            target="_blank"
+            rel="noopener noreferrer"
+            href={getWhatsAppUrl(vehicle)}
+          >
+            <WhatsappIcon /> <span>Consultar por WhatsApp</span>
+          </Link>
+          <a className="contact-option" href={business.phoneHref}>
+            <PhoneIcon /> <span>Llamar al {business.phone}</span>
+          </a>
+          <Link
+            className="contact-option"
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://t.me/${telegramId.replace(/\s/g, "")}`}
+          >
+            <TelegramIcon /> <span>Contactar por Telegram</span>
+          </Link>
+        </div>
       </DialogContent>
     </Dialog>
   );

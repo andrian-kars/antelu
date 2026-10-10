@@ -1,152 +1,276 @@
-import { VehicleCard } from "@/components/VehicleCard";
-import { vehicles } from "@/data/vehicles";
-import initial_background from "@/data/general/images/initial_background.jpg";
+import type { Metadata } from "next";
 import Image from "next/image";
-import infoLeft from "@/data/general/images/info_left.jpg";
-import infoRight from "@/data/general/images/info_right.jpg";
+import Link from "next/link";
+import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUpRight,
+  CalendarDays,
+  MapPin,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
+import { VehicleCard } from "@/components/VehicleCard";
+import { VehicleCatalogue } from "@/components/VehicleCatalogue";
+import { business, formatPrice, getWhatsAppUrl } from "@/data/constants";
+import { vehicles } from "@/data/vehicles";
+import { gallery } from "@/data/gallery";
+import { getAgeRange } from "@/lib/vehicles";
 import QuestionsSection from "./_sections/QuestionsSection";
 
+export const metadata: Metadata = {
+  title: "Antelu | Alquiler de vehículos infantiles en Narón",
+  description:
+    "Coches eléctricos, motos, quads, tractores y caballitos infantiles de alquiler. Descubre los modelos y consulta tu alquiler con Antelu en Narón.",
+  alternates: { canonical: "/" },
+};
+
 export default function HomePage() {
+  const highlights = [
+    { type: "electric_car", label: "Coches", photoOf: "jeep-yellow", tone: "aqua" },
+    { type: "motorbike", label: "Motos", photoOf: "moto-cross-red", tone: "yellow" },
+    { type: "pony", label: "Caballitos", photoOf: "pony-small", tone: "coral" },
+  ].map((highlight) => {
+    const models = vehicles.filter(({ type }) => type === highlight.type);
+    return {
+      ...highlight,
+      models: models.length,
+      minPrice: Math.min(...models.map(({ price }) => price)),
+      image: vehicles.find(({ id }) => id === highlight.photoOf)!.images[0],
+    };
+  });
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": `${business.url}/#business`,
+      name: business.name,
+      url: business.url,
+      image: `${business.url}/opengraph-image.jpg`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: "Vehículos infantiles de Antelu",
+      itemListElement: vehicles.map(({ id, name }, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name,
+        url: `${business.url}/rent/${id}`,
+      })),
+    },
+  ];
   return (
-    <main className="z-30 relative bg-white">
-      <section
-        itemScope
-        itemType="http://schema.org/Product"
-        style={{
-          backgroundImage: `linear-gradient(
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.5)
-    ), url(${initial_background.src})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+    <main id="main">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
         }}
-        className="py-16 sm:py-56 bg-[radial-gradient(hsl(0,72%,65%,40%),hsl(24,62%,73%,40%),hsl(var(--background))_60%)] flex items-center justify-center text-center text-balance flex-col gap-4 md:gap-8 px-4 text-white"
-      >
-        <h1
-          itemProp="name"
-          className="text-3xl md:text-5xl xl:text-6xl font-bold tracking-tight m-2 md:m-4"
-        >
-          ALQUILER DE VEHÍCULOS INFANTILES: COCHES, MOTOS, CABALLITOS.
-        </h1>
-        <h2
-          itemProp="description"
-          className="text-lg md:text-2xl xl:text-3xl max-w-screen-xl"
-        >
-          Ofrecemos una selección diversa de vehículos para que los más pequeños
-          disfruten en cualquier evento: fiestas de cumpleaños, bodas, cualquier
-          otra fiesta o eventos, o simplemente por diversión. ANTELU te ofrece
-          la elección definitiva a precios muy asequibles para el alquiler de
-          vehículos divertidos y seguros para los más pequeños.
-        </h2>
-        <div itemProp="offers" itemScope itemType="http://schema.org/Offer">
-          <meta itemProp="priceCurrency" content="EUR" />
-          <link itemProp="availability" href="http://schema.org/InStock" />
-          <span itemProp="price" className="hidden">
-            Consultar en la página
+      />
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="hero-copy">
+          <div className="page-width">
+            <p className="eyebrow">
+              <MapPin size={15} aria-hidden="true" /> Antelu · Narón, A Coruña
+            </p>
+            <h1 id="hero-title">
+              Vehículos infantiles
+              <br />
+              de alquiler.
+            </h1>
+            <p className="hero-description">
+              Coches, motos y caballitos para sus pequeños grandes planes.
+            </p>
+            <div className="actions">
+              <a className="action action-primary" href="#vehicles">
+                Elige su vehículo <ArrowDown size={18} aria-hidden="true" />
+              </a>
+              <a
+                className="hero-contact text-link"
+                href={getWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ¿Hablamos? <ArrowUpRight size={18} aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </div>
+        <ul className="page-width hero-categories" aria-label="Categorías de vehículos">
+          {highlights.map(({ type, label, tone, models, minPrice, image }) => (
+            <li key={type}>
+              <a
+                className={`category-tile tone-${tone}`}
+                href="#vehicles"
+                data-category={type}
+              >
+                <span className="category-name">{label}</span>
+                <span className="category-meta">
+                  <span className="category-count">{models} modelos · </span>
+                  desde {formatPrice(minPrice)}
+                </span>
+                <Image
+                  className="category-image"
+                  src={image}
+                  alt=""
+                  sizes="(max-width: 600px) 30vw, 400px"
+                  loading="eager"
+                />
+                <ArrowRight className="category-arrow" size={20} aria-hidden="true" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <div className="intro-strip">
+        <div className="page-width">
+          <span>
+            <CalendarDays size={19} aria-hidden="true" /> Alquiler por día
+          </span>
+          <span>
+            <MapPin size={19} aria-hidden="true" /> Recogida en Narón
+          </span>
+          <span>
+            <MessageCircle size={19} aria-hidden="true" /> Consulta por WhatsApp o
+            teléfono
           </span>
         </div>
-      </section>
-      <section id="vehicles" className="px-8 pt-20 md:pt-28 bg-acccent/5">
-        <h3 className="text-4xl lg:text-6xl text-center text-balance font-semibold mb-2">
-          Elige La Aventura De Tu Hijo/Hija
-        </h3>
-        <p className="text-center mb-8 lg:text-xl italic">
-          *Con estos precios, puedes disfrutar del vehículo durante todo el día.
-        </p>
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen-xl mx-auto"
-          itemScope
-          itemType="http://schema.org/ItemList"
-        >
-          {vehicles.map((vehicle, index) => (
-            <div
-              itemProp="itemListElement"
-              itemScope
-              itemType="http://schema.org/Product"
-              key={vehicle.id}
-              className="vehicle-card"
-            >
-              <VehicleCard {...vehicle} />
-              <meta itemProp="position" content={`${index + 1}`} />
+      </div>
+      <section
+        id="vehicles"
+        className="catalogue section-space"
+        aria-labelledby="catalogue-title"
+      >
+        <div className="page-width">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Elige su próxima aventura</p>
+              <h2 id="catalogue-title">¿Cuál será el suyo?</h2>
+              <p>Encuentra su favorito. Los precios son por un día de alquiler.</p>
             </div>
-          ))}
+            <span className="catalogue-note">
+              Coches, motos y mucho más <ArrowDown size={18} aria-hidden="true" />
+            </span>
+          </div>
+          <VehicleCatalogue
+            items={vehicles.map((vehicle) => ({
+              id: vehicle.id,
+              type: vehicle.type,
+              age: getAgeRange(vehicle),
+            }))}
+          >
+            {vehicles.map((vehicle) => (
+              <VehicleCard key={vehicle.id} {...vehicle} />
+            ))}
+          </VehicleCatalogue>
         </div>
       </section>
-      <section id="info" className="pt-14 md:pt-20 bg-acccent/5">
-        <div className="flex flex-1">
-          <Image
-            src={infoLeft}
-            alt="Info cars"
-            className="w-1/2 hidden md:block"
-          />
-          <div className="flex flex-col justify-center md:w-1/2 px-6 lg:px-12 xl:px-24 py-3 lg:py-6">
-            <h4 className="text-xl lg:text-4xl text-balance font-semibold mb-2 lg:mb-4">
-              Alquilar un coche para niños es una opción excelente por varias
-              razones:
-            </h4>
-            <p className="text-base lg:text-lg">
-              Desde fomentar la conveniencia y ofrecer diversas opciones, hasta
-              facilitar la planificación de eventos y permitir pruebas de
-              manejo, los alquileres de coches para niños son una opción
-              versátil para diferentes necesidades y ocasiones. Son ideales para
-              vacaciones, eventos especiales o simplemente un fin de semana de
-              diversión, ya que los beneficios de alquilar estos coches van más
-              allá de la diversión, creando experiencias memorables en la
-              infancia. 🚗
-            </p>
+      <section
+        id="info"
+        className="rental-info section-space"
+        aria-labelledby="rental-title"
+      >
+        <div className="page-width">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Del catálogo a la diversión</p>
+              <h2 id="rental-title">Un plan sencillo.</h2>
+            </div>
+            <a
+              className="text-link"
+              href={getWhatsAppUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Consulta tu alquiler <ArrowUpRight size={18} aria-hidden="true" />
+            </a>
           </div>
+          <ol className="rental-steps">
+            <li>
+              <span>01</span>
+              <h3>Encuentra su favorito</h3>
+              <p>Revisa la edad recomendada y las características de cada vehículo.</p>
+            </li>
+            <li>
+              <span>02</span>
+              <h3>Cuéntanos tu plan</h3>
+              <p>
+                Contacta por teléfono o WhatsApp para acordar la fecha y confirmar
+                disponibilidad.
+              </p>
+            </li>
+            <li>
+              <span>03</span>
+              <h3>Recoge y disfruta</h3>
+              <p>
+                Recoge el vehículo y devuélvelo en el lugar y la hora acordados. También
+                puedes consultar la entrega con cargo adicional.
+              </p>
+            </li>
+          </ol>
+          <p className="rental-terms">
+            Titular mayor de 18 años, DNI y fianza de {formatPrice(business.deposit)} por
+            vehículo. La reserva se confirma directamente con Antelu.
+          </p>
         </div>
-        <div className="flex">
-          <div className="flex flex-col justify-center md:w-1/2 px-6 lg:px-12 xl:px-24 py-3 lg:py-6">
-            <h4 className="text-xl lg:text-4xl text-balance font-semibold mb-2 lg:mb-4">
-              Cómo Alquilar:
-            </h4>
-            <ol>
-              <li>
-                <p className="text-base lg:text-lg font-semibold">
-                  1. Selección
-                </p>
-                <p className="text-base lg:text-lg">
-                  ¡Descubre nuestro impresionante escaparate de vehículos,
-                  precios competitivos y políticas de alquiler amigables con el
-                  cliente! 🚗💨
-                </p>
-              </li>
-              <li>
-                <p className="text-base lg:text-lg font-semibold">
-                  2. Hacer una Reserva
-                </p>
-                <p className="text-base lg:text-lg">
-                  Si te gusta alguno puedes proceder a reservar el coche. Haz
-                  una sencilla llamada telefónica e iniciaremos el trámite.
-                </p>
-              </li>
-              <li>
-                <p className="text-base lg:text-lg font-semibold">
-                  3. Recoger y Devolver el vehículo
-                </p>
-                <p className="text-base lg:text-lg">
-                  En el día y hora acordado para el alquiler recoge el coche en
-                  nuestras instalaciones o utiliza nuestro servicio de entrega
-                  por un cargo extra. Al concluir el alquiler, devuelve el coche
-                  en el lugar y hora convenido, y en mismo estado para evitar
-                  cargos adicionales. El titular del contrato de alquiler deberá
-                  tener más de 18 años y dar sus datos personales y presentar su
-                  DNI, junto con el depósito de 50€ de fianza por vehículo.
-                </p>
-              </li>
-            </ol>
+      </section>
+      <section className="gallery-teaser section-space">
+        <div className="page-width gallery-teaser-inner">
+          <div>
+            <p className="eyebrow">Momentos Antelu</p>
+            <h2>
+              La diversión
+              <br />
+              tiene muchas formas.
+            </h2>
+            <p>
+              Un paseo, un cumpleaños o un día en familia. Así se viven los pequeños
+              grandes planes.
+            </p>
+            <Link className="action action-secondary" href="/gallery">
+              Ver la galería <ArrowRight size={18} aria-hidden="true" />
+            </Link>
           </div>
-          <Image
-            src={infoRight}
-            alt="Info hourses"
-            className="w-1/2 hidden md:block"
-          />
+          <Link
+            className="gallery-collage"
+            href="/gallery"
+            aria-label="Ver la galería de fotos de Antelu"
+          >
+            {[18, 8, 13].map((index) => (
+              <Image
+                key={index}
+                src={gallery[index].image}
+                alt=""
+                sizes="(max-width: 700px) 60vw, 420px"
+              />
+            ))}
+          </Link>
         </div>
       </section>
       <QuestionsSection />
+      <section className="contact-band">
+        <div className="page-width">
+          <div>
+            <p className="eyebrow">Estamos al otro lado</p>
+            <h2>¿Preparamos su próximo plan?</h2>
+          </div>
+          <div className="actions">
+            <a
+              className="action action-primary"
+              href={getWhatsAppUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Hablar por WhatsApp <ArrowUpRight size={18} aria-hidden="true" />
+            </a>
+            <a className="text-link" href={business.phoneHref}>
+              <Phone size={18} aria-hidden="true" />
+              {business.phone}
+            </a>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

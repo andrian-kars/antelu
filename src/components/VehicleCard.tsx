@@ -1,56 +1,59 @@
-"use client";
-
-import { vehicles } from "@/data/vehicles";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight, UsersRound } from "lucide-react";
 import { ReserveNowButton } from "./ReserveNowButton";
-import { CharacteristicsList } from "./CharacteristicsList";
+import { formatPrice } from "@/data/constants";
+import { getAgeRange, getCategoryLabel, type Vehicle } from "@/lib/vehicles";
 
-export function VehicleCard({
-  name,
-  id,
-  price,
-  discount,
-  images,
-  characteristics,
-  itemProp,
-}: (typeof vehicles)[number]) {
+export function VehicleCard(vehicle: Vehicle) {
+  const { id, name, images, price, discount, type } = vehicle;
   return (
-    <Card>
-      <Link href={`/rent/${id}`}>
-        <CardHeader className="relative">
-          <Image
-            className="scale-90 hover:scale-100 transition-all"
-            src={images[0].src}
-            width={500}
-            height={500}
-            alt={name}
-          />
-          <div className="flex flex-col items-center justify-center absolute bottom-2 right-2 lg:bottom-4 lg:right-4 bg-red-600 rounded-full w-24 h-24 text-white">
-            <span className="font-bold">Desde</span>
-            <span className="font-bold text-xl">€{price}</span>
-            {discount && <span className="line-through">€{discount}</span>}
-          </div>
-        </CardHeader>
+    <article className="vehicle-card" aria-labelledby={`vehicle-${id}`}>
+      <Link
+        className="vehicle-image"
+        href={`/rent/${id}`}
+        tabIndex={-1}
+        aria-hidden="true"
+      >
+        <Image
+          src={images[0]}
+          alt=""
+          sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 1000px) 46vw, 390px"
+        />
+        <span className="vehicle-category">{getCategoryLabel(type)}</span>
       </Link>
-      <CardContent>
-        <Link href={`/rent/${id}`}>
-          <CardTitle className="text-xl" itemProp={itemProp}>
-            {name}
-          </CardTitle>
-        </Link>
-        <CharacteristicsList characteristics={characteristics} />
-      </CardContent>
-      <CardFooter>
-        <ReserveNowButton variant="secondary" />
-      </CardFooter>
-    </Card>
+      <div className="vehicle-body">
+        <h3 id={`vehicle-${id}`}>
+          <Link href={`/rent/${id}`}>{name}</Link>
+        </h3>
+        <p className="vehicle-age">
+          <UsersRound size={17} aria-hidden="true" />
+          {getAgeRange(vehicle)?.label ?? "Consultar edad recomendada"}
+        </p>
+        <div className="vehicle-price">
+          <span>
+            Desde <strong>{formatPrice(price)}</strong>
+            <span className="price-period"> / día</span>
+          </span>
+          {discount ? (
+            <del>
+              <span className="sr-only">Precio anterior: </span>
+              {formatPrice(discount)}
+            </del>
+          ) : null}
+        </div>
+        <div className="vehicle-actions">
+          <ReserveNowButton vehicle={{ id, name }} />
+          <Link
+            className="icon-button"
+            href={`/rent/${id}`}
+            aria-label={`Ver ${name}`}
+            title={`Ver ${name}`}
+          >
+            <ArrowUpRight size={20} aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+    </article>
   );
 }

@@ -1,10 +1,6 @@
-import React, {
-  ComponentPropsWithRef,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import React, { ComponentPropsWithRef, useCallback, useSyncExternalStore } from "react";
 import { EmblaCarouselType } from "embla-carousel";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 type UsePrevNextButtonsType = {
   prevBtnDisabled: boolean;
@@ -14,10 +10,28 @@ type UsePrevNextButtonsType = {
 };
 
 export const usePrevNextButtons = (
-  emblaApi: EmblaCarouselType | undefined
+  emblaApi: EmblaCarouselType | undefined,
 ): UsePrevNextButtonsType => {
-  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
-  const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
+  const subscribe = useCallback(
+    (listener: () => void) => {
+      if (!emblaApi) return () => {};
+      emblaApi.on("reInit", listener).on("select", listener);
+      return () => {
+        emblaApi.off("reInit", listener).off("select", listener);
+      };
+    },
+    [emblaApi],
+  );
+  const prevBtnDisabled = useSyncExternalStore(
+    subscribe,
+    () => !emblaApi?.canScrollPrev(),
+    () => true,
+  );
+  const nextBtnDisabled = useSyncExternalStore(
+    subscribe,
+    () => !emblaApi?.canScrollNext(),
+    () => true,
+  );
 
   const onPrevButtonClick = useCallback(() => {
     if (!emblaApi) return;
@@ -28,18 +42,6 @@ export const usePrevNextButtons = (
     if (!emblaApi) return;
     emblaApi.scrollNext();
   }, [emblaApi]);
-
-  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-    setPrevBtnDisabled(!emblaApi.canScrollPrev());
-    setNextBtnDisabled(!emblaApi.canScrollNext());
-  }, []);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-
-    onSelect(emblaApi);
-    emblaApi.on("reInit", onSelect).on("select", onSelect);
-  }, [emblaApi, onSelect]);
 
   return {
     prevBtnDisabled,
@@ -56,16 +58,12 @@ export const PrevButton: React.FC<PropType> = (props) => {
 
   return (
     <button
-      className="embla__button embla__button--prev"
+      className="icon-button"
       type="button"
+      aria-label="Foto anterior"
       {...restProps}
     >
-      <svg className="embla__button__svg" viewBox="0 0 532 532">
-        <path
-          fill="currentColor"
-          d="M355.66 11.354c13.793-13.805 36.208-13.805 50.001 0 13.785 13.804 13.785 36.238 0 50.034L201.22 266l204.442 204.61c13.785 13.805 13.785 36.239 0 50.044-13.793 13.796-36.208 13.796-50.002 0a5994246.277 5994246.277 0 0 0-229.332-229.454 35.065 35.065 0 0 1-10.326-25.126c0-9.2 3.393-18.26 10.326-25.2C172.192 194.973 332.731 34.31 355.66 11.354Z"
-        />
-      </svg>
+      <ArrowLeft size={20} aria-hidden="true" />
       {children}
     </button>
   );
@@ -76,16 +74,12 @@ export const NextButton: React.FC<PropType> = (props) => {
 
   return (
     <button
-      className="embla__button embla__button--next"
+      className="icon-button"
       type="button"
+      aria-label="Foto siguiente"
       {...restProps}
     >
-      <svg className="embla__button__svg" viewBox="0 0 532 532">
-        <path
-          fill="currentColor"
-          d="M176.34 520.646c-13.793 13.805-36.208 13.805-50.001 0-13.785-13.804-13.785-36.238 0-50.034L330.78 266 126.34 61.391c-13.785-13.805-13.785-36.239 0-50.044 13.793-13.796 36.208-13.796 50.002 0 22.928 22.947 206.395 206.507 229.332 229.454a35.065 35.065 0 0 1 10.326 25.126c0 9.2-3.393 18.26-10.326 25.2-45.865 45.901-206.404 206.564-229.332 229.52Z"
-        />
-      </svg>
+      <ArrowRight size={20} aria-hidden="true" />
       {children}
     </button>
   );
