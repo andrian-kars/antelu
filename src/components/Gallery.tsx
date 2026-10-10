@@ -4,6 +4,7 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { gallery } from "@/data/gallery";
+import { skeleton } from "@/lib/skeleton";
 import "yet-another-react-lightbox/styles.css";
 
 const Lightbox = dynamic(() => import("yet-another-react-lightbox"));
@@ -30,6 +31,8 @@ export function Gallery() {
               alt={photo.alt}
               quality={60}
               preload={current === 0}
+              placeholder={skeleton(photo)}
+              style={{ objectFit: "cover" }}
               sizes="(min-width: 1304px) 403px, (max-width: 600px) calc(100vw - 32px), (max-width: 900px) calc((100vw - 80px) / 2), calc((100vw - 96px) / 3)"
             />
           </a>

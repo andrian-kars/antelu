@@ -4,6 +4,7 @@ import { ArrowUpRight, UsersRound } from "lucide-react";
 import { ReserveNowButton } from "./ReserveNowButton";
 import { formatPrice } from "@/data/constants";
 import { getAgeRange, getCategoryLabel, type Vehicle } from "@/lib/vehicles";
+import { skeleton } from "@/lib/skeleton";
 
 export function VehicleCard(vehicle: Vehicle) {
   const { id, name, images, price, discount, type } = vehicle;
@@ -18,6 +19,8 @@ export function VehicleCard(vehicle: Vehicle) {
         <Image
           src={images[0]}
           alt=""
+          placeholder={skeleton(images[0])}
+          style={{ objectFit: "contain" }}
           sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 1000px) 46vw, 390px"
         />
         <span className="vehicle-category">{getCategoryLabel(type)}</span>

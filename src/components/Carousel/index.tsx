@@ -4,6 +4,7 @@ import Image, { type StaticImageData } from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { DotButton, useDotButton } from "./CarouselDotButton";
 import { NextButton, PrevButton, usePrevNextButtons } from "./CarouselDotArrowButtons";
+import { skeleton } from "@/lib/skeleton";
 
 export default function Carousel({
   slides,
@@ -36,6 +37,8 @@ export default function Carousel({
                 src={slide}
                 alt={`${name}, vista ${index + 1}`}
                 preload={index === 0}
+                placeholder={skeleton(slide)}
+                style={{ objectFit: "contain" }}
                 sizes="(max-width: 800px) calc(100vw - 32px), (max-width: 1300px) 55vw, 680px"
               />
             </div>

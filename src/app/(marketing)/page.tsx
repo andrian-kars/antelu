@@ -16,6 +16,7 @@ import { business, formatPrice, getWhatsAppUrl } from "@/data/constants";
 import { vehicles } from "@/data/vehicles";
 import { gallery } from "@/data/gallery";
 import { getAgeRange } from "@/lib/vehicles";
+import { skeleton } from "@/lib/skeleton";
 import QuestionsSection from "./_sections/QuestionsSection";
 
 export const metadata: Metadata = {
@@ -114,6 +115,8 @@ export default function HomePage() {
                   className="category-image"
                   src={image}
                   alt=""
+                  placeholder={skeleton(image)}
+                  style={{ objectFit: "contain" }}
                   sizes="(max-width: 600px) 30vw, 400px"
                   loading="eager"
                 />
@@ -242,6 +245,8 @@ export default function HomePage() {
                 key={index}
                 src={gallery[index].image}
                 alt=""
+                placeholder={skeleton(gallery[index].image)}
+                style={{ objectFit: "cover" }}
                 sizes="(max-width: 700px) 60vw, 420px"
               />
             ))}

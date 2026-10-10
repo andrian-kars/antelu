@@ -368,3 +368,20 @@ test("dialog close button is a full-size target without a mouse focus ring", asy
     "none",
   );
 });
+
+test("images show a skeleton until they load", async ({ page }) => {
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => (release = resolve));
+  await page.route(/\/_next\/image\?/, async (route) => {
+    await held;
+    await route.continue();
+  });
+  await page.goto("/rent/mercedes-csl-350-amg", { waitUntil: "domcontentloaded" });
+  const photo = page.locator(".embla__slide img").first();
+  await expect(photo).toHaveCSS("background-image", /data:image\/svg\+xml/);
+  release();
+  await expect(photo).toHaveCSS("background-image", "none");
+  expect(
+    await photo.evaluate((image: HTMLImageElement) => image.naturalWidth),
+  ).toBeGreaterThan(0);
+});
