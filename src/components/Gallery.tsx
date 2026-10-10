@@ -2,13 +2,31 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import { gallery } from "@/data/gallery";
 import { skeleton } from "@/lib/skeleton";
 import "yet-another-react-lightbox/styles.css";
 
 const Lightbox = dynamic(() => import("yet-another-react-lightbox"));
 const photos = gallery.map(({ image, alt }) => ({ ...image, alt }));
+const slides = photos.map((photo) => {
+  const { props } = getImageProps({ src: photo, alt: photo.alt, sizes: "100vw" });
+  const srcSet = (props.srcSet ?? "")
+    .split(", ")
+    .map((candidate) => {
+      const [src, descriptor] = candidate.split(" ");
+      const width = parseInt(descriptor);
+      return { src, width, height: Math.round((width * photo.height) / photo.width) };
+    })
+    .filter(({ width }) => width <= photo.width);
+  return {
+    src: props.src,
+    alt: photo.alt,
+    width: photo.width,
+    height: photo.height,
+    srcSet,
+  };
+});
 
 export function Gallery() {
   const [index, setIndex] = useState(-1);
@@ -41,7 +59,7 @@ export function Gallery() {
       {index >= 0 && (
         <Lightbox
           index={index}
-          slides={photos}
+          slides={slides}
           open
           close={() => setIndex(-1)}
           labels={{ Close: "Cerrar", Next: "Siguiente", Previous: "Anterior" }}

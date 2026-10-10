@@ -70,6 +70,11 @@ test("gallery opens a labelled lightbox and closes with Escape", async ({ page }
   const first = page.locator(".photo-album a").first();
   await first.click();
   await expect(page.getByRole("button", { name: "Cerrar", exact: true })).toBeVisible();
+  const slide = page.locator(".yarl__slide_current img");
+  await expect(slide).toHaveAttribute("src", /\/_next\/image\?/);
+  await expect
+    .poll(() => slide.evaluate((image: HTMLImageElement) => image.currentSrc))
+    .toContain("/_next/image?");
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   await page.keyboard.press("Escape");
   await expect(
