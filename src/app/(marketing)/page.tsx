@@ -8,7 +8,6 @@ import {
   CalendarDays,
   MapPin,
   MessageCircle,
-  Phone,
 } from "lucide-react";
 import { VehicleCard } from "@/components/VehicleCard";
 import { VehicleCatalogue } from "@/components/VehicleCatalogue";
@@ -268,10 +267,6 @@ export default function HomePage() {
               rel="noopener noreferrer"
             >
               Hablar por WhatsApp <ArrowUpRight size={18} aria-hidden="true" />
-            </a>
-            <a className="text-link" href={business.phoneHref}>
-              <Phone size={18} aria-hidden="true" />
-              {business.phone}
             </a>
           </div>
         </div>
