@@ -31,7 +31,7 @@ export const gl: Messages = {
     },
     mainNavigation: "Navegación principal",
     mobileNavigation: "Navegación móbil",
-    footerNavigation: "Ligazóns do pé",
+    footerNavigation: "Ligazóns do pé de páxina",
     openMenu: "Abrir o menú",
     closeMenu: "Pechar o menú",
     language: "Lingua",
@@ -56,7 +56,7 @@ export const gl: Messages = {
     call: "Chamar ao {phone}",
     telegram: "Contactar por Telegram",
     close: "Pechar",
-    enquire: "Consultar aluguer",
+    enquire: "Consultar o aluguer",
     enquireNoScript: " por WhatsApp",
     whatsappGeneric:
       "Ola, gustaríame consultar a dispoñibilidade dos vosos vehículos infantís.",
@@ -137,7 +137,7 @@ export const gl: Messages = {
       },
       {
         title: "Recolle e goza",
-        text: "Recolle o vehículo e devólveo no lugar e á hora acordados. Tamén podes consultar a entrega con cargo adicional.",
+        text: "Recolle o vehículo e devólveo no lugar e á hora acordados. Tamén podes consultar a entrega por un custo adicional.",
       },
     ],
     terms:
@@ -169,7 +169,7 @@ export const gl: Messages = {
       {
         title: "Pódese entregar o vehículo a domicilio?",
         answer:
-          "Podes consultar o noso servizo de entrega con cargo adicional. Acordaremos contigo a zona, o horario e o importe antes de confirmar o aluguer.",
+          "Podes consultar o noso servizo de entrega por un custo adicional. Acordaremos contigo a zona, o horario e o importe antes de confirmar o aluguer.",
       },
       {
         title: "Que fago se hai algún problema co vehículo?",
@@ -197,7 +197,7 @@ export const gl: Messages = {
       "Fianza de {deposit} por vehículo.",
       "A persoa titular debe ser maior de 18 anos e presentar o seu DNI.",
       "Recollida e devolución no lugar e no horario acordados.",
-      "Consulta as condicións de entrega con cargo adicional.",
+      "Consulta as condicións de entrega por un custo adicional.",
     ],
     conditionsNote:
       "Comproba a idade recomendada, a carga máxima e as condicións de uso antes do aluguer.",
@@ -220,7 +220,7 @@ export const gl: Messages = {
     battery: "Batería: {value}",
     doors: "Portas que se abren",
     motor: "Motor: {value}",
-    motors: plurals({ other: "{n} motores de {value}" }),
+    motors: plurals({ one: "{n} motor de {value}", other: "{n} motores de {value}" }),
     seats: plurals({ one: "{n} asento", other: "{n} asentos" }),
     leatherSeats: plurals({
       one: "{n} asento de ecocoiro",
