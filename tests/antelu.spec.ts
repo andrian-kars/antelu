@@ -421,6 +421,7 @@ test("the content editor is served at /admin without language routing", async ({
   const config = await request.get("/admin/config.yml");
   expect(config.status()).toBe(200);
   expect(await config.text()).toContain("file: /src/content/vehicles.json");
+  expect(await config.text()).toContain("auth_methods: [token]");
 });
 
 test.describe("languages", () => {

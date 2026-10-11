@@ -5,6 +5,8 @@ backend:
   name: github
   repo: andrian-kars/antelu
   branch: master
+  # "Sign In with GitHub" needs an OAuth server (Netlify by default); the site is on Vercel.
+  auth_methods: [token]
 
 site_url: https://antelu.es
 media_folder: /public/images

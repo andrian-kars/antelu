@@ -82,7 +82,8 @@ There is no database or extra service; every save is a commit to `master`, which
 publishes in a minute or two.
 
 1. Open `https://antelu.es/admin` in a desktop or mobile browser.
-2. Choose **Sign In Using Access Token** and follow its link to GitHub, which pre-fills the
+2. Choose **Sign In Using Access Token** (the only option shown; GitHub's own login would
+   need an extra OAuth server) and follow its link to GitHub, which pre-fills the
    permissions. The account needs write access to this repository. The token stays in that
    browser; generate a new one if it expires.
 3. Edit **Vehicles** or **Gallery**, then **Save**. Spanish is the only required language.
