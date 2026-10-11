@@ -5,6 +5,14 @@ export type PluralForms = { one?: string; few?: string; many?: string; other: st
 
 export const plurals = (forms: PluralForms) => forms;
 
+// CMS text: only Spanish is required; an empty translation falls back to it.
+export function translated(
+  text: { es: string } & Partial<Record<Locale, string>>,
+  locale: Locale,
+) {
+  return text[locale] || text.es;
+}
+
 export function fill(template: string, values: Record<string, string | number>) {
   return template.replace(/\{(\w+)\}/g, (match, key: string) =>
     key in values ? String(values[key]) : match,

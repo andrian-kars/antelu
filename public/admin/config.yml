@@ -1,0 +1,204 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@0.233.1/schema/sveltia-cms.json
+# Content editor at /admin. Field names must match src/lib/content.ts.
+
+backend:
+  name: github
+  repo: andrian-kars/antelu
+  branch: master
+
+site_url: https://antelu.es
+media_folder: /public/images
+public_folder: /images
+
+media_libraries:
+  # External images can't be optimised by the site, so only uploads are offered.
+  stock_assets: false
+  default:
+    config:
+      slugify_filename: true
+      # Phone photos (including iPhone HEIC) are resized and converted to WebP on upload.
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+          width: 2000
+          height: 2000
+
+collections:
+  - name: vehicles
+    label: Vehículos
+    label_singular: Vehículo
+    icon: electric_car
+    file: /src/content/vehicles.json
+    media_folder: /public/images/vehicles
+    public_folder: /images/vehicles
+    identifier_field: id
+    summary: "{{name.es}}"
+    create: true
+    editor:
+      preview: false
+    fields:
+      - name: name
+        label: Nombre
+        widget: object
+        hint: Solo el español es obligatorio. Si dejas un idioma vacío, se mostrará en español.
+        fields:
+          - { name: es, label: Español }
+          - { name: gl, label: Galego, required: false }
+          - { name: en, label: English, required: false }
+          - { name: uk, label: Українська, required: false }
+      - name: id
+        label: Dirección web
+        hint: "antelu.es/rent/… Solo minúsculas, números y guiones, p. ej. jeep-rojo. No la cambies después de publicar."
+        pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "Solo minúsculas, números y guiones"]
+      - name: type
+        label: Tipo
+        widget: select
+        options:
+          - { label: Coche, value: electric_car }
+          - { label: Moto, value: motorbike }
+          - { label: Quad, value: quad }
+          - { label: Tractor, value: tractor }
+          - { label: Caballito, value: pony }
+      - name: price
+        label: Precio por día
+        widget: number
+        value_type: float
+        min: 0.01
+        step: 0.01
+        after_input: €
+      - name: previousPrice
+        label: Precio anterior (tachado)
+        widget: number
+        value_type: float
+        min: 0.01
+        step: 0.01
+        after_input: €
+        required: false
+        hint: Solo para ofertas. Déjalo vacío o pon un precio mayor que el actual.
+      - name: images
+        label: Fotos
+        widget: image
+        multiple: true
+        min: 1
+        choose_url: false
+        accept: image/jpeg,image/png,image/webp,image/avif,image/heic,image/heif
+        hint: La primera foto es la portada. Arrastra las fotos para cambiar el orden.
+      - name: specs
+        label: Características
+        widget: object
+        hint: Deja vacío lo que no corresponda; no se mostrará.
+        fields:
+          - name: ageMin
+            label: Edad mínima
+            widget: number
+            min: 0
+            max: 18
+            required: false
+            after_input: años
+          - name: ageMax
+            label: Edad máxima
+            widget: number
+            min: 0
+            max: 18
+            required: false
+            after_input: años
+          - name: battery
+            label: Batería
+            required: false
+            hint: "Por ejemplo: 12V 7AH"
+          - name: openingDoors
+            label: Puertas que se abren
+            widget: boolean
+            required: false
+          - name: motors
+            label: Número de motores
+            widget: number
+            min: 1
+            required: false
+          - name: motorPower
+            label: Potencia de cada motor
+            required: false
+            hint: "Por ejemplo: 35V"
+          - name: seats
+            label: Asientos
+            widget: number
+            min: 1
+            required: false
+          - name: leatherSeats
+            label: Asientos de ecocuero
+            widget: boolean
+            required: false
+          - name: maxSpeed
+            label: Velocidad máxima
+            required: false
+            hint: En km/h. Un número o un rango, por ejemplo 4-5.
+            pattern: ["^\\d+(-\\d+)?$", "Un número o un rango, por ejemplo 4-5"]
+          - name: maxWeight
+            label: Carga máxima
+            widget: number
+            min: 1
+            required: false
+            after_input: kg
+          - name: belts
+            label: Cinturones de seguridad
+            widget: boolean
+            required: false
+          - name: remoteControl
+            label: Mando a distancia para adultos
+            widget: boolean
+            required: false
+          - name: sound
+            label: Sonido
+            widget: select
+            multiple: true
+            required: false
+            options:
+              - { label: MP3, value: mp3 }
+              - { label: Bluetooth, value: bluetooth }
+              - { label: USB, value: usb }
+          - name: detachableTrailer
+            label: Remolque desmontable
+            widget: boolean
+            required: false
+      - name: hidden
+        label: Ocultar en la web
+        widget: boolean
+        required: false
+        hint: Para retirar un vehículo temporalmente sin borrarlo.
+
+  - name: gallery
+    label: Galería
+    label_singular: Foto
+    icon: photo_library
+    file: /src/content/gallery.json
+    media_folder: /public/images/gallery
+    public_folder: /images/gallery
+    summary: "{{alt.es}}"
+    create: true
+    editor:
+      preview: false
+    fields:
+      - name: image
+        label: Foto
+        widget: image
+        choose_url: false
+        accept: image/jpeg,image/png,image/webp,image/avif,image/heic,image/heif
+      - name: alt
+        label: Descripción de la foto
+        widget: object
+        hint: Una frase corta para quien no puede ver la foto. Solo el español es obligatorio.
+        fields:
+          - { name: es, label: Español }
+          - { name: gl, label: Galego, required: false }
+          - { name: en, label: English, required: false }
+          - { name: uk, label: Українська, required: false }
+      - name: homeSlot
+        label: Mostrar en la página de inicio
+        widget: select
+        required: false
+        hint: Elige un hueco del collage de la portada. Si dos fotos eligen el mismo, se usa la primera.
+        options:
+          - { label: Foto grande (izquierda), value: 1 }
+          - { label: Arriba a la derecha, value: 2 }
+          - { label: Abajo a la derecha, value: 3 }

@@ -404,6 +404,25 @@ test("images show a skeleton until they load", async ({ page }) => {
   ).toBeGreaterThan(0);
 });
 
+test("the content editor is served at /admin without language routing", async ({
+  request,
+}) => {
+  for (const path of ["/admin", "/admin/index.html"]) {
+    const response = await request.get(path, {
+      headers: { "Accept-Language": "en-GB" },
+      maxRedirects: 0,
+    });
+    expect(response.status()).toBe(200);
+    const html = await response.text();
+    expect(html).toMatch(/@sveltia\/cms@\d+\.\d+\.\d+\/dist\/sveltia-cms\.js/);
+    expect(html).toContain('integrity="sha384-');
+    expect(html).toContain('name="robots" content="noindex"');
+  }
+  const config = await request.get("/admin/config.yml");
+  expect(config.status()).toBe(200);
+  expect(await config.text()).toContain("file: /src/content/vehicles.json");
+});
+
 test.describe("languages", () => {
   const visit = async (
     browser: import("@playwright/test").Browser,

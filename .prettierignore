@@ -4,6 +4,6 @@ yarn.lock
 next-env.d.ts
 playwright-report
 test-results
-src/data/vehicles/images
-src/data/general/images
-src/data/gallery/images
+public/images
+# Written by the CMS, which has its own JSON formatting.
+src/content

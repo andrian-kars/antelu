@@ -12,11 +12,10 @@ import {
 import { VehicleCard } from "@/components/VehicleCard";
 import { VehicleCatalogue } from "@/components/VehicleCatalogue";
 import { business } from "@/data/constants";
-import { vehicles } from "@/data/vehicles";
-import { gallery } from "@/data/gallery";
 import { languageAlternates, localePath } from "@/i18n/config";
 import { fill, formatPrice, plural, whatsAppUrl } from "@/i18n/format";
 import { getLocale, getMessages } from "@/i18n/server";
+import { homePhotos, vehicles } from "@/lib/content";
 import { getAgeRange, vehicleName } from "@/lib/vehicles";
 import { skeleton } from "@/lib/skeleton";
 import { socialMetadata } from "@/lib/metadata";
@@ -40,17 +39,20 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+// Each tile prefers a hand-picked photo but survives that vehicle being removed in the CMS.
 const highlights = [
   { type: "electric_car", photoOf: "jeep-yellow", tone: "aqua" },
   { type: "motorbike", photoOf: "moto-cross-red", tone: "yellow" },
   { type: "pony", photoOf: "pony-small", tone: "coral" },
-].map((highlight) => {
+].flatMap((highlight) => {
   const models = vehicles.filter(({ type }) => type === highlight.type);
+  if (!models.length) return [];
+  const cover = models.find(({ id }) => id === highlight.photoOf) ?? models[0];
   return {
     ...highlight,
     models: models.length,
     minPrice: Math.min(...models.map(({ price }) => price)),
-    image: vehicles.find(({ id }) => id === highlight.photoOf)!.images[0],
+    image: cover.images[0],
   };
 });
 
@@ -76,7 +78,7 @@ export default async function HomePage() {
       itemListElement: vehicles.map((vehicle, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        name: vehicleName(vehicle, messages),
+        name: vehicleName(vehicle, locale),
         url: new URL(localePath(locale, `/rent/${vehicle.id}`), business.url).href,
       })),
     },
@@ -135,7 +137,9 @@ export default async function HomePage() {
                 </span>
                 <Image
                   className="category-image"
-                  src={image}
+                  src={image.src}
+                  width={image.width}
+                  height={image.height}
                   alt=""
                   placeholder={skeleton(image)}
                   style={{ objectFit: "contain" }}
@@ -252,12 +256,14 @@ export default async function HomePage() {
             href={localePath(locale, "/gallery")}
             aria-label={home.galleryLink}
           >
-            {[18, 8, 13].map((index) => (
+            {homePhotos.map((photo) => (
               <Image
-                key={index}
-                src={gallery[index].image}
+                key={photo.src}
+                src={photo.src}
+                width={photo.width}
+                height={photo.height}
                 alt=""
-                placeholder={skeleton(gallery[index].image)}
+                placeholder={skeleton(photo)}
                 style={{ objectFit: "cover" }}
                 sizes="(max-width: 700px) 60vw, 420px"
               />

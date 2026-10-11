@@ -1,0 +1,848 @@
+[
+  {
+    "name": {
+      "es": "Mercedes CLS 350 AMG",
+      "gl": "",
+      "en": "",
+      "uk": ""
+    },
+    "id": "mercedes-csl-350-amg",
+    "type": "electric_car",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/mercedes_csl_350_amg.jpg",
+      "/images/vehicles/mercedes_csl_350_amg_1.jpg",
+      "/images/vehicles/mercedes_csl_350_amg_2.jpg",
+      "/images/vehicles/mercedes_csl_350_amg_3.jpg"
+    ],
+    "specs": {
+      "ageMin": 1,
+      "ageMax": 6,
+      "battery": "12V 4.5AH",
+      "openingDoors": true,
+      "motors": 2,
+      "motorPower": "25V",
+      "seats": 1,
+      "leatherSeats": true,
+      "maxSpeed": "4-5",
+      "maxWeight": 30,
+      "belts": true,
+      "remoteControl": true,
+      "sound": [
+        "mp3",
+        "bluetooth",
+        "usb"
+      ],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Lamborghini Aventador SVJ",
+      "gl": "",
+      "en": "",
+      "uk": ""
+    },
+    "id": "lamborghini-aventador-svj",
+    "type": "electric_car",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/lamborghini_aventador_svj.jpg",
+      "/images/vehicles/lamborghini_aventador_svj_1.jpg",
+      "/images/vehicles/lamborghini_aventador_svj_2.jpg",
+      "/images/vehicles/lamborghini_aventador_svj_3.jpg",
+      "/images/vehicles/lamborghini_aventador_svj_4.jpg",
+      "/images/vehicles/lamborghini_aventador_svj_5.jpg"
+    ],
+    "specs": {
+      "ageMin": 1,
+      "ageMax": 8,
+      "battery": "12V 7AH",
+      "openingDoors": true,
+      "motors": 2,
+      "motorPower": "35V",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "3-5",
+      "maxWeight": 30,
+      "belts": true,
+      "remoteControl": true,
+      "sound": [
+        "mp3",
+        "bluetooth",
+        "usb"
+      ],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Jeep Wrangler",
+      "gl": "",
+      "en": "",
+      "uk": ""
+    },
+    "id": "jeep-wragler",
+    "type": "electric_car",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/jeep_wragler.jpg",
+      "/images/vehicles/jeep_wragler_1.jpg",
+      "/images/vehicles/jeep_wragler_2.jpg",
+      "/images/vehicles/jeep_wragler_3.jpg",
+      "/images/vehicles/jeep_wragler_4.jpg"
+    ],
+    "specs": {
+      "ageMin": 3,
+      "ageMax": 8,
+      "battery": "12V 4.5AH",
+      "openingDoors": true,
+      "motors": 2,
+      "motorPower": "35V",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "3-5",
+      "maxWeight": 30,
+      "belts": true,
+      "remoteControl": false,
+      "sound": [],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Coche policía",
+      "gl": "Coche de policía",
+      "en": "Police car",
+      "uk": "Поліцейська машина"
+    },
+    "id": "police-car",
+    "type": "electric_car",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/police_car.jpg",
+      "/images/vehicles/police_car_1.jpg",
+      "/images/vehicles/police_car_2.jpg",
+      "/images/vehicles/police_car_3.jpg"
+    ],
+    "specs": {
+      "ageMin": 1,
+      "ageMax": 6,
+      "battery": "12V 4.5AH",
+      "openingDoors": true,
+      "motors": 2,
+      "motorPower": "25V",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "3-5",
+      "maxWeight": 30,
+      "belts": true,
+      "remoteControl": true,
+      "sound": [
+        "mp3",
+        "bluetooth",
+        "usb"
+      ],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Camión de Bomberos",
+      "gl": "Camión de bombeiros",
+      "en": "Fire truck",
+      "uk": "Пожежна машина"
+    },
+    "id": "fire-truck",
+    "type": "electric_car",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/fire_truck.jpg",
+      "/images/vehicles/fire_truck_1.jpg"
+    ],
+    "specs": {
+      "ageMin": 1,
+      "ageMax": 8,
+      "battery": "12V 10AH",
+      "openingDoors": true,
+      "motors": 2,
+      "motorPower": "12V",
+      "seats": 1,
+      "leatherSeats": true,
+      "maxSpeed": "5-6",
+      "maxWeight": 35,
+      "belts": true,
+      "remoteControl": true,
+      "sound": [
+        "mp3",
+        "bluetooth",
+        "usb"
+      ],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Lamborghini Sián",
+      "gl": "",
+      "en": "",
+      "uk": ""
+    },
+    "id": "lamborghini-sian",
+    "type": "electric_car",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/lamborghini_sian.jpg",
+      "/images/vehicles/lamborghini_sian_1.jpg"
+    ],
+    "specs": {
+      "ageMin": 1,
+      "ageMax": 3,
+      "battery": "12V 4.5AH",
+      "openingDoors": true,
+      "motors": 2,
+      "motorPower": "12V",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "3-5",
+      "maxWeight": 25,
+      "belts": true,
+      "remoteControl": true,
+      "sound": [
+        "mp3",
+        "bluetooth",
+        "usb"
+      ],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Mercedes ML 350",
+      "gl": "",
+      "en": "",
+      "uk": ""
+    },
+    "id": "mercedes-ml-350",
+    "type": "electric_car",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/mercedes_ml_350.jpg",
+      "/images/vehicles/mercedes_ml_350_1.jpg",
+      "/images/vehicles/mercedes_ml_350_2.jpg",
+      "/images/vehicles/mercedes_ml_350_3.jpg",
+      "/images/vehicles/mercedes_ml_350_4.jpg"
+    ],
+    "specs": {
+      "ageMin": 1,
+      "ageMax": 6,
+      "battery": "12V 7AH",
+      "openingDoors": true,
+      "motors": 2,
+      "motorPower": "35V",
+      "seats": 1,
+      "leatherSeats": true,
+      "maxSpeed": "5-6",
+      "maxWeight": 35,
+      "belts": true,
+      "remoteControl": true,
+      "sound": [
+        "mp3",
+        "bluetooth",
+        "usb"
+      ],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Jeep (Amarillo)",
+      "gl": "Jeep (amarelo)",
+      "en": "Jeep (yellow)",
+      "uk": "Jeep (жовтий)"
+    },
+    "id": "jeep-yellow",
+    "type": "electric_car",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/jeep_yellow.jpg",
+      "/images/vehicles/jeep_yellow_1.jpg",
+      "/images/vehicles/jeep_yellow_2.jpg",
+      "/images/vehicles/jeep_yellow_3.jpg",
+      "/images/vehicles/jeep_yellow_4.jpg"
+    ],
+    "specs": {
+      "ageMin": 1,
+      "ageMax": 8,
+      "battery": "12V 7AH",
+      "openingDoors": true,
+      "motors": 4,
+      "motorPower": "12V",
+      "seats": 2,
+      "leatherSeats": true,
+      "maxSpeed": "4-5",
+      "maxWeight": 30,
+      "belts": true,
+      "remoteControl": true,
+      "sound": [],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Jeep (Rojo)",
+      "gl": "Jeep (vermello)",
+      "en": "Jeep (red)",
+      "uk": "Jeep (червоний)"
+    },
+    "id": "jeep-red",
+    "type": "electric_car",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/jeep_red.jpg",
+      "/images/vehicles/jeep_red_1.jpg",
+      "/images/vehicles/jeep_red_2.jpg",
+      "/images/vehicles/jeep_red_3.jpg",
+      "/images/vehicles/jeep_red_4.jpg"
+    ],
+    "specs": {
+      "ageMin": 1,
+      "ageMax": 8,
+      "battery": "12V 7AH",
+      "openingDoors": true,
+      "motors": 4,
+      "motorPower": "12V",
+      "seats": 2,
+      "leatherSeats": true,
+      "maxSpeed": "4-5",
+      "maxWeight": 30,
+      "belts": true,
+      "remoteControl": true,
+      "sound": [],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Jeep Todoterreno (Rojo)",
+      "gl": "Jeep todoterreo (vermello)",
+      "en": "Off-road Jeep (red)",
+      "uk": "Позашляховик Jeep (червоний)"
+    },
+    "id": "jeep-plus-red",
+    "type": "electric_car",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/jeep_plus_red.jpg",
+      "/images/vehicles/jeep_plus_red_1.jpg",
+      "/images/vehicles/jeep_plus_red_2.jpg",
+      "/images/vehicles/jeep_plus_red_3.jpg"
+    ],
+    "specs": {
+      "ageMin": 3,
+      "ageMax": 8,
+      "battery": "12V 7AH",
+      "openingDoors": true,
+      "motors": null,
+      "motorPower": "",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "5-6",
+      "maxWeight": 30,
+      "belts": true,
+      "remoteControl": true,
+      "sound": [
+        "mp3",
+        "bluetooth",
+        "usb"
+      ],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Quad (Amarillo)",
+      "gl": "Quad (amarelo)",
+      "en": "Quad (yellow)",
+      "uk": "Квадроцикл (жовтий)"
+    },
+    "id": "quad-yellow",
+    "type": "quad",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/quad_yellow.jpg",
+      "/images/vehicles/quad_yellow_1.jpg",
+      "/images/vehicles/quad_yellow_2.jpg",
+      "/images/vehicles/quad_yellow_3.jpg"
+    ],
+    "specs": {
+      "ageMin": 3,
+      "ageMax": 8,
+      "battery": "12V 10AH",
+      "openingDoors": false,
+      "motors": 2,
+      "motorPower": "12V",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "3-5",
+      "maxWeight": 30,
+      "belts": false,
+      "remoteControl": false,
+      "sound": [],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Quad (Rojo)",
+      "gl": "Quad (vermello)",
+      "en": "Quad (red)",
+      "uk": "Квадроцикл (червоний)"
+    },
+    "id": "quad-red",
+    "type": "quad",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/quad_red.jpg",
+      "/images/vehicles/quad_red_1.jpg",
+      "/images/vehicles/quad_red_2.jpg",
+      "/images/vehicles/quad_red_3.jpg",
+      "/images/vehicles/quad_red_4.jpg"
+    ],
+    "specs": {
+      "ageMin": 3,
+      "ageMax": 8,
+      "battery": "12V 10AH",
+      "openingDoors": false,
+      "motors": 2,
+      "motorPower": "12V",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "3-5",
+      "maxWeight": 30,
+      "belts": false,
+      "remoteControl": false,
+      "sound": [],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Tractor (Azul)",
+      "gl": "Tractor (azul)",
+      "en": "Tractor (blue)",
+      "uk": "Трактор (синій)"
+    },
+    "id": "tractor-blue",
+    "type": "tractor",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/tractor_blue.webp",
+      "/images/vehicles/tractor_blue_8.jpg",
+      "/images/vehicles/tractor_blue_1.webp",
+      "/images/vehicles/tractor_blue_2.webp",
+      "/images/vehicles/tractor_blue_3.webp",
+      "/images/vehicles/tractor_blue_4.webp",
+      "/images/vehicles/tractor_blue_5.jpg",
+      "/images/vehicles/tractor_blue_6.jpg",
+      "/images/vehicles/tractor_blue_7.jpg"
+    ],
+    "specs": {
+      "ageMin": 1,
+      "ageMax": 8,
+      "battery": "12V",
+      "openingDoors": false,
+      "motors": 2,
+      "motorPower": "25V",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "4-5",
+      "maxWeight": 30,
+      "belts": true,
+      "remoteControl": true,
+      "sound": [],
+      "detachableTrailer": true
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Tractor (Amarillo)",
+      "gl": "Tractor (amarelo)",
+      "en": "Tractor (yellow)",
+      "uk": "Трактор (жовтий)"
+    },
+    "id": "tractor-yellow",
+    "type": "tractor",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/tractor_yellow.jpg",
+      "/images/vehicles/tractor_yellow_1.jpg",
+      "/images/vehicles/tractor_yellow_2.jpg",
+      "/images/vehicles/tractor_yellow_3.jpg",
+      "/images/vehicles/tractor_yellow_4.jpg"
+    ],
+    "specs": {
+      "ageMin": 1,
+      "ageMax": 8,
+      "battery": "12V",
+      "openingDoors": false,
+      "motors": 2,
+      "motorPower": "25V",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "4-5",
+      "maxWeight": 30,
+      "belts": true,
+      "remoteControl": true,
+      "sound": [],
+      "detachableTrailer": true
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Moto (Rojo)",
+      "gl": "Moto (vermella)",
+      "en": "Motorbike (red)",
+      "uk": "Мотоцикл (червоний)"
+    },
+    "id": "moto-red",
+    "type": "motorbike",
+    "price": 9.99,
+    "previousPrice": 29.99,
+    "images": [
+      "/images/vehicles/moto_red.webp",
+      "/images/vehicles/moto_red_1.jpg",
+      "/images/vehicles/moto_red_2.jpg",
+      "/images/vehicles/moto_red_3.jpg",
+      "/images/vehicles/moto_red_4.jpg"
+    ],
+    "specs": {
+      "ageMin": 1,
+      "ageMax": 3,
+      "battery": "5V 4AH",
+      "openingDoors": false,
+      "motors": null,
+      "motorPower": "",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "3-4",
+      "maxWeight": 25,
+      "belts": false,
+      "remoteControl": false,
+      "sound": [],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Moto (Negro)",
+      "gl": "Moto (negra)",
+      "en": "Motorbike (black)",
+      "uk": "Мотоцикл (чорний)"
+    },
+    "id": "moto-black",
+    "type": "motorbike",
+    "price": 9.99,
+    "previousPrice": 29.99,
+    "images": [
+      "/images/vehicles/moto_black.webp",
+      "/images/vehicles/moto_black_1.jpg",
+      "/images/vehicles/moto_black_2.jpg"
+    ],
+    "specs": {
+      "ageMin": 1,
+      "ageMax": 3,
+      "battery": "5V 4AH",
+      "openingDoors": false,
+      "motors": null,
+      "motorPower": "",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "3-4",
+      "maxWeight": 25,
+      "belts": false,
+      "remoteControl": false,
+      "sound": [],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Moto Cross (Amarillo)",
+      "gl": "Moto de motocrós (amarela)",
+      "en": "Motocross bike (yellow)",
+      "uk": "Кросовий мотоцикл (жовтий)"
+    },
+    "id": "moto-cross-yellow",
+    "type": "motorbike",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/moto_cross_yellow.jpg",
+      "/images/vehicles/moto_cross_yellow_1.jpg",
+      "/images/vehicles/moto_cross_yellow_2.jpg",
+      "/images/vehicles/moto_cross_yellow_3.jpg",
+      "/images/vehicles/moto_cross_yellow_4.jpg"
+    ],
+    "specs": {
+      "ageMin": 3,
+      "ageMax": 8,
+      "battery": "",
+      "openingDoors": false,
+      "motors": 1,
+      "motorPower": "12V",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "5-6",
+      "maxWeight": 30,
+      "belts": false,
+      "remoteControl": false,
+      "sound": [],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Moto Cross (Rojo)",
+      "gl": "Moto de motocrós (vermella)",
+      "en": "Motocross bike (red)",
+      "uk": "Кросовий мотоцикл (червоний)"
+    },
+    "id": "moto-cross-red",
+    "type": "motorbike",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/moto_cross_red.jpg",
+      "/images/vehicles/moto_cross_red_1.jpg",
+      "/images/vehicles/moto_cross_red_2.jpg",
+      "/images/vehicles/moto_cross_red_3.jpg",
+      "/images/vehicles/moto_cross_red_4.jpg"
+    ],
+    "specs": {
+      "ageMin": 3,
+      "ageMax": 8,
+      "battery": "",
+      "openingDoors": false,
+      "motors": 1,
+      "motorPower": "12V",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "5-6",
+      "maxWeight": 30,
+      "belts": false,
+      "remoteControl": false,
+      "sound": [],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Pony Unicornio (Blanco)",
+      "gl": "Poni unicornio (branco)",
+      "en": "Unicorn pony (white)",
+      "uk": "Поні-єдиноріг (білий)"
+    },
+    "id": "pony-unicorn-white",
+    "type": "pony",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/pony_unicorn_white.jpg",
+      "/images/vehicles/pony_unicorn_white_1.jpg",
+      "/images/vehicles/pony_unicorn_white_2.jpg",
+      "/images/vehicles/pony_unicorn_white_3.jpg",
+      "/images/vehicles/pony_unicorn_white_4.jpg"
+    ],
+    "specs": {
+      "ageMin": 3,
+      "ageMax": 8,
+      "battery": "",
+      "openingDoors": false,
+      "motors": null,
+      "motorPower": "",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "",
+      "maxWeight": 30,
+      "belts": false,
+      "remoteControl": false,
+      "sound": [],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Pony (Negro)",
+      "gl": "Poni (negro)",
+      "en": "Pony (black)",
+      "uk": "Поні (чорний)"
+    },
+    "id": "pony-black",
+    "type": "pony",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/pony_black.jpg",
+      "/images/vehicles/pony_black_1.jpg",
+      "/images/vehicles/pony_black_2.jpg",
+      "/images/vehicles/pony_black_3.jpg"
+    ],
+    "specs": {
+      "ageMin": 3,
+      "ageMax": 8,
+      "battery": "",
+      "openingDoors": false,
+      "motors": null,
+      "motorPower": "",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "",
+      "maxWeight": 30,
+      "belts": false,
+      "remoteControl": false,
+      "sound": [],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Caballo (Marrón)",
+      "gl": "Cabalo (marrón)",
+      "en": "Horse (brown)",
+      "uk": "Кінь (коричневий)"
+    },
+    "id": "horse-brown",
+    "type": "pony",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/pony_brown.jpg",
+      "/images/vehicles/pony_brown_1.jpg",
+      "/images/vehicles/pony_brown_2.jpg",
+      "/images/vehicles/pony_brown_3.jpg"
+    ],
+    "specs": {
+      "ageMin": 5,
+      "ageMax": 15,
+      "battery": "",
+      "openingDoors": false,
+      "motors": null,
+      "motorPower": "",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "",
+      "maxWeight": 60,
+      "belts": false,
+      "remoteControl": false,
+      "sound": [],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Caballo (Negro)",
+      "gl": "Cabalo (negro)",
+      "en": "Horse (black)",
+      "uk": "Кінь (чорний)"
+    },
+    "id": "horse-black",
+    "type": "pony",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/horse_black.jpg",
+      "/images/vehicles/horse_black_1.jpg",
+      "/images/vehicles/horse_black_2.jpg",
+      "/images/vehicles/horse_black_3.jpg",
+      "/images/vehicles/horse_black_4.jpg"
+    ],
+    "specs": {
+      "ageMin": 5,
+      "ageMax": 15,
+      "battery": "",
+      "openingDoors": false,
+      "motors": null,
+      "motorPower": "",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "",
+      "maxWeight": 60,
+      "belts": false,
+      "remoteControl": false,
+      "sound": [],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  },
+  {
+    "name": {
+      "es": "Pequeño Pony",
+      "gl": "Poni pequeno",
+      "en": "Little pony",
+      "uk": "Маленький поні"
+    },
+    "id": "pony-small",
+    "type": "pony",
+    "price": 29.99,
+    "previousPrice": null,
+    "images": [
+      "/images/vehicles/pony_small.jpg",
+      "/images/vehicles/pony_small_1.jpg",
+      "/images/vehicles/pony_small_2.jpg",
+      "/images/vehicles/pony_small_3.jpg"
+    ],
+    "specs": {
+      "ageMin": 1,
+      "ageMax": 3,
+      "battery": "",
+      "openingDoors": false,
+      "motors": null,
+      "motorPower": "",
+      "seats": 1,
+      "leatherSeats": false,
+      "maxSpeed": "",
+      "maxWeight": 20,
+      "belts": false,
+      "remoteControl": false,
+      "sound": [],
+      "detachableTrailer": false
+    },
+    "hidden": false
+  }
+]

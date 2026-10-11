@@ -69,22 +69,60 @@ switcher shows "UA"). [src/proxy.ts](src/proxy.ts) decides which version to show
 Spanish pages are rendered from `/es/...` internally. Each page declares its translations
 with `hreflang`, and the sitemap lists all four versions. Text lives in
 [src/i18n/messages](src/i18n/messages); `es.ts` defines the structure the other languages
-must follow, so TypeScript reports missing translations. Vehicle display names are
-translated by ID; brand model names stay unchanged. WhatsApp enquiries are prefilled in the
+must follow, so TypeScript reports missing translations. Vehicle names and photo descriptions
+are translated in the content files (below); an empty translation falls back to Spanish and
+brand model names stay unchanged. WhatsApp enquiries are prefilled in the
 visitor's language. Ukrainian headings use Manrope because Bricolage has no Cyrillic.
+
+## Editing Vehicles And Photos
+
+Vehicles and gallery photos are edited at **antelu.es/admin** with
+[Sveltia CMS](https://sveltiacms.app), a free editor that saves straight to this repository.
+There is no database or extra service; every save is a commit to `master`, which Vercel
+publishes in a minute or two.
+
+1. Open `https://antelu.es/admin` in a desktop or mobile browser.
+2. Choose **Sign In Using Access Token** and follow its link to GitHub, which pre-fills the
+   permissions. The account needs write access to this repository. The token stays in that
+   browser; generate a new one if it expires.
+3. Edit **Vehicles** or **Gallery**, then **Save**. Spanish is the only required language.
+   Photos (including iPhone HEIC) are resized to 2000 px and converted to WebP on upload.
+
+What each field does:
+
+- `id` is the public URL (`/rent/<id>`); keep it unchanged once published.
+- The first vehicle photo is the catalogue cover; drag to reorder.
+- `previousPrice` is the crossed-out price; it is ignored unless it is higher than `price`.
+- **Ocultar en la web** hides a vehicle (and its page) without deleting it.
+- In the gallery, **Mostrar en la página de inicio** picks the three homepage collage photos.
+
+The content is in [src/content](src/content) and the photos in [public/images](public/images);
+the editor's fields are defined in [public/admin/config.yml](public/admin/config.yml). Every
+build checks the content in [src/lib/content.ts](src/lib/content.ts): a missing photo, an
+empty Spanish name or a duplicate `id` fails the build with the entry's position, so a bad
+edit never replaces the live site (Vercel keeps the previous deployment and emails the
+failure). Fix it in the editor or revert the commit.
+
+To try changes without publishing, run `yarn dev`, open
+`http://localhost:3000/admin/index.html` in Chrome or Edge and choose **Work with Local
+Repository**; it edits local files that you commit yourself.
+
+The editor script is pinned to an exact version with an integrity hash in
+[public/admin/index.html](public/admin/index.html), because that page holds a GitHub token.
+To upgrade, change the version in both files and replace the hash with the output of
+`curl -sL https://unpkg.com/@sveltia/cms@VERSION/dist/sveltia-cms.js | openssl dgst -sha384 -binary | openssl base64 -A`.
 
 ## Content And Structure
 
 - [src/data/constants.ts](src/data/constants.ts): business details, navigation paths and phone numbers.
 - [src/i18n](src/i18n): supported languages, URL helpers, plural rules, price formatting and WhatsApp links.
-- [src/data/vehicles/index.ts](src/data/vehicles/index.ts): the existing 23 vehicles and their photographs. `price` is the current daily price; `discount` is the crossed-out previous price, not a percentage. Keep IDs stable because they are public URLs.
-- [src/data/gallery/index.ts](src/data/gallery/index.ts): existing gallery photographs; their descriptions are translated in the message files.
+- [src/content](src/content): vehicles and gallery photos, edited through the CMS (see above) and validated by [src/lib/content.ts](src/lib/content.ts).
 - [src/components/VehicleCatalogue.tsx](src/components/VehicleCatalogue.tsx): category and age controls; the cards themselves are server-rendered. Unknown ages do not match a selected numeric age.
 - [src/components/ReserveNowButton.tsx](src/components/ReserveNowButton.tsx): a direct WhatsApp link before hydration, enhanced to a Radix contact dialog. Phone links always work without JavaScript.
 - [src/app/globals.css](src/app/globals.css): shared tokens, typography and responsive layouts. Fonts are served locally through Fontsource.
 - [src/app/sitemap.ts](src/app/sitemap.ts): generated from the same vehicle IDs. Pages retain `/`, `/gallery`, `/rent/[slug]` and the existing homepage anchors.
 
-Product pages are statically generated. Adding a vehicle requires rebuilding the site.
+Product pages are statically generated, so content changes are published by a rebuild.
 Gallery thumbnails use CSS columns and intrinsic image dimensions so the layout is stable
 before JavaScript loads; only the existing lightbox is loaded on demand. Carousel photos
 do not autoplay.
@@ -115,7 +153,7 @@ Business facts were carried over from the published site and are **provisional**
 - Review the final site on a real phone, verify the intended WhatsApp account manually without sending an automated message, and check the live social preview after deployment.
 
 No booking is confirmed by the website. Dates, availability and final terms are agreed
-directly with Antelu. No changes are committed, pushed or deployed automatically.
+directly with Antelu.
 
 ## Revision Verification
 

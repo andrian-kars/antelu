@@ -3,15 +3,15 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import Image, { getImageProps } from "next/image";
-import { gallery } from "@/data/gallery";
 import type { Messages } from "@/i18n/messages/es";
+import type { Photo } from "@/lib/content";
 import { skeleton } from "@/lib/skeleton";
 import "yet-another-react-lightbox/styles.css";
 
 const Lightbox = dynamic(() => import("yet-another-react-lightbox"));
-const photos = gallery.map(({ image }) => image);
-const slides = photos.map((photo) => {
-  const { props } = getImageProps({ src: photo, alt: "", sizes: "100vw" });
+
+function lightboxSlide(photo: Photo & { alt: string }) {
+  const { props } = getImageProps({ ...photo, sizes: "100vw" });
   const srcSet = (props.srcSet ?? "")
     .split(", ")
     .map((candidate) => {
@@ -24,11 +24,18 @@ const slides = photos.map((photo) => {
     src: props.src,
     width: photo.width,
     height: photo.height,
+    alt: photo.alt,
     srcSet,
   };
-});
+}
 
-export function Gallery({ messages }: { messages: Messages["gallery"] }) {
+export function Gallery({
+  photos,
+  labels,
+}: {
+  photos: (Photo & { alt: string })[];
+  labels: Messages["gallery"]["lightbox"];
+}) {
   const [index, setIndex] = useState(-1);
   return (
     <>
@@ -45,8 +52,10 @@ export function Gallery({ messages }: { messages: Messages["gallery"] }) {
             }}
           >
             <Image
-              src={photo}
-              alt={messages.alts[current]}
+              src={photo.src}
+              width={photo.width}
+              height={photo.height}
+              alt={photo.alt}
               quality={60}
               preload={current === 0}
               placeholder={skeleton(photo)}
@@ -59,16 +68,13 @@ export function Gallery({ messages }: { messages: Messages["gallery"] }) {
       {index >= 0 && (
         <Lightbox
           index={index}
-          slides={slides.map((slide, current) => ({
-            ...slide,
-            alt: messages.alts[current],
-          }))}
+          slides={photos.map(lightboxSlide)}
           open
           close={() => setIndex(-1)}
           labels={{
-            Close: messages.lightbox.close,
-            Next: messages.lightbox.next,
-            Previous: messages.lightbox.previous,
+            Close: labels.close,
+            Next: labels.next,
+            Previous: labels.previous,
           }}
           carousel={{ finite: true }}
         />

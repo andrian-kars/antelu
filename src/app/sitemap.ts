@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { business } from "@/data/constants";
-import { vehicles } from "@/data/vehicles";
 import { languageAlternates, localePath, locales } from "@/i18n/config";
+import { vehicles } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const absolute = (path: string) => new URL(path, business.url).href;

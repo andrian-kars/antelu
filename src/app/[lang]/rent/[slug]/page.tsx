@@ -5,11 +5,11 @@ import { ArrowLeft, CalendarDays, MapPin, Phone } from "lucide-react";
 import Carousel from "@/components/Carousel";
 import { CharacteristicsList } from "@/components/CharacteristicsList";
 import { ReserveNowButton } from "@/components/ReserveNowButton";
-import { vehicles } from "@/data/vehicles";
 import { business } from "@/data/constants";
 import { languageAlternates, localePath } from "@/i18n/config";
 import { fill, formatPrice, whatsAppUrl } from "@/i18n/format";
 import { getLocale, getMessages } from "@/i18n/server";
+import { vehicles } from "@/lib/content";
 import { ageLabel, categoryLabel, vehicleName } from "@/lib/vehicles";
 import { socialMetadata } from "@/lib/metadata";
 
@@ -31,7 +31,7 @@ export async function generateMetadata({
   const vehicle = getVehicle((await params).slug);
   const locale = await getLocale();
   const messages = getMessages(locale);
-  const name = vehicleName(vehicle, messages);
+  const name = vehicleName(vehicle, locale);
   const title = fill(messages.meta.vehicleTitle, { name });
   const description = fill(messages.meta.vehicleDescription, { name });
   const path = `/rent/${vehicle.id}`;
@@ -57,8 +57,8 @@ export default async function RentPage({ params }: PageProps<"/[lang]/rent/[slug
   const locale = await getLocale();
   const messages = getMessages(locale);
   const { vehicle: text } = messages;
-  const { id, price, discount, images, characteristics, type } = vehicle;
-  const name = vehicleName(vehicle, messages);
+  const { id, price, previousPrice, images, specs, type } = vehicle;
+  const name = vehicleName(vehicle, locale);
   const deposit = formatPrice(business.deposit, locale);
   const enquiryUrl = whatsAppUrl(locale, messages.contact, { id, name });
   const breadcrumb = {
@@ -101,10 +101,10 @@ export default async function RentPage({ params }: PageProps<"/[lang]/rent/[slug
           <p className="product-price">
             {messages.vehicles.from} <strong>{formatPrice(price, locale)}</strong>{" "}
             {messages.vehicles.perDay}{" "}
-            {discount ? (
+            {previousPrice ? (
               <del>
                 <span className="sr-only">{messages.vehicles.previousPrice}</span>
-                {formatPrice(discount, locale)}
+                {formatPrice(previousPrice, locale)}
               </del>
             ) : null}
           </p>
@@ -142,7 +142,7 @@ export default async function RentPage({ params }: PageProps<"/[lang]/rent/[slug
         <section aria-labelledby="specifications">
           <p className="eyebrow">{text.specsEyebrow}</p>
           <h2 id="specifications">{text.specsTitle}</h2>
-          <CharacteristicsList characteristics={characteristics} />
+          <CharacteristicsList specs={specs} />
         </section>
         <section className="product-conditions" aria-labelledby="conditions">
           <p className="eyebrow">{text.conditionsEyebrow}</p>

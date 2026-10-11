@@ -17,15 +17,17 @@ export function VehicleCard({
   locale: Locale;
   messages: Messages;
 }) {
-  const { id, images, price, discount, type } = vehicle;
-  const name = vehicleName(vehicle, messages);
+  const { id, images, price, previousPrice, type } = vehicle;
+  const name = vehicleName(vehicle, locale);
   const href = localePath(locale, `/rent/${id}`);
   const { vehicles: text } = messages;
   return (
     <article className="vehicle-card" aria-labelledby={`vehicle-${id}`}>
       <Link className="vehicle-image" href={href} tabIndex={-1} aria-hidden="true">
         <Image
-          src={images[0]}
+          src={images[0].src}
+          width={images[0].width}
+          height={images[0].height}
           alt=""
           placeholder={skeleton(images[0])}
           style={{ objectFit: "contain" }}
@@ -46,10 +48,10 @@ export function VehicleCard({
             {text.from} <strong>{formatPrice(price, locale)}</strong>
             <span className="price-period"> {text.perDay}</span>
           </span>
-          {discount ? (
+          {previousPrice ? (
             <del>
               <span className="sr-only">{text.previousPrice}</span>
-              {formatPrice(discount, locale)}
+              {formatPrice(previousPrice, locale)}
             </del>
           ) : null}
         </div>

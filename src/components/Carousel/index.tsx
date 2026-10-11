@@ -1,12 +1,13 @@
 "use client";
 
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { DotButton, useDotButton } from "./CarouselDotButton";
 import { NextButton, PrevButton, usePrevNextButtons } from "./CarouselDotArrowButtons";
 import { skeleton } from "@/lib/skeleton";
 import { fill } from "@/i18n/format";
 import type { Messages } from "@/i18n/messages/es";
+import type { Photo } from "@/lib/content";
 
 export default function Carousel({
   slides,
@@ -14,7 +15,7 @@ export default function Carousel({
   labels,
 }: {
   name: string;
-  slides: StaticImageData[];
+  slides: Photo[];
   labels: Messages["carousel"];
 }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
@@ -38,7 +39,9 @@ export default function Carousel({
               aria-label={fill(labels.slide, { i: index + 1, n: slides.length })}
             >
               <Image
-                src={slide}
+                src={slide.src}
+                width={slide.width}
+                height={slide.height}
                 alt={fill(labels.alt, { name, i: index + 1 })}
                 preload={index === 0}
                 placeholder={skeleton(slide)}

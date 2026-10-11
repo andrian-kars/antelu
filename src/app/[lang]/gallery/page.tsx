@@ -3,8 +3,9 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Gallery } from "@/components/Gallery";
 import { languageAlternates, localePath } from "@/i18n/config";
-import { whatsAppUrl } from "@/i18n/format";
+import { translated, whatsAppUrl } from "@/i18n/format";
 import { getLocale, getMessages } from "@/i18n/server";
+import { galleryPhotos } from "@/lib/content";
 import { socialMetadata } from "@/lib/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -49,7 +50,15 @@ export default async function GalleryPage() {
           {gallery.action} <ArrowUpRight size={18} aria-hidden="true" />
         </a>
       </div>
-      <Gallery messages={gallery} />
+      <Gallery
+        photos={galleryPhotos.map(({ src, width, height, alt }) => ({
+          src,
+          width,
+          height,
+          alt: translated(alt, locale),
+        }))}
+        labels={gallery.lightbox}
+      />
     </main>
   );
 }

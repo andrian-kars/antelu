@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     qualities: [60, 75],
   },
+  // Next.js doesn't serve folder index files; the CMS lives in public/admin.
+  async rewrites() {
+    return [{ source: "/admin", destination: "/admin/index.html" }];
+  },
   async headers() {
     return [
       {
