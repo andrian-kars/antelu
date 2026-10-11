@@ -57,12 +57,7 @@ export const PrevButton: React.FC<PropType> = (props) => {
   const { children, ...restProps } = props;
 
   return (
-    <button
-      className="icon-button"
-      type="button"
-      aria-label="Foto anterior"
-      {...restProps}
-    >
+    <button className="icon-button" type="button" {...restProps}>
       <ArrowLeft size={20} aria-hidden="true" />
       {children}
     </button>
@@ -73,12 +68,7 @@ export const NextButton: React.FC<PropType> = (props) => {
   const { children, ...restProps } = props;
 
   return (
-    <button
-      className="icon-button"
-      type="button"
-      aria-label="Foto siguiente"
-      {...restProps}
-    >
+    <button className="icon-button" type="button" {...restProps}>
       <ArrowRight size={20} aria-hidden="true" />
       {children}
     </button>

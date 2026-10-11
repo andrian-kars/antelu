@@ -1,4 +1,6 @@
 import { Check } from "lucide-react";
+import { fill, plural } from "@/i18n/format";
+import { getLocale, getMessages } from "@/i18n/server";
 
 type SeatsDetail = { number: number; material: string | null };
 type SoundSystem = { isUsb: boolean; isBluetooth: boolean; isMp3: boolean };
@@ -7,42 +9,55 @@ type Characteristic = {
   value: string | number | boolean | SeatsDetail | SoundSystem;
 };
 
-export function CharacteristicsList({
+export async function CharacteristicsList({
   characteristics,
-  isFull = false,
 }: {
   characteristics: Characteristic[];
-  isFull?: boolean;
 }) {
+  const locale = await getLocale();
+  const { specs } = getMessages(locale);
+  // Source data uses "12V 4.5AH"; each language formats decimals and units its own way.
+  const units = (value: string) =>
+    value
+      .replace(/(\d)\.(\d)/g, `$1${specs.units.decimal}$2`)
+      .replace(/(\d)\s?V\b/g, `$1 ${specs.units.volt}`)
+      .replace(/(\d)\s?AH\b/gi, `$1 ${specs.units.ampHour}`);
+
   const descriptions = characteristics
     .map(({ name, value }) => {
       if (value === false) return null;
       switch (name) {
-        case "recommendedAge":
-          return `Edad recomendada: ${value} años`;
+        case "recommendedAge": {
+          const [min, max] = String(value).split("-").map(Number);
+          return plural(locale, specs.age, max, { min });
+        }
         case "battery":
-          return `Batería: ${formatUnits(String(value))}`;
+          return fill(specs.battery, { value: units(String(value)) });
         case "isOpeningDoors":
-          return "Puertas que se abren";
+          return specs.doors;
         case "motor": {
           const [count, power] = String(value).split("*");
-          if (!power) return `Motor: ${formatUnits(count)}`;
+          if (!power) return fill(specs.motor, { value: units(count) });
           return Number(count) > 1
-            ? `${count} motores de ${formatUnits(power)}`
-            : `Motor: ${formatUnits(power)}`;
+            ? plural(locale, specs.motors, Number(count), { value: units(power) })
+            : fill(specs.motor, { value: units(power) });
         }
         case "seats": {
           const { number, material } = value as SeatsDetail;
-          return `${number} ${number === 1 ? "asiento" : "asientos"}${material === "leather" ? " de ecocuero" : ""}`;
+          return plural(
+            locale,
+            material === "leather" ? specs.leatherSeats : specs.seats,
+            number,
+          );
         }
         case "maxSpeed":
-          return `Velocidad máxima: ${value} km/h`;
+          return fill(specs.speed, { value: String(value) });
         case "maxWeight":
-          return `Carga máxima: ${value} kg`;
+          return fill(specs.load, { value: String(value) });
         case "isBelts":
-          return "Cinturones de seguridad";
+          return specs.belts;
         case "isRemoteControl":
-          return "Control remoto para adultos";
+          return specs.remote;
         case "sound": {
           const sound = value as SoundSystem;
           const options = [
@@ -50,10 +65,10 @@ export function CharacteristicsList({
             sound.isBluetooth && "Bluetooth",
             sound.isUsb && "USB",
           ].filter(Boolean);
-          return options.length ? `Sonido: ${options.join(", ")}` : null;
+          return options.length ? fill(specs.sound, { value: options.join(", ") }) : null;
         }
         case "isTrailerDetachable":
-          return "Remolque desmontable";
+          return specs.trailer;
         default:
           return null;
       }
@@ -62,7 +77,7 @@ export function CharacteristicsList({
 
   return (
     <ul className="specification-list">
-      {(isFull ? descriptions : descriptions.slice(0, 4)).map((description) => (
+      {descriptions.map((description) => (
         <li key={description}>
           <Check size={17} aria-hidden="true" />
           <span>{description}</span>
@@ -70,12 +85,4 @@ export function CharacteristicsList({
       ))}
     </ul>
   );
-}
-
-// Source data uses "12V 4.5AH"; Spanish style is "12 V 4,5 Ah".
-function formatUnits(value: string) {
-  return value
-    .replace(/(\d)\.(\d)/g, "$1,$2")
-    .replace(/(\d)\s?V\b/g, "$1 V")
-    .replace(/(\d)\s?AH\b/gi, "$1 Ah");
 }

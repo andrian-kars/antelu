@@ -31,6 +31,8 @@
     --aqua: #d3f0ef;
     --line: #d7dfdb;
     --header-height: 80px;
+    /* Bricolage has no Cyrillic, so Ukrainian headings fall back to Manrope glyph by glyph. */
+    --font-display: "Bricolage Grotesque Variable", "Manrope Variable", sans-serif;
   }
   * {
     @apply border-border;
@@ -53,7 +55,7 @@
   h2,
   h3,
   .brand {
-    font-family: "Bricolage Grotesque Variable", sans-serif;
+    font-family: var(--font-display);
     line-height: 1.1;
     font-weight: 700;
     text-wrap: balance;
@@ -206,6 +208,89 @@
 }
 .mobile-links a {
   padding: 10px 0;
+}
+.language-menu {
+  position: relative;
+  flex-shrink: 0;
+}
+.language-menu summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 700;
+  list-style: none;
+}
+.language-menu summary::-webkit-details-marker {
+  display: none;
+}
+.language-menu summary:hover,
+.language-menu[open] summary {
+  background: var(--aqua);
+}
+.language-options {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 45;
+  display: grid;
+  min-width: 190px;
+  padding: 6px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgb(0 0 0 / 12%);
+}
+.language-options a {
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 16px;
+}
+.language-options a:hover {
+  background: var(--aqua);
+}
+.language-options a[aria-current="true"],
+.mobile-languages a[aria-current="true"] {
+  color: var(--red);
+  font-weight: 700;
+}
+.mobile-languages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+  margin-top: 8px;
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+}
+.language-suggestion {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: min(640px, calc(100% - 32px));
+  padding: 12px 12px 12px 20px;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 16px 40px rgb(0 0 0 / 16%);
+}
+.language-suggestion p {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.language-suggestion .action {
+  padding: 10px 16px;
+  font-size: 15px;
 }
 .action {
   display: inline-flex;
@@ -414,7 +499,7 @@
   background: #fde3dc;
 }
 .category-name {
-  font-family: "Bricolage Grotesque Variable", sans-serif;
+  font-family: var(--font-display);
   font-size: 24px;
   font-weight: 700;
   line-height: 1.1;
@@ -596,7 +681,7 @@
   margin-bottom: 20px;
 }
 .vehicle-price strong {
-  font-family: "Bricolage Grotesque Variable", sans-serif;
+  font-family: var(--font-display);
   font-size: 28px;
   margin-left: 4px;
 }
@@ -637,7 +722,7 @@
   padding: 0;
 }
 .rental-steps li > span {
-  font-family: "Bricolage Grotesque Variable", sans-serif;
+  font-family: var(--font-display);
   font-size: 44px;
   color: #23706f;
   display: block;
@@ -765,7 +850,7 @@
   font-size: 17px;
 }
 .product-price strong {
-  font-family: "Bricolage Grotesque Variable", sans-serif;
+  font-family: var(--font-display);
   font-size: 38px;
 }
 .product-price del {
@@ -1159,11 +1244,27 @@
     display: none;
   }
 }
+@media (min-width: 901px) and (max-width: 1180px) {
+  .header-phone {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    justify-content: center;
+  }
+  .header-phone span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+}
 @media (max-width: 900px) {
   :root {
     --header-height: 72px;
   }
-  .desktop-links {
+  .desktop-links,
+  .language-menu {
     display: none;
   }
   .menu-toggle {
@@ -1183,6 +1284,16 @@
 @media (max-width: 600px) {
   :root {
     --header-height: 68px;
+  }
+  .language-suggestion {
+    bottom: 12px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 12px;
+  }
+  .language-suggestion .action {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
   .page-width {
     width: calc(100% - 32px);

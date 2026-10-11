@@ -5,13 +5,17 @@ import useEmblaCarousel from "embla-carousel-react";
 import { DotButton, useDotButton } from "./CarouselDotButton";
 import { NextButton, PrevButton, usePrevNextButtons } from "./CarouselDotArrowButtons";
 import { skeleton } from "@/lib/skeleton";
+import { fill } from "@/i18n/format";
+import type { Messages } from "@/i18n/messages/es";
 
 export default function Carousel({
   slides,
   name,
+  labels,
 }: {
   name: string;
   slides: StaticImageData[];
+  labels: Messages["carousel"];
 }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const { selectedIndex, onDotButtonClick } = useDotButton(emblaApi);
@@ -21,8 +25,8 @@ export default function Carousel({
   return (
     <section
       className="product-gallery"
-      aria-label={`Fotos de ${name}`}
-      aria-roledescription="carrusel"
+      aria-label={fill(labels.region, { name })}
+      aria-roledescription={labels.roleDescription}
     >
       <div className="embla" ref={emblaRef}>
         <div className="embla__container">
@@ -31,11 +35,11 @@ export default function Carousel({
               key={slide.src}
               className="embla__slide"
               role="group"
-              aria-label={`Foto ${index + 1} de ${slides.length}`}
+              aria-label={fill(labels.slide, { i: index + 1, n: slides.length })}
             >
               <Image
                 src={slide}
-                alt={`${name}, vista ${index + 1}`}
+                alt={fill(labels.alt, { name, i: index + 1 })}
                 preload={index === 0}
                 placeholder={skeleton(slide)}
                 style={{ objectFit: "contain" }}
@@ -46,18 +50,26 @@ export default function Carousel({
         </div>
       </div>
       <div className="carousel-controls">
-        <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+        <PrevButton
+          onClick={onPrevButtonClick}
+          disabled={prevBtnDisabled}
+          aria-label={labels.previous}
+        />
         <p aria-live="polite">
           {selectedIndex + 1} / {slides.length}
         </p>
-        <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+        <NextButton
+          onClick={onNextButtonClick}
+          disabled={nextBtnDisabled}
+          aria-label={labels.next}
+        />
       </div>
       <div className="carousel-dots">
         {slides.map((slide, index) => (
           <DotButton
             key={slide.src}
             className="carousel-dot"
-            aria-label={`Ir a la foto ${index + 1}`}
+            aria-label={fill(labels.goTo, { i: index + 1 })}
             aria-current={selectedIndex === index ? "true" : undefined}
             onClick={() => onDotButtonClick(index)}
           />

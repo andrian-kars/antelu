@@ -138,6 +138,7 @@ for (const route of ["/", "/rent/mercedes-csl-350-amg", "/gallery"]) {
   }) => {
     const context = await browser.newContext({
       javaScriptEnabled: false,
+      locale: "es-ES",
       viewport: { width: 390, height: 844 },
     });
     const page = await context.newPage();
@@ -266,8 +267,13 @@ test("catalogue URLs, sitemap, robots and not-found responses remain correct", a
   const sitemap = await request.get("/sitemap.xml");
   expect(sitemap.status()).toBe(200);
   const xml = await sitemap.text();
-  for (const url of urls) expect(xml).toContain(`https://antelu.es${url}`);
-  expect((xml.match(/<loc>/g) ?? []).length).toBe(25);
+  for (const url of urls) {
+    for (const prefix of ["", "/gl", "/en", "/uk"]) {
+      expect(xml).toContain(`<loc>https://antelu.es${prefix}${url}</loc>`);
+    }
+  }
+  expect((xml.match(/<loc>/g) ?? []).length).toBe(100);
+  expect(xml).toContain('hreflang="uk"');
   expect(await (await request.get("/robots.txt")).text()).toContain(
     "Sitemap: https://antelu.es/sitemap.xml",
   );
@@ -298,7 +304,10 @@ for (const route of ["/", "/rent/mercedes-csl-350-amg"]) {
     baseURL,
   }) => {
     const layout = async (hydrate: boolean) => {
-      const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+      const context = await browser.newContext({
+        locale: "es-ES",
+        viewport: { width: 390, height: 844 },
+      });
       const page = await context.newPage();
       // Blocking app bundles keeps scripting on but freezes the pre-hydration markup.
       if (!hydrate)
@@ -366,6 +375,10 @@ test("dialog close button is a full-size target without a mouse focus ring", asy
   await page.getByRole("button", { name: "Consultar alquiler" }).click();
   const close = page.getByRole("button", { name: "Cerrar", exact: true });
   await expect(close).toBeFocused();
+  // The dialog zooms in from 95%, so measure once the animation settles.
+  await expect
+    .poll(async () => (await close.boundingBox())!.width)
+    .toBeGreaterThanOrEqual(44);
   const box = await close.boundingBox();
   expect(box!.width).toBeGreaterThanOrEqual(44);
   expect(box!.height).toBeGreaterThanOrEqual(44);
@@ -389,4 +402,167 @@ test("images show a skeleton until they load", async ({ page }) => {
   expect(
     await photo.evaluate((image: HTMLImageElement) => image.naturalWidth),
   ).toBeGreaterThan(0);
+});
+
+test.describe("languages", () => {
+  const visit = async (
+    browser: import("@playwright/test").Browser,
+    baseURL: string | undefined,
+    acceptLanguage: string,
+    path = "/",
+    cookies: { name: string; value: string }[] = [],
+  ) => {
+    const context = await browser.newContext({ locale: acceptLanguage.split(",")[0] });
+    // The suite defaults to a Spanish browser; override the header on every request.
+    await context.route("**/*", (route) =>
+      route.continue({
+        headers: { ...route.request().headers(), "accept-language": acceptLanguage },
+      }),
+    );
+    if (cookies.length) {
+      await context.addCookies(cookies.map((cookie) => ({ ...cookie, url: baseURL! })));
+    }
+    const page = await context.newPage();
+    await page.goto(`${baseURL}${path}`);
+    return { context, page };
+  };
+
+  test("English and Ukrainian browsers switch automatically on the same page", async ({
+    browser,
+    baseURL,
+  }) => {
+    for (const [header, prefix, heading] of [
+      ["en-GB,en;q=0.9", "/en", "Jeep (red)"],
+      ["uk-UA,uk;q=0.9", "/uk", "Jeep (червоний)"],
+    ]) {
+      const { context, page } = await visit(browser, baseURL, header, "/rent/jeep-red");
+      await expect(page).toHaveURL(`${baseURL}${prefix}/rent/jeep-red`);
+      await expect(page.locator("html")).toHaveAttribute("lang", prefix.slice(1));
+      await expect(page.getByRole("heading", { level: 1 })).toHaveText(heading);
+      await context.close();
+    }
+  });
+
+  test("Spanish-reading browsers stay on Spanish with a one-time suggestion", async ({
+    browser,
+    baseURL,
+  }) => {
+    for (const [header, suggestion, target] of [
+      ["en-US,en;q=0.9,es;q=0.8", "Switch to English", "/en"],
+      ["gl-ES,gl;q=0.9", "Ver en galego", "/gl"],
+    ]) {
+      const { context, page } = await visit(browser, baseURL, header);
+      await expect(page).toHaveURL(`${baseURL}/`);
+      await expect(page.locator("html")).toHaveAttribute("lang", "es");
+      const bar = page.getByRole("complementary");
+      await expect(bar.getByRole("link", { name: suggestion })).toBeVisible();
+      expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+      await bar.getByRole("button").click();
+      await expect(bar).toBeHidden();
+      await page.reload();
+      await expect(page.getByRole("complementary")).toBeHidden();
+      await page.goto(`${baseURL}/`);
+      await page.goto(`${baseURL}${target}`);
+      await expect(page.locator("html")).toHaveAttribute("lang", target.slice(1));
+      await context.close();
+    }
+  });
+
+  test("a chosen language is remembered and beats the browser language", async ({
+    browser,
+    baseURL,
+  }) => {
+    const { context, page } = await visit(browser, baseURL, "en-GB", "/gallery");
+    const choose = async (language: string) => {
+      const toggle = page.locator(".menu-toggle");
+      if (await toggle.isVisible()) {
+        await toggle.click();
+        await page
+          .locator("#mobile-navigation")
+          .getByRole("link", { name: language })
+          .click();
+      } else {
+        await page.locator(".language-menu summary").click();
+        await page
+          .locator(".language-options")
+          .getByRole("link", { name: language })
+          .click();
+      }
+    };
+    await expect(page).toHaveURL(`${baseURL}/en/gallery`);
+    await choose("Español");
+    await expect(page).toHaveURL(`${baseURL}/gallery`);
+    await expect(page.locator("html")).toHaveAttribute("lang", "es");
+    await page.goto(`${baseURL}/rent/jeep-red`);
+    await expect(page).toHaveURL(`${baseURL}/rent/jeep-red`);
+    await choose("Galego");
+    await expect(page).toHaveURL(`${baseURL}/gl/rent/jeep-red`);
+    await page.goto(`${baseURL}/`);
+    await expect(page).toHaveURL(`${baseURL}/gl`);
+    await context.close();
+  });
+
+  test("crawlers always see Spanish and every page lists its translations", async ({
+    request,
+    baseURL,
+  }) => {
+    const crawl = await request.get("/rent/jeep-red", {
+      headers: { "Accept-Language": "en-US", "User-Agent": "Googlebot/2.1" },
+      maxRedirects: 0,
+    });
+    expect(crawl.status()).toBe(200);
+    const html = await crawl.text();
+    expect(html).toContain('<html lang="es"');
+    for (const [code, href] of [
+      ["es", "https://antelu.es/rent/jeep-red"],
+      ["gl", "https://antelu.es/gl/rent/jeep-red"],
+      ["en", "https://antelu.es/en/rent/jeep-red"],
+      ["uk", "https://antelu.es/uk/rent/jeep-red"],
+      ["x-default", "https://antelu.es/rent/jeep-red"],
+    ]) {
+      expect(html).toContain(`hrefLang="${code}" href="${href}"`);
+    }
+    const explicit = await request.get(`${baseURL}/en`, {
+      headers: { "Accept-Language": "es-ES", "User-Agent": "Mozilla/5.0" },
+      maxRedirects: 0,
+    });
+    expect(explicit.status()).toBe(200);
+    expect(await explicit.text()).toContain(
+      '<link rel="canonical" href="https://antelu.es/en"',
+    );
+  });
+
+  test("translated pages localize prices, specs, WhatsApp and stay accessible", async ({
+    browser,
+    baseURL,
+  }) => {
+    const { context, page } = await visit(browser, baseURL, "uk-UA", "/uk/rent/moto-red");
+    await expect(page.locator(".product-price")).toContainText("9,99 €");
+    await expect(page.locator(".specification-list")).toContainText(
+      "Акумулятор: 5 В 4 А·год",
+    );
+    await page.getByRole("button", { name: "Дізнатися про оренду" }).click();
+    const href = await page
+      .getByRole("dialog")
+      .getByRole("link", { name: "Запитати у WhatsApp" })
+      .getAttribute("href");
+    const message = new URL(href!).searchParams.get("text")!;
+    expect(message).toContain("«Мотоцикл (червоний)»");
+    expect(message).toContain("https://antelu.es/uk/rent/moto-red");
+    await page.keyboard.press("Escape");
+    expect(
+      await page.evaluate(() =>
+        document.fonts.check('700 40px "Manrope Variable"', "Транспорт"),
+      ),
+    ).toBe(true);
+    for (const path of ["/uk", "/en/gallery", "/gl/rent/jeep-red"]) {
+      await page.goto(`${baseURL}${path}`);
+      expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+    }
+    await page.goto(`${baseURL}/en`);
+    await expect(page.locator(".category-tile").nth(1)).toContainText("from €9.99");
+    await page.getByRole("link", { name: /^Motorbikes/ }).click();
+    await expect(page.getByRole("status")).toHaveText("4 vehicles");
+    await context.close();
+  });
 });

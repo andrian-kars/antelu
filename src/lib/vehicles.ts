@@ -1,13 +1,16 @@
 import type { vehicles } from "@/data/vehicles";
+import type { Locale } from "@/i18n/config";
+import { plural } from "@/i18n/format";
+import type { Messages } from "@/i18n/messages/es";
 
 export type Vehicle = (typeof vehicles)[number];
-export const categories = [
-  { id: "all", label: "Todos" },
-  { id: "electric_car", label: "Coches" },
-  { id: "motorbike", label: "Motos" },
-  { id: "quad", label: "Quads" },
-  { id: "tractor", label: "Tractores" },
-  { id: "pony", label: "Caballitos" },
+export const categoryIds = [
+  "all",
+  "electric_car",
+  "motorbike",
+  "quad",
+  "tractor",
+  "pony",
 ] as const;
 
 export function getAgeRange(vehicle: Vehicle) {
@@ -15,15 +18,20 @@ export function getAgeRange(vehicle: Vehicle) {
     (item) => item.name === "recommendedAge",
   )?.value;
   const match = typeof value === "string" ? /^(\d+)-(\d+)$/.exec(value) : null;
-  return match
-    ? {
-        min: Number(match[1]),
-        max: Number(match[2]),
-        label: `${match[1]}-${match[2]} años`,
-      }
-    : null;
+  return match ? { min: Number(match[1]), max: Number(match[2]) } : null;
 }
 
-export function getCategoryLabel(type: string) {
-  return categories.find((category) => category.id === type)?.label ?? "Vehículos";
+export function ageLabel(vehicle: Vehicle, locale: Locale, messages: Messages) {
+  const range = getAgeRange(vehicle);
+  return range
+    ? plural(locale, messages.vehicles.ageRange, range.max, { min: range.min })
+    : messages.vehicles.ageUnknown;
+}
+
+export function vehicleName(vehicle: Vehicle, messages: Messages) {
+  return messages.vehicles.names[vehicle.id] ?? vehicle.name;
+}
+
+export function categoryLabel(type: string, messages: Messages) {
+  return messages.vehicles.categories[type] ?? messages.shell.nav.vehicles;
 }

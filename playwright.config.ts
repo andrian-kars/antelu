@@ -13,6 +13,8 @@ export default defineConfig({
   reporter: [["list"], ["html", { open: "never" }]],
   use: {
     baseURL,
+    // Browser language drives redirects; most tests cover the default Spanish site.
+    locale: "es-ES",
     reducedMotion: "reduce",
     trace: "retain-on-failure",
     screenshot: "only-on-failure",

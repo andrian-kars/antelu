@@ -2,20 +2,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, UsersRound } from "lucide-react";
 import { ReserveNowButton } from "./ReserveNowButton";
-import { formatPrice } from "@/data/constants";
-import { getAgeRange, getCategoryLabel, type Vehicle } from "@/lib/vehicles";
+import { localePath, type Locale } from "@/i18n/config";
+import { fill, formatPrice, whatsAppUrl } from "@/i18n/format";
+import type { Messages } from "@/i18n/messages/es";
+import { ageLabel, categoryLabel, vehicleName, type Vehicle } from "@/lib/vehicles";
 import { skeleton } from "@/lib/skeleton";
 
-export function VehicleCard(vehicle: Vehicle) {
-  const { id, name, images, price, discount, type } = vehicle;
+export function VehicleCard({
+  vehicle,
+  locale,
+  messages,
+}: {
+  vehicle: Vehicle;
+  locale: Locale;
+  messages: Messages;
+}) {
+  const { id, images, price, discount, type } = vehicle;
+  const name = vehicleName(vehicle, messages);
+  const href = localePath(locale, `/rent/${id}`);
+  const { vehicles: text } = messages;
   return (
     <article className="vehicle-card" aria-labelledby={`vehicle-${id}`}>
-      <Link
-        className="vehicle-image"
-        href={`/rent/${id}`}
-        tabIndex={-1}
-        aria-hidden="true"
-      >
+      <Link className="vehicle-image" href={href} tabIndex={-1} aria-hidden="true">
         <Image
           src={images[0]}
           alt=""
@@ -23,35 +31,39 @@ export function VehicleCard(vehicle: Vehicle) {
           style={{ objectFit: "contain" }}
           sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 1000px) 46vw, 390px"
         />
-        <span className="vehicle-category">{getCategoryLabel(type)}</span>
+        <span className="vehicle-category">{categoryLabel(type, messages)}</span>
       </Link>
       <div className="vehicle-body">
         <h3 id={`vehicle-${id}`}>
-          <Link href={`/rent/${id}`}>{name}</Link>
+          <Link href={href}>{name}</Link>
         </h3>
         <p className="vehicle-age">
           <UsersRound size={17} aria-hidden="true" />
-          {getAgeRange(vehicle)?.label ?? "Consultar edad recomendada"}
+          {ageLabel(vehicle, locale, messages)}
         </p>
         <div className="vehicle-price">
           <span>
-            Desde <strong>{formatPrice(price)}</strong>
-            <span className="price-period"> / día</span>
+            {text.from} <strong>{formatPrice(price, locale)}</strong>
+            <span className="price-period"> {text.perDay}</span>
           </span>
           {discount ? (
             <del>
-              <span className="sr-only">Precio anterior: </span>
-              {formatPrice(discount)}
+              <span className="sr-only">{text.previousPrice}</span>
+              {formatPrice(discount, locale)}
             </del>
           ) : null}
         </div>
         <div className="vehicle-actions">
-          <ReserveNowButton vehicle={{ id, name }} />
+          <ReserveNowButton
+            whatsappUrl={whatsAppUrl(locale, messages.contact, { id, name })}
+            description={name}
+            messages={messages.contact}
+          />
           <Link
             className="icon-button"
-            href={`/rent/${id}`}
-            aria-label={`Ver ${name}`}
-            title={`Ver ${name}`}
+            href={href}
+            aria-label={fill(text.view, { name })}
+            title={fill(text.view, { name })}
           >
             <ArrowUpRight size={20} aria-hidden="true" />
           </Link>

@@ -2,12 +2,19 @@
 
 import { ArrowUpRight } from "lucide-react";
 import { useSyncExternalStore } from "react";
-import { ContactDialog } from "./ContactDialog";
-import { getWhatsAppUrl, type ContactVehicle } from "@/data/constants";
+import { ContactDialog, type ContactMessages } from "./ContactDialog";
 
 const subscribe = () => () => {};
 
-export function ReserveNowButton({ vehicle }: { vehicle?: ContactVehicle }) {
+export function ReserveNowButton({
+  whatsappUrl,
+  description,
+  messages,
+}: {
+  whatsappUrl: string;
+  description?: string;
+  messages: ContactMessages;
+}) {
   const hydrated = useSyncExternalStore(
     subscribe,
     () => true,
@@ -18,20 +25,25 @@ export function ReserveNowButton({ vehicle }: { vehicle?: ContactVehicle }) {
     return (
       <a
         className="action action-primary"
-        href={getWhatsAppUrl(vehicle)}
+        href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
       >
-        Consultar alquiler<span className="sr-only"> por WhatsApp</span>
+        {messages.enquire}
+        <span className="sr-only">{messages.enquireNoScript}</span>
         <ArrowUpRight size={18} aria-hidden="true" />
       </a>
     );
   }
 
   return (
-    <ContactDialog vehicle={vehicle}>
+    <ContactDialog
+      whatsappUrl={whatsappUrl}
+      description={description}
+      messages={messages}
+    >
       <button type="button" className="action action-primary">
-        Consultar alquiler <ArrowUpRight size={18} aria-hidden="true" />
+        {messages.enquire} <ArrowUpRight size={18} aria-hidden="true" />
       </button>
     </ContactDialog>
   );

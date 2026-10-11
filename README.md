@@ -1,6 +1,7 @@
 # Antelu
 
-Spanish children's vehicle-rental catalogue for [antelu.es](https://antelu.es).
+Children's vehicle-rental catalogue for [antelu.es](https://antelu.es) in Spanish, Galician,
+English and Ukrainian.
 Next.js App Router, React, strict TypeScript, Tailwind, Radix, Embla and a photo gallery.
 Enquiries go directly to phone or WhatsApp; there is no booking backend or payment processing.
 
@@ -45,15 +46,39 @@ PLAYWRIGHT_BASE_URL=http://localhost:3000 yarn test:e2e
 
 Tests cover Chromium, WebKit and mobile Chromium, catalogue filtering, vehicle-specific
 enquiries, photo controls, keyboard navigation, axe accessibility, 320-1920px layouts,
-no-JavaScript content, all existing vehicle URLs, canonical metadata and the sitemap.
+no-JavaScript content, all existing vehicle URLs, canonical metadata, the sitemap and the
+language rules below. The suite browses as a Spanish browser unless a test sets a language.
 External phone/chat links are inspected, never used to place calls or send messages.
 GitHub Actions runs the same quality gates and retains browser failure artifacts.
 
+## Languages
+
+Spanish keeps the original unprefixed URLs (`/`, `/gallery`, `/rent/[slug]`). Galician,
+English and Ukrainian live under `/gl`, `/en` and `/uk` (`uk` is the language code; the
+switcher shows "UA"). [src/proxy.ts](src/proxy.ts) decides which version to show:
+
+1. A `/gl`, `/en` or `/uk` URL is always shown as requested.
+2. A language chosen in the switcher is saved in the `NEXT_LOCALE` cookie and wins over
+   the browser language, redirecting Spanish URLs on later visits.
+3. Otherwise, browsers that prefer English or Ukrainian are redirected to that language,
+   unless they also list Spanish or Galician.
+4. Everyone else sees Spanish. If their preferred language differs, a dismissible bar
+   suggests it once (for example Galician browsers, or English browsers that also read Spanish).
+5. Search engines and link-preview bots are never redirected.
+
+Spanish pages are rendered from `/es/...` internally. Each page declares its translations
+with `hreflang`, and the sitemap lists all four versions. Text lives in
+[src/i18n/messages](src/i18n/messages); `es.ts` defines the structure the other languages
+must follow, so TypeScript reports missing translations. Vehicle display names are
+translated by ID; brand model names stay unchanged. WhatsApp enquiries are prefilled in the
+visitor's language. Ukrainian headings use Manrope because Bricolage has no Cyrillic.
+
 ## Content And Structure
 
-- [src/data/constants.ts](src/data/constants.ts): business details, navigation, contact URLs and EUR formatting.
+- [src/data/constants.ts](src/data/constants.ts): business details, navigation paths and phone numbers.
+- [src/i18n](src/i18n): supported languages, URL helpers, plural rules, price formatting and WhatsApp links.
 - [src/data/vehicles/index.ts](src/data/vehicles/index.ts): the existing 23 vehicles and their photographs. `price` is the current daily price; `discount` is the crossed-out previous price, not a percentage. Keep IDs stable because they are public URLs.
-- [src/data/gallery/index.ts](src/data/gallery/index.ts): existing gallery photographs and Spanish alt text.
+- [src/data/gallery/index.ts](src/data/gallery/index.ts): existing gallery photographs; their descriptions are translated in the message files.
 - [src/components/VehicleCatalogue.tsx](src/components/VehicleCatalogue.tsx): category and age controls; the cards themselves are server-rendered. Unknown ages do not match a selected numeric age.
 - [src/components/ReserveNowButton.tsx](src/components/ReserveNowButton.tsx): a direct WhatsApp link before hydration, enhanced to a Radix contact dialog. Phone links always work without JavaScript.
 - [src/app/globals.css](src/app/globals.css): shared tokens, typography and responsive layouts. Fonts are served locally through Fontsource.
@@ -69,9 +94,10 @@ Structured business data omits provisional operational details until they are co
 
 The homepage category tiles reuse existing Jeep, motocross and pony product photographs;
 CSS blends their white backgrounds into the tile colour, so no edited copies are stored.
-Tile counts and starting prices are calculated from the vehicle data. The social image is a
-1200x630 capture of the local design, styled for sharing. Regenerate it when branding
-changes. The favicon was regenerated from the existing icon SVG to fix
+Tile counts and starting prices are calculated from the vehicle data. The social image
+([public/opengraph-image.jpg](public/opengraph-image.jpg)) is a 1200x630 capture of the
+local design, styled for sharing. Regenerate it when branding changes. The favicon was
+regenerated from the existing icon SVG to fix
 an invalid ICO dimension header.
 
 ## Required Before Launch
@@ -85,6 +111,7 @@ Business facts were carried over from the published site and are **provisional**
 - Verify every age range, maximum load, battery and motor specification. Existing motor units such as `25V` were retained, not silently changed to watts.
 - Verify any insurance, damage, cancellation or licensing claims before adding them. The old unverified insurance guarantee and official-licence display are not repeated.
 - Confirm permission to publish all existing photographs, especially those with identifiable children.
+- Have a native speaker review the Galician and Ukrainian text, and confirm the owner can reply to WhatsApp enquiries in English and Ukrainian.
 - Review the final site on a real phone, verify the intended WhatsApp account manually without sending an automated message, and check the live social preview after deployment.
 
 No booking is confirmed by the website. Dates, availability and final terms are agreed

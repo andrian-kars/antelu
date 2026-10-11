@@ -1,9 +1,6 @@
-import {
-  business,
-  getWhatsAppUrl,
-  telegramId,
-  type ContactVehicle,
-} from "@/data/constants";
+import { business, telegramId } from "@/data/constants";
+import type { Messages } from "@/i18n/messages/es";
+import { fill } from "@/i18n/format";
 import {
   Dialog,
   DialogContent,
@@ -15,36 +12,53 @@ import {
 import Link from "next/link";
 import { ReactNode } from "react";
 
+export type ContactMessages = Pick<
+  Messages["contact"],
+  | "title"
+  | "description"
+  | "whatsapp"
+  | "call"
+  | "telegram"
+  | "close"
+  | "enquire"
+  | "enquireNoScript"
+>;
+
 export function ContactDialog({
   children,
-  vehicle,
+  whatsappUrl,
+  description,
+  messages,
 }: {
   children: ReactNode;
-  vehicle?: ContactVehicle;
+  whatsappUrl: string;
+  description?: string;
+  messages: ContactMessages;
 }) {
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="contact-dialog w-[calc(100%-2rem)]">
+      <DialogContent
+        className="contact-dialog w-[calc(100%-2rem)]"
+        closeLabel={messages.close}
+      >
         <DialogHeader>
           <DialogTitle className="text-base lg:text-xl font-semibold">
-            Hablemos de tu alquiler
+            {messages.title}
           </DialogTitle>
         </DialogHeader>
-        <DialogDescription>
-          {vehicle ? vehicle.name : "Coches, motos y caballitos para un día especial."}
-        </DialogDescription>
+        <DialogDescription>{description ?? messages.description}</DialogDescription>
         <div className="contact-options">
           <Link
             className="contact-option"
             target="_blank"
             rel="noopener noreferrer"
-            href={getWhatsAppUrl(vehicle)}
+            href={whatsappUrl}
           >
-            <WhatsappIcon /> <span>Consultar por WhatsApp</span>
+            <WhatsappIcon /> <span>{messages.whatsapp}</span>
           </Link>
           <a className="contact-option" href={business.phoneHref}>
-            <PhoneIcon /> <span>Llamar al {business.phone}</span>
+            <PhoneIcon /> <span>{fill(messages.call, { phone: business.phone })}</span>
           </a>
           <Link
             className="contact-option"
@@ -52,7 +66,7 @@ export function ContactDialog({
             rel="noopener noreferrer"
             href={`https://t.me/${telegramId.replace(/\s/g, "")}`}
           >
-            <TelegramIcon /> <span>Contactar por Telegram</span>
+            <TelegramIcon /> <span>{messages.telegram}</span>
           </Link>
         </div>
       </DialogContent>

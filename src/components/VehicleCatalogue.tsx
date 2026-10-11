@@ -2,7 +2,10 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { RotateCcw, Search } from "lucide-react";
-import { categories } from "@/lib/vehicles";
+import type { Locale } from "@/i18n/config";
+import { plural } from "@/i18n/format";
+import type { Messages } from "@/i18n/messages/es";
+import { categoryIds } from "@/lib/vehicles";
 
 type CatalogueItem = {
   id: string;
@@ -13,9 +16,15 @@ type CatalogueItem = {
 export function VehicleCatalogue({
   items,
   children,
+  locale,
+  messages,
+  categories,
 }: {
   items: CatalogueItem[];
   children: ReactNode[];
+  locale: Locale;
+  messages: Messages["catalogue"];
+  categories: Record<string, string>;
 }) {
   const [category, setCategory] = useState("all");
   const [age, setAge] = useState("");
@@ -50,29 +59,29 @@ export function VehicleCatalogue({
   return (
     <>
       <div className="catalogue-toolbar">
-        <div className="category-filters" role="group" aria-label="Tipo de vehículo">
-          {categories.map(({ id, label }) => (
+        <div className="category-filters" role="group" aria-label={messages.typeLabel}>
+          {categoryIds.map((id) => (
             <button
               key={id}
               type="button"
               aria-pressed={category === id}
               onClick={() => setCategory(id)}
             >
-              {label}
+              {categories[id]}
             </button>
           ))}
         </div>
         <label className="age-filter">
-          Edad{" "}
+          {messages.ageLabel}{" "}
           <select
             value={age}
             onChange={(event) => setAge(event.target.value)}
-            aria-label="Edad del niño o niña"
+            aria-label={messages.ageAria}
           >
-            <option value="">Todas las edades</option>
+            <option value="">{messages.allAges}</option>
             {Array.from({ length: 15 }, (_, index) => index + 1).map((years) => (
               <option key={years} value={years}>
-                {years} {years === 1 ? "año" : "años"}
+                {plural(locale, messages.years, years)}
               </option>
             ))}
           </select>
@@ -80,11 +89,11 @@ export function VehicleCatalogue({
       </div>
       <div className="catalogue-status">
         <p role="status" aria-live="polite">
-          {count} {count === 1 ? "vehículo" : "vehículos"}
+          {plural(locale, messages.count, count)}
         </p>
         {filtered && (
           <button type="button" className="text-link" onClick={reset}>
-            <RotateCcw size={15} aria-hidden="true" /> Restablecer filtros
+            <RotateCcw size={15} aria-hidden="true" /> {messages.reset}
           </button>
         )}
       </div>
@@ -98,9 +107,9 @@ export function VehicleCatalogue({
       {count === 0 && (
         <div className="empty-state">
           <Search size={32} aria-hidden="true" />
-          <h3>No hay vehículos con estos filtros</h3>
+          <h3>{messages.emptyTitle}</h3>
           <button className="action action-secondary" onClick={reset}>
-            Ver todos los vehículos
+            {messages.showAll}
           </button>
         </div>
       )}
